@@ -58,12 +58,12 @@ fun MenuCard(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 18.dp, vertical = 16.dp),
+                    .padding(horizontal = 20.dp, vertical = 16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Box(
                     modifier = Modifier
-                        .size(56.dp)
+                        .size(62.dp)
                         .clip(RoundedCornerShape(14.dp))
                         .background(iconBackground)
                         .border(1.dp, Color.White.copy(alpha = 0.45f), RoundedCornerShape(14.dp)),
@@ -72,11 +72,12 @@ fun MenuCard(
                     Icon(
                         painter = icon,
                         contentDescription = title,
+                        modifier = Modifier.size(30.dp),
                         tint = iconTint
                     )
                 }
 
-                Column(modifier = Modifier.padding(start = 14.dp)) {
+                Column(modifier = Modifier.padding(start = 18.dp)) {
                     Text(
                         text = title,
                         color = Color.White,
