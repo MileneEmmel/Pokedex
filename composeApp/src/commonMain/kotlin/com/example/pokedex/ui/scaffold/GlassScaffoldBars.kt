@@ -1,103 +1,60 @@
 package com.example.pokedex.ui.scaffold
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.draw.shadow
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.*
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.*
+import androidx.compose.ui.text.font.*
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.*
 import org.jetbrains.compose.resources.Font
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.press_start_2p_regular
 
+private fun glassBrush() = Brush.verticalGradient(
+    colors = listOf(
+        Color.White.copy(alpha = 0.25f),
+        Color.White.copy(alpha = 0.10f)
+    )
+)
+
 @Composable
 fun GlassTopBar(
     title: String,
-    showBack: Boolean,
-    onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // TopBar translúcida ajustada para o tom "verde clarinho quase branco" (bg-white/60 no React)
+    val shape = RectangleShape
+
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White.copy(alpha = 0.60f)) // Fundo translúcido
-            .border(BorderStroke(1.dp, GlassScaffoldTokens.barBorder))
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            if (showBack) {
-                val backShape = RoundedCornerShape(12.dp)
-                Box(
-                    modifier = Modifier
-                        .background(Color.White.copy(alpha = 0.60f), backShape)
-                        .border(1.dp, Color.White.copy(alpha = 0.70f), backShape)
-                        .clip(backShape)
-                        .clickable(onClick = onBackClick)
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Back",
-                        color = Color(0xFF14532D),
-                        style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            } else {
-                Spacer(modifier = Modifier.size(56.dp))
-            }
-
-            Text(
-                text = title,
-                color = Color(0xFF14532D),
-                style = TextStyle(
-                    fontFamily = pixelFont(),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
-                ),
-                maxLines = 1,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
+            .shadow(6.dp, shape)
+            .clip(shape)
+            .background(Color(0xFFDCEFE3))
+            .border(
+                width = 1.dp,
+                color = Color(0xFFCDE5D6),
+                shape = shape
             )
-
-            Spacer(modifier = Modifier.size(56.dp))
-        }
+            .padding(top = 24.dp, bottom = 14.dp),
+    ) {
+        Text(
+            text = title,
+            modifier = Modifier.align(Alignment.BottomCenter),
+            color = Color(0xFF14532D),
+            fontFamily = pixelFont(),
+            fontWeight = FontWeight.Bold,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -111,52 +68,32 @@ fun GlassBottomNav(
     onTeamClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val bottomShape = RoundedCornerShape(
-        topStart = GlassScaffoldTokens.bottomBarCorner,
-        topEnd = GlassScaffoldTokens.bottomBarCorner
-    )
+    val shape = RectangleShape
 
-    // Fundo da barra inferior ajustado para o tom "verde clarinho quase branco" (bg-white/60 no React)
-    Surface(
-        color = Color.White.copy(alpha = 0.60f),
-        shape = bottomShape,
-        shadowElevation = 16.dp, // Sombra forte (shadow-2xl)
+    Box(
         modifier = modifier
             .fillMaxWidth()
-            // Borda superior (border-t-3)
-            .drawBehind {
-                val strokeWidth = 1.dp.toPx()
-                val y = strokeWidth / 2
-                drawLine(
-                    color = GlassScaffoldTokens.barBorder,
-                    start = Offset(0f, y),
-                    end = Offset(size.width, y),
-                    strokeWidth = strokeWidth * 2
-                )
-            }
+            .shadow(12.dp, shape)
+            .clip(shape)
+            .background(Color(0xFFDCEFE3))
+            .padding(12.dp)
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            GlassBottomNavItem(
+            BottomItem(
                 label = "POKEDEX",
                 icon = pokedexIcon,
                 selected = isPokedexSelected,
-                selectedBrush = GlassScaffoldTokens.pokedexSelectedGradient,
-                shadowColor = GlassScaffoldTokens.pokedexShadowColor,
                 onClick = onPokedexClick,
                 modifier = Modifier.weight(1f)
             )
 
-            GlassBottomNavItem(
+            BottomItem(
                 label = "MY TEAM",
                 icon = teamIcon,
                 selected = isTeamSelected,
-                selectedBrush = GlassScaffoldTokens.teamSelectedGradient,
-                shadowColor = GlassScaffoldTokens.teamShadowColor,
                 onClick = onTeamClick,
                 modifier = Modifier.weight(1f)
             )
@@ -165,76 +102,53 @@ fun GlassBottomNav(
 }
 
 @Composable
-private fun GlassBottomNavItem(
+private fun BottomItem(
     label: String,
-    icon: Painter, // Voltamos para Painter
+    icon: Painter,
     selected: Boolean,
-    selectedBrush: Brush,
-    shadowColor: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(GlassScaffoldTokens.tabCorner)
-    // Animação de escala (scale-105)
-    val scale by animateFloatAsState(if (selected) 1.05f else 1f)
+    val shape = RoundedCornerShape(14.dp)
 
     Box(
         modifier = modifier
-            .scale(scale)
-            // Sombra colorida no item selecionado (shadow-lg)
-            .then(
-                if (selected) Modifier.shadow(
-                    elevation = 12.dp,
-                    shape = shape,
-                    ambientColor = shadowColor,
-                    spotColor = shadowColor
-                ) else Modifier
-            )
-            .background(
-                // Cor de fundo do item inativo (bg-white/40)
-                color = if (selected) Color.Transparent else GlassScaffoldTokens.inactiveTabBackground,
-                shape = shape
-            )
-            .background(
-                brush = if (selected) selectedBrush else Brush.verticalGradient(
-                    listOf(
-                        Color.Transparent,
-                        Color.Transparent
-                    )
-                ),
-                shape = shape
-            )
-            // Borda do item (border-white/50 ou border-white/60 no React)
-            .border(
-                width = 1.dp,
-                color = if (selected) Color.White.copy(alpha = 0.50f) else GlassScaffoldTokens.inactiveTabBorder,
-                shape = shape
-            )
             .clip(shape)
+            .background(
+                if (selected) Color(0xFF16A34A) // verde forte
+                else Color.Transparent
+            )
+            .border(
+                width = 2.dp,
+                color = if (selected) Color.White else Color(0xFFD1D5DB),
+                shape = shape
+            )
             .clickable(onClick = onClick)
-            .padding(vertical = 12.dp), // py-3
+            .padding(vertical = 14.dp),
         contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
             Icon(
                 painter = icon,
                 contentDescription = label,
-                // Cores do texto/ícone: Branco se selecionado, Verde escuro se inativo (text-white vs text-green-800)
                 tint = if (selected) Color.White else Color(0xFF166534),
-                modifier = Modifier.size(24.dp) // w-6
+                modifier = Modifier.size(22.dp)
             )
+
+            Spacer(modifier = Modifier.height(4.dp))
+
             Text(
                 text = label,
                 color = if (selected) Color.White else Color(0xFF166534),
-                style = TextStyle(
-                    fontFamily = pixelFont(),
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 11.sp // text-xs
-                )
+                fontSize = 11.sp,
+                fontFamily = pixelFont(),
+                fontWeight = FontWeight.Medium
             )
         }
     }
 }
 
 @Composable
-private fun pixelFont(): FontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+private fun pixelFont(): FontFamily =
+    FontFamily(Font(Res.font.press_start_2p_regular))

@@ -19,7 +19,7 @@ import com.example.pokedex.navigation.MyTeamRoute
 import com.example.pokedex.navigation.PokedexRoute
 import com.example.pokedex.navigation.PokemonDetailRoute
 import com.example.pokedex.ui.HomeScreen
-import com.example.pokedex.ui.PokedexGridScreen
+import com.example.pokedex.ui.pokedex.PokedexGridScreen
 import com.example.pokedex.ui.PokemonDetailScreen
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.scaffold.GlassBottomNav
@@ -66,8 +66,6 @@ fun App() {
             topBar = {
                 GlassTopBar(
                     title = title,
-                    showBack = currentDestination?.hasRoute<PokemonDetailRoute>() == true,
-                    onBackClick = { navController.popBackStack() }
                 )
             },
             bottomBar = {
@@ -107,9 +105,6 @@ fun App() {
                         onPokemonClick = { pokemonId ->
                             navController.navigate(PokemonDetailRoute(pokemonId))
                         },
-                        onBackClick = {
-                            navController.popBackStack()
-                        }
                     )
                 }
 
