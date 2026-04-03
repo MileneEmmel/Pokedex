@@ -1,7 +1,6 @@
 package com.example.pokedex.ui.scaffold
 
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -11,11 +10,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,35 +56,41 @@ fun GlassTopBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .shadow(
+                elevation = 8.dp,
+                ambientColor = Color(0xFF14532D).copy(alpha = 0.05f),
+                spotColor = Color(0xFF14532D).copy(alpha = 0.15f)
+            )
             .background(Color(0xFFDCFCE7).copy(alpha = 0.60f))
+            .statusBarsPadding() // Empurra a barra pra baixo da barra de status (hora, bateria)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .padding(horizontal = 16.dp, vertical = 10.dp), // Vertical reduzido para deixar menor
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             if (showBack) {
-                val backShape = RoundedCornerShape(12.dp)
+                // Substituído o "retângulo estranho" por um círculo limpo com sombra
                 Box(
                     modifier = Modifier
-                        .background(Color.White.copy(alpha = 0.40f), backShape)
-                        .border(1.dp, Color.White.copy(alpha = 0.50f), backShape)
-                        .clip(backShape)
+                        .shadow(elevation = 3.dp, shape = CircleShape)
+                        .background(Color.White, CircleShape)
+                        .clip(CircleShape)
                         .clickable(onClick = onBackClick)
-                        .padding(horizontal = 12.dp, vertical = 8.dp),
+                        .padding(8.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Voltar",
                         tint = Color(0xFF14532D),
-                        modifier = Modifier.size(20.dp)
+                        modifier = Modifier.size(24.dp)
                     )
                 }
             } else {
-                Spacer(modifier = Modifier.size(56.dp))
+                Spacer(modifier = Modifier.size(40.dp))
             }
 
             Text(
@@ -92,14 +99,14 @@ fun GlassTopBar(
                 style = TextStyle(
                     fontFamily = pixelFont(),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 22.sp
+                    fontSize = 20.sp // Fonte levemente ajustada para caber na barra mais fina
                 ),
                 maxLines = 1,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.weight(1f)
             )
 
-            Spacer(modifier = Modifier.size(56.dp))
+            Spacer(modifier = Modifier.size(40.dp))
         }
     }
 }
@@ -118,25 +125,31 @@ fun GlassBottomNav(
     )
 
     Surface(
-        color = Color.White.copy(alpha = 0.30f),
+        color = Color(0xFFDCFCE7).copy(alpha = 0.60f), // Cor atualizada para ser igual a de cima
         shape = bottomShape,
-        shadowElevation = 20.dp,
         modifier = modifier
             .fillMaxWidth()
+            .shadow(
+                elevation = 20.dp,
+                shape = bottomShape,
+                spotColor = Color(0xFF14532D).copy(alpha = 0.25f), // Sombra mais moderna
+                ambientColor = Color(0xFF14532D).copy(alpha = 0.1f)
+            )
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 drawLine(
-                    color = Color.White.copy(alpha = 0.40f),
+                    color = Color.White.copy(alpha = 0.50f),
                     start = Offset(0f, 0f),
                     end = Offset(size.width, 0f),
-                    strokeWidth = strokeWidth * 3
+                    strokeWidth = strokeWidth * 2
                 )
             }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 16.dp),
+                .navigationBarsPadding() // Empurra os botões pra cima da barra de navegação do Android
+                .padding(horizontal = 16.dp, vertical = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             GlassBottomNavItem(
