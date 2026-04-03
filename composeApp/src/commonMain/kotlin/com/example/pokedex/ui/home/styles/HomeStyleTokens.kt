@@ -25,6 +25,7 @@ object HomeStyleTokens {
     val neonOrange = Color(0xFFFF9F0A)
     val neonPurple = Color(0xFFAF52DE)
 
+    val neonBlue = Color(0xFF2979FF)
     val primaryMenuIconGradient = Brush.verticalGradient(
         listOf(Color(0xFF10B981), Color(0xFF16A34A))
     )

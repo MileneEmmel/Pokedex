@@ -20,7 +20,7 @@ import com.example.pokedex.navigation.PokedexRoute
 import com.example.pokedex.navigation.PokemonDetailRoute
 import com.example.pokedex.ui.HomeScreen
 import com.example.pokedex.ui.pokedex.PokedexGridScreen
-import com.example.pokedex.ui.PokemonDetailScreen
+import com.example.pokedex.ui.details.PokemonDetailScreen
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.scaffold.GlassBottomNav
 import com.example.pokedex.ui.scaffold.GlassTopBar
@@ -41,7 +41,7 @@ fun App() {
         val visualTeam = remember {
             mutableStateListOf<Pokemon>().apply {
                 // Para testar com 3 Pokémons, descomente:
-                // addAll(PokemonMock.pokedex.take(3))
+                 addAll(PokemonMock.pokedex.take(3))
             }
         }
 
