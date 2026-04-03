@@ -25,10 +25,6 @@ import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.scaffold.GlassBottomNav
 import com.example.pokedex.ui.scaffold.GlassTopBar
 import com.example.pokedex.ui.team.TeamBuilderScreen
-import org.jetbrains.compose.resources.painterResource
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.ic_bolt
-import pokedex.composeapp.generated.resources.ic_groups
 
 @Composable
 @Preview
@@ -44,7 +40,8 @@ fun App() {
 
         val visualTeam = remember {
             mutableStateListOf<Pokemon>().apply {
-                addAll(PokemonMock.pokedex.take(3))
+                // Para testar com 3 Pokémons, descomente:
+                // addAll(PokemonMock.pokedex.take(3))
             }
         }
 
@@ -60,7 +57,7 @@ fun App() {
 
         val showBottomBar =
             currentDestination?.hasRoute<PokedexRoute>() == true ||
-            currentDestination?.hasRoute<MyTeamRoute>() == true
+                    currentDestination?.hasRoute<MyTeamRoute>() == true
 
         Scaffold(
             topBar = {
@@ -70,12 +67,10 @@ fun App() {
             },
             bottomBar = {
                 if (showBottomBar) {
-                    currentDestination?.let { destination ->
+                    currentDestination.let { destination ->
                         GlassBottomNav(
                             isPokedexSelected = destination.hasRoute<PokedexRoute>(),
                             isTeamSelected = destination.hasRoute<MyTeamRoute>(),
-                            pokedexIcon = painterResource(Res.drawable.ic_bolt),
-                            teamIcon = painterResource(Res.drawable.ic_groups),
                             onPokedexClick = { navController.navigate(PokedexRoute) },
                             onTeamClick = { navController.navigate(MyTeamRoute) }
                         )
@@ -111,7 +106,12 @@ fun App() {
                 composable<MyTeamRoute> {
                     TeamBuilderScreen(
                         team = visualTeam,
-                        modifier = Modifier
+                        modifier = Modifier,
+                        onExploreClick = {
+                            navController.navigate(PokedexRoute) {
+                                 popUpTo(PokedexRoute) { inclusive = true }
+                            }
+                        }
                     )
                 }
 

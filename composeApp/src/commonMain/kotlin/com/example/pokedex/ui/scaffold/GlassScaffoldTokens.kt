@@ -11,14 +11,11 @@ object GlassScaffoldTokens {
     val bottomBarCorner: Dp = 24.dp // rounded-t-3xl é próximo a 24.dp
     val tabCorner: Dp = 16.dp // rounded-2xl é próximo a 16.dp
 
-    // Gradientes baseados nas cores do React: from-emerald-500 to-green-600
     val pokedexSelectedGradient = Brush.linearGradient(
         listOf(Color(0xFF10B981), Color(0xFF16A34A))
     )
     val pokedexShadowColor = Color(0xFF10B981).copy(alpha = 0.30f)
-
-    // Gradientes baseados nas cores do React: from-teal-500 to-cyan-600
-    val teamSelectedGradient = Brush.linearGradient(
+     val teamSelectedGradient = Brush.linearGradient(
         listOf(Color(0xFF14B8A6), Color(0xFF0891B2))
     )
     val teamShadowColor = Color(0xFF14B8A6).copy(alpha = 0.30f)
