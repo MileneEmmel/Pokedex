@@ -7,10 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
@@ -21,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -37,13 +34,6 @@ import com.example.pokedex.ui.HomeTypography
 @Composable
 fun TeamMemberCard(
     pokemon: Pokemon,
-    panelColor: Color,
-    panelBorder: Color,
-    titleColor: Color,
-    subtitleColor: Color,
-    chipBackground: Color,
-    chipTextColor: Color,
-    accentColor: Color,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
@@ -54,143 +44,129 @@ fun TeamMemberCard(
             .fillMaxWidth()
             .border(3.dp, Color.White.copy(alpha = 0.50f), RoundedCornerShape(24.dp))
     ) {
-        Box {
-            // Decorative element
-            Box(
+
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Row(
                 modifier = Modifier
-                    .offset(x = 12.dp, y = 12.dp)
-                    .shadow(8.dp, CircleShape, ambientColor = Color(0xFF76FF03), spotColor = Color(0xFF76FF03))
-                    .size(12.dp)
-                    .clip(CircleShape)
-                    .background(Color(0xFF76FF03))
-            )
-
-            Column(modifier = Modifier.fillMaxWidth()) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(12.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    // Pokemon image - compact
-                    Box(
-                        modifier = Modifier
-                            .size(72.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(
-                                Brush.linearGradient(
-                                    listOf(Color(0xFFDCFCE7).copy(alpha = 0.50f), Color(0xFFA7F3D0).copy(alpha = 0.50f))
-                                )
-                            )
-                            .border(2.dp, Color.White.copy(alpha = 0.40f), RoundedCornerShape(16.dp)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        AsyncImage(
-                            model = pokemon.imageUrl,
-                            contentDescription = pokemon.name,
-                            modifier = Modifier.size(56.dp)
-                        )
-
-                        // Pokemon number badge
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.TopEnd)
-                                .offset(x = 4.dp, y = (-4).dp)
-                                .background(Color(0xFF14532D).copy(alpha = 0.80f), RoundedCornerShape(6.dp))
-                                .border(1.dp, Color(0xFF76FF03).copy(alpha = 0.50f), RoundedCornerShape(6.dp))
-                                .padding(horizontal = 6.dp, vertical = 2.dp)
-                        ) {
-                            Text(
-                                text = pokemon.id.formatPokemonNumber(),
-                                color = Color(0xFF76FF03),
-                                style = HomeTypography.statValue(),
-                                fontSize = 8.sp
-                            )
-                        }
-                    }
-
-                    // Pokemon info
-                    Column(
-                        modifier = Modifier.weight(1f),
-                        verticalArrangement = Arrangement.spacedBy(6.dp)
-                    ) {
-                        Text(
-                            text = pokemon.name.capitalizePokemonName(),
-                            color = Color(0xFF14532D),
-                            style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Medium,
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-
-                        // Types
-                        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                            pokemon.types.take(2).forEach { type ->
-                                Surface(
-                                    shape = RoundedCornerShape(8.dp),
-                                    color = Color.White.copy(alpha = 0.60f),
-                                    border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(alpha = 0.80f))
-                                ) {
-                                    Text(
-                                        text = type.capitalizePokemonName(),
-                                        color = Color(0xFF166534),
-                                        style = MaterialTheme.typography.labelSmall,
-                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                                        fontSize = 10.sp,
-                                        fontWeight = FontWeight.Medium
-                                    )
-                                }
-                            }
-                        }
-
-                        // Mini Stats - compact horizontal
-                        Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
-                            MiniStat(
-                                label = "HP",
-                                value = pokemon.stats.firstOrNull { it.name == "hp" }?.value ?: 0,
-                                valueColor = Color(0xFFFF1744),
-                                bgColor = Color(0xFF7F1D1D).copy(alpha = 0.30f),
-                                borderColor = Color(0xFFEF4444).copy(alpha = 0.30f)
-                            )
-                            MiniStat(
-                                label = "ATK",
-                                value = pokemon.stats.firstOrNull { it.name == "attack" }?.value ?: 0,
-                                valueColor = Color(0xFFFFA726),
-                                bgColor = Color(0xFF7C2D12).copy(alpha = 0.30f),
-                                borderColor = Color(0xFFF97316).copy(alpha = 0.30f)
-                            )
-                            MiniStat(
-                                label = "DEF",
-                                value = pokemon.stats.firstOrNull { it.name == "defense" }?.value ?: 0,
-                                valueColor = Color(0xFFFFEA00),
-                                bgColor = Color(0xFF713F12).copy(alpha = 0.30f),
-                                borderColor = Color(0xFFFACC15).copy(alpha = 0.30f)
-                            )
-                        }
-                    }
-                }
-
-                // View Details Link
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        .size(100.dp)
+                        .clip(RoundedCornerShape(20.dp))
                         .background(
-                            Brush.horizontalGradient(
-                                listOf(Color(0xFF10B981).copy(alpha = 0.80f), Color(0xFF16A34A).copy(alpha = 0.80f))
+                            Brush.linearGradient(
+                                listOf(Color(0xFFDCFCE7).copy(alpha = 0.60f), Color(0xFFA7F3D0).copy(alpha = 0.60f))
                             )
                         )
-                        .border(1.dp, Color.White.copy(alpha = 0.30f))
-                        .padding(vertical = 8.dp),
+                        .border(2.dp, Color.White.copy(alpha = 0.50f), RoundedCornerShape(20.dp)),
                     contentAlignment = Alignment.Center
                 ) {
+                    AsyncImage(
+                        model = pokemon.imageUrl,
+                        contentDescription = pokemon.name,
+                        modifier = Modifier.size(100.dp)
+                    )
+
                     Text(
-                        text = "View Details",
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodySmall,
-                        fontWeight = FontWeight.Medium
+                        text = pokemon.id.formatPokemonNumber(),
+                        color = Color(0xFF14532D),
+                        style = HomeTypography.statValue(),
+                        fontSize = 10.sp,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .align(Alignment.TopCenter)
+                            .padding(top = 6.dp)
                     )
                 }
+                    
+                // Informações do Pokemon
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = pokemon.name.capitalizePokemonName(),
+                        color = Color(0xFF064E3B),
+                        style = MaterialTheme.typography.titleLarge,
+                        fontWeight = FontWeight.ExtraBold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    // Tipos
+                    Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+                        pokemon.types.take(2).forEach { type ->
+                            Surface(
+                                shape = RoundedCornerShape(6.dp),
+                                color = Color.White.copy(alpha = 0.50f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(alpha = 0.80f))
+                            ) {
+                                Text(
+                                    text = type.capitalizePokemonName(),
+                                    color = Color(0xFF166534),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                    fontSize = 10.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
+
+                    // Mini Stats - Mantido layout anterior
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        MiniStat(
+                            label = "HP",
+                            value = pokemon.stats.firstOrNull { it.name == "hp" }?.value ?: 0,
+                            valueColor = Color(0xFFFF1744),
+                            bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
+                            borderColor = Color(0xFFFF1744).copy(alpha = 0.2f)
+                        )
+                        MiniStat(
+                            label = "ATK",
+                            value = pokemon.stats.firstOrNull { it.name == "attack" }?.value ?: 0,
+                            valueColor = Color(0xFFFFA726),
+                            bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
+                            borderColor = Color(0xFFFFA726).copy(alpha = 0.2f)
+                        )
+                        MiniStat(
+                            label = "DEF",
+                            value = pokemon.stats.firstOrNull { it.name == "defense" }?.value ?: 0,
+                            valueColor = Color(0xFFFFEA00),
+                            bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
+                            borderColor = Color(0xFFFFEA00).copy(alpha = 0.2f)
+                        )
+                        MiniStat(
+                            label = "SPD",
+                            value = pokemon.stats.firstOrNull { it.name == "speed" }?.value ?: 0,
+                            valueColor = Color(0xFF8B5CF6),
+                            bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
+                            borderColor = Color(0xFF8B5CF6).copy(alpha = 0.2f)
+                        )
+                    }
+                }
+            }
+
+            // Botão View Details - Aumentado verticalmente (de 12.dp para 20.dp)
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFF16A34A).copy(alpha = 0.72f))
+                    .padding(vertical = 20.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "VIEW DETAILS",
+                    color = Color.White,
+                    style = HomeTypography.statValue(),
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 12.sp,
+                    letterSpacing = 1.sp
+                )
             }
         }
     }
@@ -202,7 +178,7 @@ private fun MiniStat(label: String, value: Int, valueColor: Color, bgColor: Colo
         modifier = Modifier
             .background(bgColor, RoundedCornerShape(8.dp))
             .border(1.dp, borderColor, RoundedCornerShape(8.dp))
-            .padding(horizontal = 6.dp, vertical = 4.dp),
+            .padding(horizontal = 8.dp, vertical = 4.dp),
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -210,13 +186,15 @@ private fun MiniStat(label: String, value: Int, valueColor: Color, bgColor: Colo
                 text = value.toString(),
                 color = valueColor,
                 style = HomeTypography.statValue(),
-                fontSize = 12.sp
+                fontSize = 13.sp,
+                fontWeight = FontWeight.ExtraBold
             )
             Text(
                 text = label,
-                color = Color.White.copy(alpha = 0.70f),
+                color = Color(0xFF14532D).copy(alpha = 0.8f),
                 style = MaterialTheme.typography.labelSmall,
-                fontSize = 10.sp
+                fontSize = 9.sp,
+                fontWeight = FontWeight.Bold
             )
         }
     }

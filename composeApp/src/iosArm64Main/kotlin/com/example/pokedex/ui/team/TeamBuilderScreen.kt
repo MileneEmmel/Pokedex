@@ -7,11 +7,12 @@ import com.example.pokedex.data.Pokemon
 @Composable
 actual fun TeamBuilderScreen(
     team: List<Pokemon>,
+    onExploreClick: () -> Unit,
     modifier: Modifier
 ) {
     TeamBuilderIosContent(
         team = team,
+        onExploreClick = onExploreClick,
         modifier = modifier
     )
 }
-

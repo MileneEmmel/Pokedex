@@ -16,9 +16,10 @@ import com.example.pokedex.data.Pokemon
 import com.example.pokedex.ui.team.styles.TeamBuilderStyle
 
 @Composable
-internal fun TeamBuilderContent(
+fun TeamBuilderContent(
     team: List<Pokemon>,
     style: TeamBuilderStyle,
+    onExploreClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val avgHp = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "hp" }?.value }.averageInt()
@@ -52,20 +53,14 @@ internal fun TeamBuilderContent(
                     panelBorder = style.panelBorder,
                     titleColor = style.titleColor,
                     subtitleColor = style.subtitleColor,
-                    accentColor = style.accentColor
+                    accentColor = style.accentColor,
+                    onExploreClick = onExploreClick
                 )
             }
         } else {
             items(team, key = { it.id }) { pokemon ->
                 TeamMemberCard(
                     pokemon = pokemon,
-                    panelColor = style.panelColor,
-                    panelBorder = style.panelBorder,
-                    titleColor = style.titleColor,
-                    subtitleColor = style.subtitleColor,
-                    chipBackground = style.chipBackground,
-                    chipTextColor = style.chipTextColor,
-                    accentColor = style.accentColor
                 )
             }
 
@@ -75,7 +70,3 @@ internal fun TeamBuilderContent(
 }
 
 private fun List<Int>.averageInt(): Int = if (isEmpty()) 0 else sum() / size
-
-
-
-

@@ -18,6 +18,7 @@ import com.example.pokedex.ui.team.styles.TeamBuilderStyle
 @Composable
 actual fun TeamBuilderScreen(
     team: List<Pokemon>,
+    onExploreClick: () -> Unit,
     modifier: Modifier
 ) {
     Box(
@@ -55,7 +56,7 @@ actual fun TeamBuilderScreen(
             chipBackground = Color.White.copy(alpha = 0.78f),
             chipTextColor = Color(0xFF315F47),
             badgeColor = Color(0xFF7DFF00).copy(alpha = 0.20f),
-            accentColor = Color(0xFF55CF8A),
+            accentColor = Color(0xFF16A34A).copy(alpha = 0.72f),
             headerTitle = "MY TEAM",
             headerSubtitle = "",
             emptyTitle = "Team empty",
@@ -64,10 +65,8 @@ actual fun TeamBuilderScreen(
 
         TeamBuilderContent(
             team = team,
-            style = style
+            style = style,
+            onExploreClick = onExploreClick
         )
     }
 }
-
-
-

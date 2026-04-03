@@ -37,8 +37,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.Font
+import org.jetbrains.compose.resources.painterResource
 import pokedex.composeapp.generated.resources.Res
+import pokedex.composeapp.generated.resources.open_book
 import pokedex.composeapp.generated.resources.press_start_2p_regular
+import pokedex.composeapp.generated.resources.shield
 
 @Composable
 fun GlassTopBar(
@@ -47,12 +50,10 @@ fun GlassTopBar(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // TopBar translúcida ajustada para o tom "verde clarinho quase branco" (bg-white/60 no React)
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White.copy(alpha = 0.60f)) // Fundo translúcido
-            .border(BorderStroke(1.dp, GlassScaffoldTokens.barBorder))
+            .background(Color(0xFFDCFCE7).copy(alpha = 0.60f))
     ) {
         Row(
             modifier = Modifier
@@ -65,8 +66,8 @@ fun GlassTopBar(
                 val backShape = RoundedCornerShape(12.dp)
                 Box(
                     modifier = Modifier
-                        .background(Color.White.copy(alpha = 0.60f), backShape)
-                        .border(1.dp, Color.White.copy(alpha = 0.70f), backShape)
+                        .background(Color.White.copy(alpha = 0.40f), backShape)
+                        .border(1.dp, Color.White.copy(alpha = 0.50f), backShape)
                         .clip(backShape)
                         .clickable(onClick = onBackClick)
                         .padding(horizontal = 12.dp, vertical = 8.dp),
@@ -105,8 +106,6 @@ fun GlassTopBar(
 fun GlassBottomNav(
     isPokedexSelected: Boolean,
     isTeamSelected: Boolean,
-    pokedexIcon: Painter,
-    teamIcon: Painter,
     onPokedexClick: () -> Unit,
     onTeamClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -116,47 +115,44 @@ fun GlassBottomNav(
         topEnd = GlassScaffoldTokens.bottomBarCorner
     )
 
-    // Fundo da barra inferior ajustado para o tom "verde clarinho quase branco" (bg-white/60 no React)
     Surface(
-        color = Color.White.copy(alpha = 0.60f),
+        color = Color.White.copy(alpha = 0.30f),
         shape = bottomShape,
-        shadowElevation = 16.dp, // Sombra forte (shadow-2xl)
+        shadowElevation = 20.dp,
         modifier = modifier
             .fillMaxWidth()
-            // Borda superior (border-t-3)
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
-                val y = strokeWidth / 2
                 drawLine(
-                    color = GlassScaffoldTokens.barBorder,
-                    start = Offset(0f, y),
-                    end = Offset(size.width, y),
-                    strokeWidth = strokeWidth * 2
+                    color = Color.White.copy(alpha = 0.40f),
+                    start = Offset(0f, 0f),
+                    end = Offset(size.width, 0f),
+                    strokeWidth = strokeWidth * 3
                 )
             }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 14.dp, vertical = 16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             GlassBottomNavItem(
                 label = "POKEDEX",
-                icon = pokedexIcon,
+                icon = painterResource(Res.drawable.open_book),
                 selected = isPokedexSelected,
                 selectedBrush = GlassScaffoldTokens.pokedexSelectedGradient,
-                shadowColor = GlassScaffoldTokens.pokedexShadowColor,
+                shadowColor = Color(0xFF10B981).copy(alpha = 0.3f),
                 onClick = onPokedexClick,
                 modifier = Modifier.weight(1f)
             )
 
             GlassBottomNavItem(
                 label = "MY TEAM",
-                icon = teamIcon,
+                icon = painterResource(Res.drawable.shield),
                 selected = isTeamSelected,
                 selectedBrush = GlassScaffoldTokens.teamSelectedGradient,
-                shadowColor = GlassScaffoldTokens.teamShadowColor,
+                shadowColor = Color(0xFF14B8A6).copy(alpha = 0.3f),
                 onClick = onTeamClick,
                 modifier = Modifier.weight(1f)
             )
@@ -167,7 +163,7 @@ fun GlassBottomNav(
 @Composable
 private fun GlassBottomNavItem(
     label: String,
-    icon: Painter, // Voltamos para Painter
+    icon: Painter,
     selected: Boolean,
     selectedBrush: Brush,
     shadowColor: Color,
@@ -175,61 +171,51 @@ private fun GlassBottomNavItem(
     modifier: Modifier = Modifier
 ) {
     val shape = RoundedCornerShape(GlassScaffoldTokens.tabCorner)
-    // Animação de escala (scale-105)
     val scale by animateFloatAsState(if (selected) 1.05f else 1f)
 
     Box(
         modifier = modifier
             .scale(scale)
-            // Sombra colorida no item selecionado (shadow-lg)
             .then(
                 if (selected) Modifier.shadow(
-                    elevation = 12.dp,
+                    elevation = 15.dp,
                     shape = shape,
                     ambientColor = shadowColor,
                     spotColor = shadowColor
                 ) else Modifier
             )
             .background(
-                // Cor de fundo do item inativo (bg-white/40)
-                color = if (selected) Color.Transparent else GlassScaffoldTokens.inactiveTabBackground,
+                color = if (selected) Color.Transparent else Color.White.copy(alpha = 0.20f),
                 shape = shape
             )
             .background(
-                brush = if (selected) selectedBrush else Brush.verticalGradient(
-                    listOf(
-                        Color.Transparent,
-                        Color.Transparent
-                    )
-                ),
+                brush = if (selected) selectedBrush else Brush.verticalGradient(listOf(Color.Transparent, Color.Transparent)),
                 shape = shape
             )
-            // Borda do item (border-white/50 ou border-white/60 no React)
             .border(
                 width = 1.dp,
-                color = if (selected) Color.White.copy(alpha = 0.50f) else GlassScaffoldTokens.inactiveTabBorder,
+                color = if (selected) Color.White.copy(alpha = 0.50f) else Color.White.copy(alpha = 0.30f),
                 shape = shape
             )
             .clip(shape)
             .clickable(onClick = onClick)
-            .padding(vertical = 12.dp), // py-3
+            .padding(vertical = 12.dp),
         contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Icon(
                 painter = icon,
                 contentDescription = label,
-                // Cores do texto/ícone: Branco se selecionado, Verde escuro se inativo (text-white vs text-green-800)
-                tint = if (selected) Color.White else Color(0xFF166534),
-                modifier = Modifier.size(24.dp) // w-6
+                tint = if (selected) Color.White else Color(0xFF14532D),
+                modifier = Modifier.size(26.dp)
             )
             Text(
                 text = label,
-                color = if (selected) Color.White else Color(0xFF166534),
+                color = if (selected) Color.White else Color(0xFF14532D),
                 style = TextStyle(
                     fontFamily = pixelFont(),
                     fontWeight = FontWeight.Medium,
-                    fontSize = 11.sp // text-xs
+                    fontSize = 10.sp
                 )
             )
         }
