@@ -71,7 +71,7 @@ fun TeamEmptyCard(
                 modifier = Modifier
                     .size(100.dp)
                     .clip(CircleShape)
-                    .background(Color.White.copy(alpha = 0.2f))
+                    .background(Color.White.copy(alpha = 0.50f))
                     .border(3.dp, accentColor, CircleShape),
                 contentAlignment = Alignment.Center
             ) {
@@ -99,7 +99,6 @@ fun TeamEmptyCard(
 
             Spacer(modifier = Modifier.size(12.dp))
 
-            // Botão "Explore Pokedex" - Ajustado para ser maior e mais redondo
             val buttonShape = RoundedCornerShape(24.dp)
 
             Box(

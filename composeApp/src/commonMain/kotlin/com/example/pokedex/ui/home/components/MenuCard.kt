@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -34,62 +33,48 @@ fun MenuCard(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     cardColor: Color = Color.White.copy(alpha = 0.14f),
-    iconBackground: Brush = HomeStyleTokens.primaryMenuIconGradient,
-    iconTint: Color = Color.White,
-    accentColor: Color = Color(0xFF8BEA6A).copy(alpha = 0.22f)
+    iconTint: Color = Color.White
 ) {
     Card(
         onClick = onClick,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(28.dp),
         colors = CardDefaults.cardColors(containerColor = cardColor),
-        border = BorderStroke(1.dp, HomeStyleTokens.cardBorder),
+        border = BorderStroke(3.dp, HomeStyleTokens.cardBorder),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
-        Box {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 20.dp, vertical = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Box(
                 modifier = Modifier
-                    .align(Alignment.TopEnd)
-                    .size(106.dp)
-                    .clip(CircleShape)
-                    .background(accentColor)
-            )
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp, vertical = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                    .size(62.dp)
+                    .clip(RoundedCornerShape(14.dp)),
+                contentAlignment = Alignment.Center
             ) {
-                Box(
-                    modifier = Modifier
-                        .size(62.dp)
-                        .clip(RoundedCornerShape(14.dp))
-                        .background(iconBackground)
-                        .border(1.dp, Color.White.copy(alpha = 0.45f), RoundedCornerShape(14.dp)),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        painter = icon,
-                        contentDescription = title,
-                        modifier = Modifier.size(30.dp),
-                        tint = iconTint
-                    )
-                }
+                Icon(
+                    painter = icon,
+                    contentDescription = title,
+                    modifier = Modifier.size(50.dp),
+                    tint = iconTint
+                )
+            }
 
-                Column(modifier = Modifier.padding(start = 18.dp)) {
-                    Text(
-                        text = title,
-                        color = Color.White,
-                        style = HomeTypography.cardTitle,
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        text = subtitle,
-                        color = Color.White.copy(alpha = 0.86f),
-                        style = MaterialTheme.typography.bodyMedium
-                    )
-                }
+            Column(modifier = Modifier.padding(start = 18.dp)) {
+                Text(
+                    text = title,
+                    color = Color.White,
+                    style = HomeTypography.cardTitle,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = subtitle,
+                    color = Color.White.copy(alpha = 0.86f),
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }

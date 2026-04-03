@@ -7,9 +7,9 @@ import androidx.compose.ui.unit.dp
 object HomeStyleTokens {
     val screenGradient = Brush.verticalGradient(
         listOf(
-            Color(0xFF34D399),
+            Color(0xFF86EFAC),
             Color(0xFF22C55E),
-            Color(0xFF0D9488)
+            Color(0xFF15803D)
         )
     )
 

@@ -25,6 +25,7 @@ fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
+            .border(2.dp, Color.White, RoundedCornerShape(20.dp))
             .shadow(4.dp, RoundedCornerShape(20.dp))
             .clickable(onClick = onClick),
         shape = RoundedCornerShape(20.dp),
@@ -33,11 +34,9 @@ fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            // Metade Superior (Fundo Verde Claro com a Imagem)
             Box(
                 modifier = Modifier.fillMaxWidth().height(130.dp).background(Color(0xFFD5EED8))
             ) {
-                // Pílula com o Número (Canto Superior Esquerdo)
                 Box(
                     modifier = Modifier.align(Alignment.TopCenter).padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {

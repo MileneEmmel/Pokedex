@@ -59,13 +59,17 @@ fun App() {
             currentDestination?.hasRoute<PokedexRoute>() == true ||
                     currentDestination?.hasRoute<MyTeamRoute>() == true
 
+        val showTopBar = currentDestination?.hasRoute<HomeRoute>() != true
+
         Scaffold(
             topBar = {
-                GlassTopBar(
-                    title = title,
-                    showBack = currentDestination?.hasRoute<PokemonDetailRoute>() == true,
-                    onBackClick = { navController.popBackStack() }
-                )
+                if (showTopBar) {
+                    GlassTopBar(
+                        title = title,
+                        showBack = currentDestination?.hasRoute<PokemonDetailRoute>() == true,
+                        onBackClick = { navController.popBackStack() }
+                    )
+                }
             },
             bottomBar = {
                 if (showBottomBar) {
