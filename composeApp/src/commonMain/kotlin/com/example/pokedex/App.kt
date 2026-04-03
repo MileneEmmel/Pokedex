@@ -18,7 +18,7 @@ import com.example.pokedex.navigation.HomeRoute
 import com.example.pokedex.navigation.MyTeamRoute
 import com.example.pokedex.navigation.PokedexRoute
 import com.example.pokedex.navigation.PokemonDetailRoute
-import com.example.pokedex.ui.HomeScreen
+import com.example.pokedex.ui.home.HomeScreen
 import com.example.pokedex.ui.pokedex.PokedexGridScreen
 import com.example.pokedex.ui.details.PokemonDetailScreen
 import com.example.pokedex.ui.capitalizePokemonName

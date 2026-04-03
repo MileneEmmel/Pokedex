@@ -29,13 +29,12 @@ fun PokemonCard(
     modifier: Modifier = Modifier
 ) {
     val cardColor = Color(0xFF16A34A)
-    val numberColor = Color.White
 
     Box(
         modifier = modifier
             .fillMaxWidth()
             .shadow(8.dp, RoundedCornerShape(24.dp))
-            .border(2.dp, Color.White, RoundedCornerShape(24.dp)) // Borda do card
+            .border(2.dp, Color(0xFF2D6A4F), RoundedCornerShape(24.dp)) // Borda do card
             .background(cardColor, RoundedCornerShape(24.dp))
             .padding(start = 24.dp, top = 12.dp, end = 24.dp, bottom = 24.dp) // Espaçamento superior
     ) {
@@ -52,7 +51,7 @@ fun PokemonCard(
                 // Número do Pokémon
                 Text(
                     text = pokemon.id.formatPokemonNumber(),
-                    color = numberColor,
+                    color = Color(0xFF2D6A4F),
                     fontSize = 10.sp,
                     fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
                 )
