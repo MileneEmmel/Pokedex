@@ -63,6 +63,8 @@ fun App() {
             topBar = {
                 GlassTopBar(
                     title = title,
+                    showBack = currentDestination?.hasRoute<PokemonDetailRoute>() == true,
+                    onBackClick = { navController.popBackStack() }
                 )
             },
             bottomBar = {
