@@ -117,6 +117,12 @@ fun App() {
                             navController.navigate(PokedexRoute) {
                                  popUpTo(PokedexRoute) { inclusive = true }
                             }
+                        },
+                        onViewDetailsClick = { pokemonId ->
+                            navController.navigate(PokemonDetailRoute(pokemonId))
+                        },
+                        onRemovePokemon = { pokemonId ->
+                            visualTeam.removeAll { it.id == pokemonId }
                         }
                     )
                 }
@@ -124,12 +130,22 @@ fun App() {
                 composable<PokemonDetailRoute> { backStackEntry ->
                     val route = backStackEntry.toRoute<PokemonDetailRoute>()
                     val pokemon = PokemonMock.findById(route.pokemonId)
+                    val isInTeam = pokemon?.let { visualTeam.any { teamPokemon -> teamPokemon.id == it.id } } ?: false
 
                     PokemonDetailScreen(
                         pokemon = pokemon,
                         onBackClick = {
                             navController.popBackStack()
-                        }
+                        },
+                        onAddToTeamClick = { pokemonToAdd ->
+                            if (!visualTeam.any { it.id == pokemonToAdd.id } && visualTeam.size < 6) {
+                                visualTeam.add(pokemonToAdd)
+                            }
+                        },
+                        onViewTeamClick = {
+                            navController.navigate(MyTeamRoute)
+                        },
+                        isInTeam = isInTeam
                     )
                 }
             }

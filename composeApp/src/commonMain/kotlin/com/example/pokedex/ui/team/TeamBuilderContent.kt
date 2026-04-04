@@ -2,7 +2,6 @@ package com.example.pokedex.ui.team
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -20,6 +19,8 @@ fun TeamBuilderContent(
     team: List<Pokemon>,
     style: TeamBuilderStyle,
     onExploreClick: () -> Unit = {},
+    onViewDetailsClick: (Int) -> Unit = {},
+    onRemovePokemon: (Int) -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     val avgHp = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "hp" }?.value }.averageInt()
@@ -61,6 +62,8 @@ fun TeamBuilderContent(
             items(team, key = { it.id }) { pokemon ->
                 TeamMemberCard(
                     pokemon = pokemon,
+                    onViewDetailsClick = { onViewDetailsClick(pokemon.id) },
+                    onRemoveClick = { onRemovePokemon(pokemon.id) }
                 )
             }
 

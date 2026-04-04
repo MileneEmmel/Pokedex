@@ -8,11 +8,15 @@ import com.example.pokedex.data.Pokemon
 actual fun TeamBuilderScreen(
     team: List<Pokemon>,
     onExploreClick: () -> Unit,
+    onViewDetailsClick: (Int) -> Unit,
+    onRemovePokemon: (Int) -> Unit,
     modifier: Modifier
 ) {
     TeamBuilderIosContent(
         team = team,
         onExploreClick = onExploreClick,
+        onViewDetailsClick = onViewDetailsClick,
+        onRemovePokemon = onRemovePokemon,
         modifier = modifier
     )
 }

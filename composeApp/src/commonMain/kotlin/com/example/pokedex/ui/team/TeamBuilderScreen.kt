@@ -8,5 +8,7 @@ import com.example.pokedex.data.Pokemon
 expect fun TeamBuilderScreen(
     team: List<Pokemon>,
     onExploreClick: () -> Unit,
+    onViewDetailsClick: (Int) -> Unit,
+    onRemovePokemon: (Int) -> Unit,
     modifier: Modifier
 )

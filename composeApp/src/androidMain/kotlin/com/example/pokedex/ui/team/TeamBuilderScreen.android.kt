@@ -19,6 +19,8 @@ import com.example.pokedex.ui.team.styles.TeamBuilderStyle
 actual fun TeamBuilderScreen(
     team: List<Pokemon>,
     onExploreClick: () -> Unit,
+    onViewDetailsClick: (Int) -> Unit,
+    onRemovePokemon: (Int) -> Unit,
     modifier: Modifier
 ) {
     Box(
@@ -66,7 +68,9 @@ actual fun TeamBuilderScreen(
         TeamBuilderContent(
             team = team,
             style = style,
-            onExploreClick = onExploreClick
+            onExploreClick = onExploreClick,
+            onViewDetailsClick = onViewDetailsClick,
+            onRemovePokemon = onRemovePokemon
         )
     }
 }

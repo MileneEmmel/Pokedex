@@ -19,6 +19,8 @@ import com.example.pokedex.ui.team.styles.TeamBuilderStyle
 internal fun TeamBuilderIosContent(
     team: List<Pokemon>,
     onExploreClick: () -> Unit,
+    onViewDetailsClick: (Int) -> Unit,
+    onRemovePokemon: (Int) -> Unit,
     modifier: Modifier
 ) {
     val background = Brush.verticalGradient(
@@ -67,7 +69,9 @@ internal fun TeamBuilderIosContent(
         TeamBuilderContent(
             team = team,
             style = style,
-            onExploreClick = onExploreClick
+            onExploreClick = onExploreClick,
+            onViewDetailsClick = onViewDetailsClick,
+            onRemovePokemon = onRemovePokemon
         )
     }
 }

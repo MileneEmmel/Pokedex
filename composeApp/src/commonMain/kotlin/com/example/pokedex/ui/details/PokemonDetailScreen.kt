@@ -27,7 +27,13 @@ import com.example.pokedex.ui.details.components.EvolutionChainCard
 import com.example.pokedex.ui.details.components.TeamActionButtons
 
 @Composable
-fun PokemonDetailScreen(pokemon: Pokemon?, onBackClick: () -> Unit) {
+fun PokemonDetailScreen(
+    pokemon: Pokemon?,
+    onBackClick: () -> Unit,
+    onAddToTeamClick: (Pokemon) -> Unit = {},
+    onViewTeamClick: () -> Unit = {},
+    isInTeam: Boolean = false
+) {
     if (pokemon == null) {
         Column(
             modifier = Modifier.fillMaxSize().padding(24.dp),
@@ -62,8 +68,9 @@ fun PokemonDetailScreen(pokemon: Pokemon?, onBackClick: () -> Unit) {
 
         // Botões de Ação do Time
         TeamActionButtons(
-            onAddToTeamClick = {  },
-            onViewTeamClick = {  }
+            onAddToTeamClick = { pokemon?.let { onAddToTeamClick(it) } },
+            onViewTeamClick = { onViewTeamClick() },
+            isInTeam = isInTeam
         )
 
         // Espaço extra no final para a GlassBottomNav não cobrir o botão "View Team"
