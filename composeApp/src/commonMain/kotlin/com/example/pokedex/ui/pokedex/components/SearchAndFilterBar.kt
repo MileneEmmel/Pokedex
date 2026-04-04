@@ -18,12 +18,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pokedex.ui.ThemeColors
 
 @Composable
 fun SearchAndFilterBar(
@@ -33,41 +32,48 @@ fun SearchAndFilterBar(
     selectedType: String?,
     onTypeSelected: (String?) -> Unit
 ) {
-    // Estado de expansão para a lista de filtros
     var isExpanded by remember { mutableStateOf(false) }
+    val shape = RoundedCornerShape(24.dp)
 
-    // Ordena os tipos em ordem alfabética
     val sortedTypes = remember(types) {
         types.sortedBy { it.lowercase() }
     }
 
     Column(modifier = Modifier.fillMaxWidth()) {
+
         Row(
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 2.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 4.dp, vertical = 2.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Barra de Pesquisa (Ocupa 70% da largura à esquerda)
+
+            // 🔍 SEARCH BAR
             Surface(
                 modifier = Modifier
-                    .weight(0.75f) // Parte esquerda
+                    .weight(0.75f)
                     .height(56.dp)
-                    .shadow(2.dp, RoundedCornerShape(24.dp))
-                    .border(1.dp, Color(0xFFD1E7D1), RoundedCornerShape(24.dp))
-                    .clip(RoundedCornerShape(24.dp)),
-                color = Color(0xFFF0F8F0) // Fundo padrão padronizado
+                    .border(1.dp, Color.White, shape),
+                shape = shape,
+                color = ThemeColors.lightIceGreen,
+                shadowElevation = 6.dp,
+                tonalElevation = 2.dp
             ) {
                 OutlinedTextField(
                     value = searchQuery,
                     onValueChange = onSearchQueryChange,
                     placeholder = {
-                        Text("Search Pokémon...", color = Color(0xFF8DB3A1))
+                        Text(
+                            "Search Pokémon...",
+                            color = ThemeColors.deepGreen.copy(alpha = 0.5f)
+                        )
                     },
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Default.Search,
                             contentDescription = null,
-                            tint = Color(0xFF2D6A4F)
+                            tint = ThemeColors.deepGreen
                         )
                     },
                     modifier = Modifier.fillMaxSize(),
@@ -77,42 +83,42 @@ fun SearchAndFilterBar(
                         unfocusedContainerColor = Color.Transparent,
                         focusedBorderColor = Color.Transparent,
                         unfocusedBorderColor = Color.Transparent,
-                        cursorColor = Color(0xFF2D6A4F),
-                        focusedTextColor = Color(0xFF2D6A4F),
-                        unfocusedTextColor = Color(0xFF2D6A4F)
+                        cursorColor = ThemeColors.deepGreen,
+                        focusedTextColor = ThemeColors.deepGreen,
+                        unfocusedTextColor = ThemeColors.deepGreen
                     )
                 )
             }
 
-            Spacer(modifier = Modifier.width(8.dp))
-
-            // Botão de Filtro apenas Ícone (Ocupa o restante 30% à direita)
+            // 🎛️ FILTER BUTTON
             Surface(
                 modifier = Modifier
-                    .weight(0.25f) // Parte direita
+                    .weight(0.25f)
                     .height(56.dp)
-                    .shadow(2.dp, RoundedCornerShape(24.dp))
-                    .border(1.dp, Color(0xFFD1E7D1), RoundedCornerShape(24.dp))
-                    .clip(RoundedCornerShape(24.dp))
-                    .clickable { isExpanded = !isExpanded }, // Alterna expansão
-                color = Color(0xFFF0F8F0)
+                    .border(1.dp, Color.White, shape)
+                    .clickable { isExpanded = !isExpanded },
+                shape = shape,
+                color = ThemeColors.lightIceGreen,
+                shadowElevation = 6.dp,
+                tonalElevation = 2.dp
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
-                    // Ícone do filtro (centralizado)
+
                     Icon(
                         imageVector = Icons.Default.FilterList,
                         contentDescription = null,
-                        tint = Color(0xFF2D6A4F),
-                        modifier = Modifier.size(24.dp).align(Alignment.Center)
+                        tint = ThemeColors.deepGreen,
+                        modifier = Modifier
+                            .size(24.dp)
+                            .align(Alignment.Center)
                     )
 
-                    // Indicador de filtro ativo (bolinha no canto superior direito)
                     if (selectedType != null) {
                         Box(
                             modifier = Modifier
-                                .padding(top = 10.dp, end = 10.dp)
+                                .padding(10.dp)
                                 .size(8.dp)
-                                .background(Color(0xFF1B4332), CircleShape)
+                                .background(ThemeColors.deepGreen, CircleShape)
                                 .align(Alignment.TopEnd)
                         )
                     }
@@ -120,28 +126,28 @@ fun SearchAndFilterBar(
             }
         }
 
-        // Painel de Filtro Expandido (lista vertical rolável abaixo)
         AnimatedVisibility(
             visible = isExpanded,
-            enter = expandVertically(animationSpec = tween(400)) + fadeIn(animationSpec = tween(300)),
-            exit = shrinkVertically(animationSpec = tween(400)) + fadeOut(animationSpec = tween(300))
+            enter = expandVertically(tween(300)) + fadeIn(),
+            exit = shrinkVertically(tween(300)) + fadeOut()
         ) {
             Surface(
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .fillMaxWidth()
-                    .height(200.dp) // Altura fixa para mostrar ~4 itens
-                    .shadow(3.dp, RoundedCornerShape(24.dp))
-                    .border(1.dp, Color(0xFFD1E7D1), RoundedCornerShape(24.dp)),
-                color = Color(0xFFFBFBFB), // Fundo do painel
-                shape = RoundedCornerShape(24.dp)
+                    .height(200.dp)
+                    .border(1.dp, Color.White, shape),
+                shape = shape,
+                color = ThemeColors.lightIceGreen,
+                shadowElevation = 6.dp,
+                tonalElevation = 2.dp
             ) {
+
                 LazyColumn(
                     modifier = Modifier.padding(12.dp),
-                    contentPadding = PaddingValues(vertical = 8.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(3.dp)
                 ) {
-                    // Item "All" sempre no topo
+
                     item {
                         FilterListItem(
                             text = "All",
@@ -152,7 +158,7 @@ fun SearchAndFilterBar(
                             }
                         )
                     }
-                    // Itens ordenados
+
                     items(sortedTypes) { type ->
                         FilterListItem(
                             text = type,
@@ -180,21 +186,23 @@ fun FilterListItem(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .padding(horizontal = 16.dp, vertical = 5.dp),
+            .padding(horizontal = 16.dp, vertical = 6.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
+
         Text(
-            text = text.lowercase().replaceFirstChar { it.uppercase() }, // Força Capitalização
-            color = if (isSelected) Color(0xFF1B4332) else Color(0xFF2D6A4F),
+            text = text.replaceFirstChar { it.uppercase() },
+            color = ThemeColors.deepGreen,
             fontSize = 14.sp,
             fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
         )
+
         if (isSelected) {
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = null,
-                tint = Color(0xFF1B4332),
+                tint = ThemeColors.deepGreen,
                 modifier = Modifier.size(20.dp)
             )
         }

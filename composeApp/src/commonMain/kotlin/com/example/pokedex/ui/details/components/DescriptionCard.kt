@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Description
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -17,43 +19,70 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.ThemeColors
 import org.jetbrains.compose.resources.Font
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
-fun DescriptionCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
-    Box(
+fun DescriptionCard(
+    pokemon: Pokemon,
+    modifier: Modifier = Modifier
+) {
+    val shape = RoundedCornerShape(24.dp)
+
+    ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .border(2.dp, Color.White, RoundedCornerShape(24.dp)) // Borda branca adicionada
-            .background(Color(0xFFFBFBFB), RoundedCornerShape(24.dp))
-            .padding(16.dp)
+            .border(
+                width = 1.dp,
+                color = Color.White,
+                shape = shape
+            ),
+        shape = shape,
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = ThemeColors.lightIceGreen
+        )
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-            // Título com ícone
+        Column(
+            modifier = Modifier.padding(12.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+
+            // Header
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Description, // Ícone de documento
+                    imageVector = Icons.Outlined.Description,
                     contentDescription = null,
-                    tint = Color(0xFF2D6A4F),
+                    tint = ThemeColors.deepGreen,
                     modifier = Modifier.size(20.dp)
                 )
+
                 Text(
                     text = "DESCRIPTION",
-                    color    = Color(0xFF2D6A4F),
+                    color = ThemeColors.deepGreen,
                     fontSize = 12.sp,
-                    fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                    fontFamily = pixelFont(),
+                    fontWeight = FontWeight.Bold
                 )
             }
 
-            // Texto da Descrição
+            // Divider
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(ThemeColors.mediumGreen)
+            )
+
+            // Texto
             Text(
                 text = pokemon.description,
-                color = Color(0xFF2D6A4F),
+                color = ThemeColors.deepGreen,
                 fontSize = 14.sp,
                 lineHeight = 22.sp,
                 fontWeight = FontWeight.Normal
@@ -61,3 +90,7 @@ fun DescriptionCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
         }
     }
 }
+
+@Composable
+private fun pixelFont(): FontFamily =
+    FontFamily(Font(Res.font.press_start_2p_regular))

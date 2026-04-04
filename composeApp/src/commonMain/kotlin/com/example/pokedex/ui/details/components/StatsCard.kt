@@ -6,6 +6,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,6 +18,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.getStatColor
 import com.example.pokedex.ui.getMaxStatValue
 import org.jetbrains.compose.resources.Font
@@ -24,66 +27,63 @@ import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun StatsCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .border(2.dp, Color.White, RoundedCornerShape(24.dp))
-            .background(Color(0xFFFBFBFB), RoundedCornerShape(24.dp))
-            .padding(16.dp)
+    val shape = RoundedCornerShape(24.dp)
+
+    ElevatedCard(
+        modifier = modifier.fillMaxWidth().border(1.dp, Color.White, shape),
+        shape = shape,
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = ThemeColors.lightIceGreen
+        )
     ) {
         Column(
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp)
         ) {
+
             Text(
                 text = "STATS",
-                color = Color(0xFF2D6A4F),
+                color = ThemeColors.deepGreen,
                 fontSize = 12.sp,
-                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                fontFamily = pixelFont()
             )
 
-            // Lista os stats
-            pokemon.stats.forEach { stat ->
-                StatRow(statName = stat.name, statValue = stat.value)
-            }
+            pokemon.stats.forEach { stat -> StatRow(stat.name, stat.value) }
         }
     }
 }
 
 @Composable
 fun StatRow(statName: String, statValue: Int) {
-    // Busca a cor correta baseada no nome
     val statColor = getStatColor(statName)
 
-    // Formata o nome completo substituindo hifens e capitalizando
     val fullName = statName.split("-").joinToString(" ") {
         it.replaceFirstChar { char -> char.uppercase() }
     }
 
-    // Busca o valor máximo real desse status na Pokédex
     val maxStatValue = getMaxStatValue(statName)
 
-    // Animação suave para a barra encher
     var animationPlayed by remember { mutableStateOf(false) }
-    LaunchedEffect(key1 = true) {
-        animationPlayed = true
-    }
+
+    LaunchedEffect(Unit) { animationPlayed = true }
 
     val fraction = (statValue / maxStatValue).coerceIn(0f, 1f)
 
     val animatedFraction by animateFloatAsState(
         targetValue = if (animationPlayed) fraction else 0f,
-        animationSpec = tween(durationMillis = 1000)
+        animationSpec = tween(900)
     )
 
-    // Gradiente que aumenta a intensidade da cor conforme preenche
-    val barGradient = Brush.horizontalGradient(
-        colors = listOf(
-            statColor.copy(alpha = 0.5f), // Começa mais transparente
-            statColor                     // Termina na cor sólida
-        )
+    val shape = RoundedCornerShape(6.dp)
+
+    // Gradiente (50% -> 100%)
+    val gradient = Brush.horizontalGradient(
+        colors = listOf(statColor.copy(alpha = 0.5f), statColor)
     )
 
     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -91,33 +91,36 @@ fun StatRow(statName: String, statValue: Int) {
         ) {
             Text(
                 text = fullName,
-                color = Color(0xFF2D6A4F),
+                color = ThemeColors.deepGreen,
                 fontSize = 10.sp,
-                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                fontFamily = pixelFont()
             )
+
             Text(
                 text = statValue.toString(),
-                color = Color(0xFF2D6A4F),
+                color = ThemeColors.deepGreen,
                 fontSize = 10.sp,
-                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                fontFamily = pixelFont()
             )
         }
 
-        // Fundo cinza/transparente da barra de progresso
+        // Track
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(12.dp)
-                .background(Color(0xFFDDECDD), RoundedCornerShape(6.dp))
+                .background(ThemeColors.iceGreen, shape)
         ) {
-            // Barra colorida preenchida animada com gradiente
             Box(
                 modifier = Modifier
                     .fillMaxWidth(animatedFraction)
                     .fillMaxHeight()
-                    .background(barGradient, RoundedCornerShape(6.dp))
+                    .background(gradient, shape)
             )
         }
     }
 }
 
+@Composable
+private fun pixelFont(): FontFamily =
+    FontFamily(Font(Res.font.press_start_2p_regular))

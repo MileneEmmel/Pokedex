@@ -6,23 +6,30 @@ import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.data.PokemonMock
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.pokedex.components.DatabaseBar
 import com.example.pokedex.ui.pokedex.components.SearchAndFilterBar
 import com.example.pokedex.ui.pokedex.components.PokemonGridItem
 
 @Composable
-fun PokedexGridScreen(pokemons: List<Pokemon>, onPokemonClick: (Int) -> Unit) {
+fun PokedexGridScreen(onPokemonClick: (Int) -> Unit) {
+    val pokemons = remember { PokemonMock.getPokemonList() }
 
     var searchQuery by remember { mutableStateOf("") }
     var selectedType by remember { mutableStateOf<String?>(null) }
 
-    val filteredList = pokemons.filter {
-        val matchesName = it.name.contains(searchQuery, ignoreCase = true)
-        val matchesType = selectedType == null || it.types.contains(selectedType)
-        matchesName && matchesType
+    // 🔥 derivedStateOf melhora performance
+    val filteredList by remember(searchQuery, selectedType, pokemons) {
+        derivedStateOf {
+            pokemons.filter {
+                val matchesName = it.name.contains(searchQuery, ignoreCase = true)
+                val matchesType = selectedType == null || it.types.contains(selectedType)
+                matchesName && matchesType
+            }
+        }
     }
 
     Column(
@@ -30,20 +37,25 @@ fun PokedexGridScreen(pokemons: List<Pokemon>, onPokemonClick: (Int) -> Unit) {
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    listOf(Color(0xFFD0EBD1), Color(0xFFA5E0CC)
+                    listOf(
+                        ThemeColors.topBackground,
+                        ThemeColors.bottomBackground
                     )
                 )
             )
             .padding(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
+
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(top = 8.dp),
+            contentPadding = PaddingValues(top = 8.dp, bottom = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
+
+            // Header
             item(span = { GridItemSpan(maxLineSpan) }) {
                 DatabaseBar(
                     currentCount = filteredList.size,
@@ -51,6 +63,7 @@ fun PokedexGridScreen(pokemons: List<Pokemon>, onPokemonClick: (Int) -> Unit) {
                 )
             }
 
+            // Busca + Filtro
             item(span = { GridItemSpan(maxLineSpan) }) {
                 SearchAndFilterBar(
                     searchQuery = searchQuery,
@@ -61,7 +74,11 @@ fun PokedexGridScreen(pokemons: List<Pokemon>, onPokemonClick: (Int) -> Unit) {
                 )
             }
 
-            items(filteredList) { pokemon ->
+            // Grid de Pokémons
+            items(
+                items = filteredList,
+                key = { it.id }
+            ) { pokemon ->
                 PokemonGridItem(
                     pokemon = pokemon,
                     onClick = { onPokemonClick(pokemon.id) }

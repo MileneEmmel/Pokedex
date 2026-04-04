@@ -42,7 +42,7 @@ fun MenuCard(
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(28.dp),
         colors = CardDefaults.cardColors(containerColor = cardColor),
-        border = BorderStroke(3.dp, HomeStyleTokens.cardBorder),
+        border = BorderStroke(3.dp, Color.White.copy(alpha = 0.34f)),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Row(
@@ -69,7 +69,7 @@ fun MenuCard(
                 Text(
                     text = title,
                     color = Color.White,
-                    style = HomeTypography.cardTitle,
+                    style = Typography.cardTitle,
                     fontSize = 24.sp,
                     fontFamily = FontFamily(Font(Res.font.press_start_2p_regular)),
                     fontWeight = FontWeight.Bold

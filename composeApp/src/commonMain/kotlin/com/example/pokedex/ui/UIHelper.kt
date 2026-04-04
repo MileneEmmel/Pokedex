@@ -1,23 +1,46 @@
 package com.example.pokedex.ui
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 fun String.capitalizePokemonName(): String =
     replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() }
 
 fun Int.formatPokemonNumber(): String = "#${toString().padStart(3, '0')}"
 
-fun getTypeDetailsColor(type: String): Color {
+fun getTypeColor(type: String): Color {
     return when (type.lowercase()) {
-        "grass" -> Color(0xFF38E54D)
-        "poison" -> Color(0xFFA020F0)
-        "fire" -> Color(0xFFFF5722)
-        "water" -> Color(0xFF29B6F6)
-        "electric" -> Color(0xFFFFEB3B)
-        "psychic" -> Color(0xFFFF4081)
-        "bug" -> Color(0xFFA2C11C)
-        "normal" -> Color(0xFFA8A878)
-        else -> Color(0xFFBDBDBD)
+        "bug"      -> ThemeColors.typeBug
+        "dragon"   -> ThemeColors.typeDragon
+        "electric" -> ThemeColors.typeElectric
+        "fairy"    -> ThemeColors.typeFairy
+        "fighting" -> ThemeColors.typeFighting
+        "fire"     -> ThemeColors.typeFire
+        "flying"   -> ThemeColors.typeFlying
+        "ghost"    -> ThemeColors.typeGhost
+        "grass"    -> ThemeColors.typeGrass
+        "ground"   -> ThemeColors.typeGround
+        "ice"      -> ThemeColors.typeIce
+        "normal"   -> ThemeColors.typeNormal
+        "poison"   -> ThemeColors.typePoison
+        "psychic"  -> ThemeColors.typePsychic
+        "rock"     -> ThemeColors.typeRock
+        "steel"    -> ThemeColors.typeSteel
+        "water"    -> ThemeColors.typeWater
+        else       -> Color.LightGray
     }
 }
 
@@ -56,12 +79,12 @@ fun getStatAbbreviation(statName: String): String {
 
 fun getStatColor(statName: String): Color {
     return when (statName.lowercase()) {
-        "hp" -> HomeStyleTokens.neonRed
-        "attack", "atk" -> HomeStyleTokens.neonOrange
-        "defense", "def" -> HomeStyleTokens.neonYellow
-        "special-attack", "sp-attack", "sp.atk" -> HomeStyleTokens.neonBlue
-        "special-defense", "sp-defense", "sp.def" -> HomeStyleTokens.neonGreen
-        "speed", "spd" -> HomeStyleTokens.neonPurple
+        "hp" -> ThemeColors.neonRed
+        "attack", "atk" -> ThemeColors.neonOrange
+        "defense", "def" -> ThemeColors.neonYellow
+        "special-attack", "sp-attack", "sp.atk" -> ThemeColors.neonBlue
+        "special-defense", "sp-defense", "sp.def" -> ThemeColors.neonGreen
+        "speed", "spd" -> ThemeColors.neonPurple
         else -> Color.Gray
     }
 }
@@ -76,5 +99,54 @@ fun getMaxStatValue(statName: String): Float {
         "special-defense" -> 125f // Articuno
         "speed" -> 150f           // Electrode
         else -> 255f
+    }
+}
+
+@Composable
+fun MiniStat(label: String, value: Int, valueColor: Color, bgColor: Color, borderColor: Color) {
+    ElevatedCard(
+        shape = RoundedCornerShape(8.dp),
+        colors = CardDefaults.elevatedCardColors(containerColor = bgColor),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp),
+        modifier = Modifier.border(1.dp, borderColor, RoundedCornerShape(8.dp))
+    ) {
+        Column(
+            modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 2.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = value.toString(),
+                color = valueColor,
+                style = Typography.statValue(),
+                fontSize = 13.sp,
+                fontWeight = FontWeight.ExtraBold
+            )
+            Text(
+                text = label,
+                color = Color(0xFF14532D).copy(alpha = 0.8f),
+                style = MaterialTheme.typography.labelSmall,
+                fontSize = 9.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+fun StatItem(value: Int, label: String, valueColor: Color) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = value.toString(),
+            color = valueColor,
+            style = Typography.statValue(),
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 20.sp
+        )
+        Text(
+            text = label,
+            color = Color.White.copy(alpha = 0.80f),
+            style = MaterialTheme.typography.bodySmall,
+            fontSize = 10.sp
+        )
     }
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pokedex.ui.ThemeColors
 
 @Composable
 fun TeamActionButtons(
@@ -38,7 +39,7 @@ fun TeamActionButtons(
                  .shadow(4.dp, RoundedCornerShape(16.dp)),
              shape = RoundedCornerShape(16.dp),
              colors = ButtonDefaults.buttonColors(
-                 containerColor = if (isInTeam) Color(0xFF16A34A) else Color(0xFF0D9488),
+                 containerColor = if (isInTeam) ThemeColors.mediumGreen else ThemeColors.lightIceGreen,
                  disabledContainerColor = Color(0xFF16A34A),
                  disabledContentColor = Color.White
              ),
@@ -51,13 +52,13 @@ fun TeamActionButtons(
                  Icon(
                      imageVector = if (isInTeam) Icons.Default.Check else Icons.Default.Add,
                      contentDescription = if (isInTeam) "Added" else "Add",
-                     tint = Color.White,
+                     tint = ThemeColors.deepGreen,
                      modifier = Modifier.size(20.dp)
                  )
                  Spacer(modifier = Modifier.width(8.dp))
                  Text(
                      text = if (isInTeam) "ADDED TO TEAM" else "ADD TO TEAM",
-                     color = Color.White,
+                     color = ThemeColors.deepGreen,
                      fontSize = 16.sp,
                      fontWeight = FontWeight.Bold
                  )
@@ -73,12 +74,12 @@ fun TeamActionButtons(
                 .shadow(2.dp, RoundedCornerShape(16.dp)),
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White
+                containerColor = ThemeColors.lightIceGreen
             )
         ) {
             Text(
                 text = "VIEW TEAM",
-                color = Color(0xFF0D9488),
+                color = ThemeColors.deepGreen,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )

@@ -38,9 +38,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.pokedex.data.Pokemon
-import com.example.pokedex.ui.HomeTypography
+import com.example.pokedex.ui.Typography
+import com.example.pokedex.ui.MiniStat
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.formatPokemonNumber
+import com.example.pokedex.ui.getStatAbbreviation
+import com.example.pokedex.ui.getStatColor
+import com.example.pokedex.ui.getTypeColor
 import kotlin.math.abs
 @Composable
 fun TeamMemberCard(
@@ -127,12 +132,12 @@ fun TeamMemberCard(
                             AsyncImage(
                                 model = pokemon.imageUrl,
                                 contentDescription = pokemon.name,
-                                modifier = Modifier.size(100.dp)
+                                modifier = Modifier.size(80.dp)
                             )
                             Text(
                                 text = pokemon.id.formatPokemonNumber(),
                                 color = Color(0xFF14532D),
-                                style = HomeTypography.statValue(),
+                                style = Typography.statValue(),
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.Bold,
                                 modifier = Modifier
@@ -154,9 +159,10 @@ fun TeamMemberCard(
                             )
                             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 pokemon.types.take(2).forEach { type ->
+                                    val typeColor = getTypeColor(type)
                                     Surface(
                                         shape = RoundedCornerShape(6.dp),
-                                        color = Color.White.copy(alpha = 0.50f),
+                                        color = typeColor,
                                         border = androidx.compose.foundation.BorderStroke(
                                             1.dp,
                                             Color.White.copy(alpha = 0.80f)
@@ -164,7 +170,7 @@ fun TeamMemberCard(
                                     ) {
                                         Text(
                                             text = type.capitalizePokemonName(),
-                                            color = Color(0xFF166534),
+                                            color = Color.White,
                                             style = MaterialTheme.typography.labelSmall,
                                             modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                                             fontSize = 10.sp,
@@ -174,34 +180,15 @@ fun TeamMemberCard(
                                 }
                             }
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                MiniStat(
-                                    label = "HP",
-                                    value = pokemon.stats.firstOrNull { it.name == "hp" }?.value ?: 0,
-                                    valueColor = Color(0xFFFF1744),
-                                    bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
-                                    borderColor = Color(0xFFFF1744).copy(alpha = 0.2f)
-                                )
-                                MiniStat(
-                                    label = "ATK",
-                                    value = pokemon.stats.firstOrNull { it.name == "attack" }?.value ?: 0,
-                                    valueColor = Color(0xFFFFA726),
-                                    bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
-                                    borderColor = Color(0xFFFFA726).copy(alpha = 0.2f)
-                                )
-                                MiniStat(
-                                    label = "DEF",
-                                    value = pokemon.stats.firstOrNull { it.name == "defense" }?.value ?: 0,
-                                    valueColor = Color(0xFFFFEA00),
-                                    bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
-                                    borderColor = Color(0xFFFFEA00).copy(alpha = 0.2f)
-                                )
-                                MiniStat(
-                                    label = "SPD",
-                                    value = pokemon.stats.firstOrNull { it.name == "speed" }?.value ?: 0,
-                                    valueColor = Color(0xFF8B5CF6),
-                                    bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
-                                    borderColor = Color(0xFF8B5CF6).copy(alpha = 0.2f)
-                                )
+                                listOf("hp", "attack", "defense", "speed").forEach { statName ->
+                                    MiniStat(
+                                        label = getStatAbbreviation(statName),
+                                        value = pokemon.stats.firstOrNull { it.name == statName }?.value ?: 0,
+                                        valueColor = getStatColor(statName),
+                                        bgColor = Color(0xFF14532D).copy(alpha = 0.15f),
+                                        borderColor = getStatColor(statName).copy(alpha = 0.2f)
+                                    )
+                                }
                             }
                         }
                     }
@@ -209,6 +196,7 @@ fun TeamMemberCard(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(Color(0xFF16A34A).copy(alpha = 0.72f))
+                            .border(1.dp, ThemeColors.borderMediumGreen)
                             .clickable(onClick = onViewDetailsClick)
                             .padding(vertical = 20.dp),
                         contentAlignment = Alignment.Center
@@ -216,7 +204,7 @@ fun TeamMemberCard(
                         Text(
                             text = "VIEW DETAILS",
                             color = Color.White,
-                            style = HomeTypography.statValue(),
+                            style = Typography.statValue(),
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp,
                             letterSpacing = 1.sp
@@ -224,33 +212,6 @@ fun TeamMemberCard(
                     }
                 }
             }
-        }
-    }
-}
-@Composable
-private fun MiniStat(label: String, value: Int, valueColor: Color, bgColor: Color, borderColor: Color) {
-    Box(
-        modifier = Modifier
-            .background(bgColor, RoundedCornerShape(8.dp))
-            .border(1.dp, borderColor, RoundedCornerShape(8.dp))
-            .padding(horizontal = 8.dp, vertical = 4.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = value.toString(),
-                color = valueColor,
-                style = HomeTypography.statValue(),
-                fontSize = 13.sp,
-                fontWeight = FontWeight.ExtraBold
-            )
-            Text(
-                text = label,
-                color = Color(0xFF14532D).copy(alpha = 0.8f),
-                style = MaterialTheme.typography.labelSmall,
-                fontSize = 9.sp,
-                fontWeight = FontWeight.Bold
-            )
         }
     }
 }

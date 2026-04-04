@@ -20,8 +20,8 @@ import com.example.pokedex.navigation.PokedexRoute
 import com.example.pokedex.navigation.PokemonDetailRoute
 import com.example.pokedex.ui.home.HomeScreen
 import com.example.pokedex.ui.pokedex.PokedexGridScreen
-import com.example.pokedex.ui.details.PokemonDetailScreen
 import com.example.pokedex.ui.capitalizePokemonName
+import com.example.pokedex.ui.details.PokemonDetailScreen
 import com.example.pokedex.ui.scaffold.GlassBottomNav
 import com.example.pokedex.ui.scaffold.GlassTopBar
 import com.example.pokedex.ui.team.TeamBuilderScreen
@@ -40,8 +40,6 @@ fun App() {
 
         val visualTeam = remember {
             mutableStateListOf<Pokemon>().apply {
-                // Para testar com 3 Pokémons, descomente:
-                 addAll(PokemonMock.pokedex.take(3))
             }
         }
 
@@ -102,7 +100,6 @@ fun App() {
 
                 composable<PokedexRoute> {
                     PokedexGridScreen(
-                        pokemons = PokemonMock.pokedex,
                         onPokemonClick = { pokemonId ->
                             navController.navigate(PokemonDetailRoute(pokemonId))
                         },

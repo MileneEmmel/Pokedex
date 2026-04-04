@@ -3,74 +3,93 @@ package com.example.pokedex.ui.details.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FlashOn
-import androidx.compose.material3.Icon
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.capitalizePokemonName
+import com.example.pokedex.ui.getTypeColor
 import org.jetbrains.compose.resources.Font
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.press_start_2p_regular
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AbilitiesCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
-    Box(
+    val shape = RoundedCornerShape(24.dp)
+
+    ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .border(2.dp, Color.White, RoundedCornerShape(24.dp)) // Borda branca adicionada
-            .background(Color(0xFFFBFBFB), RoundedCornerShape(24.dp))
-            .padding(16.dp)
+            .border(1.dp, androidx.compose.ui.graphics.Color.White, shape),
+        shape = shape,
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = ThemeColors.lightIceGreen
+        )
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            // Título
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.FlashOn,
-                    contentDescription = null,
-                    tint = Color(0xFF2D6A4F),
-                    modifier = Modifier.size(20.dp)
-                )
-                Text(
-                    text = "ABILITIES",
-                    color    = Color(0xFF2D6A4F),
-                    fontSize = 12.sp,
-                    fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
-                )
-            }
+        Column(
+            modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
 
-            // Habilidades
+            // TITLE
+            Text(
+                text = "ABILITIES",
+                color = ThemeColors.deepGreen,
+                fontSize = 12.sp,
+                fontFamily = pixelFont()
+            )
+
+            // ABILITIES LIST
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 pokemon.abilities.forEach { ability ->
+
+                    val typeColors = pokemon.types.map { getTypeColor(it) }
+
+                    val backgroundModifier = when (typeColors.size) {
+                        0 -> Modifier.background(
+                            color = ThemeColors.darkGreen,
+                            shape = RoundedCornerShape(16.dp)
+                        )
+
+                        1 -> Modifier.background(
+                            color = typeColors.first(),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+
+                        else -> Modifier.background(
+                            brush = Brush.horizontalGradient(
+                                listOf(typeColors[0], typeColors[1])
+                            ),
+                            shape = RoundedCornerShape(16.dp)
+                        )
+                    }
+
                     Box(
                         modifier = Modifier
-                            .shadow(4.dp, RoundedCornerShape(16.dp))
-                            .background(Color(0xFF059669), RoundedCornerShape(16.dp)) // Verde mais azulado/teal
+                            .then(backgroundModifier)
                             .padding(horizontal = 14.dp, vertical = 8.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = ability.capitalizePokemonName(),
-                            color = Color.White,
+                            color = ThemeColors.lightIceGreen,
                             fontSize = 11.sp,
-                            fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                            fontFamily = pixelFont()
                         )
                     }
                 }
@@ -78,3 +97,7 @@ fun AbilitiesCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
         }
     }
 }
+
+@Composable
+private fun pixelFont(): FontFamily =
+    FontFamily(Font(Res.font.press_start_2p_regular))

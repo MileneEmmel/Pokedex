@@ -44,9 +44,9 @@ fun StatsCard(
             horizontalArrangement = Arrangement.SpaceEvenly,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            StatItem(value = pokemonCount, label = "Pokémon", valueColor = HomeStyleTokens.neonGreen)
-            StatItem(value = typesCount, label = "Types", valueColor = HomeStyleTokens.neonYellow)
-            StatItem(value = maxTeam, label = "Max Team", valueColor = HomeStyleTokens.neonCyan)
+            StatItem(value = pokemonCount, label = "Pokémon", valueColor = ThemeColors.neonGreen)
+            StatItem(value = typesCount, label = "Types", valueColor = ThemeColors.neonYellow)
+            StatItem(value = maxTeam, label = "Max Team", valueColor = ThemeColors.neonCyan)
         }
     }
 }
@@ -54,7 +54,7 @@ fun StatsCard(
 @Composable
 private fun StatItem(value: String, label: String, valueColor: Color) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-        val statStyle = HomeTypography.statValue()
+        val statStyle = Typography.statValue()
 
         Text(
             text = value,

@@ -14,41 +14,48 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.formatPokemonNumber
+import com.example.pokedex.ui.getTypeColor
 import org.jetbrains.compose.resources.Font
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
-    Card(
+
+    val shape = RoundedCornerShape(20.dp)
+
+    ElevatedCard(
+        onClick = onClick,
+        shape = shape,
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = Color.White
+        ),
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .border(2.dp, Color.White, RoundedCornerShape(20.dp))
-            .shadow(4.dp, RoundedCornerShape(20.dp))
-            .clickable(onClick = onClick),
-        shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = Color.White)
+            .border(1.dp, Color.White, shape)
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Box(
-                modifier = Modifier.fillMaxWidth().height(130.dp).background(Color(0xFFD5EED8))
-            ) {
-                Box(
-                    modifier = Modifier.align(Alignment.TopCenter).padding(horizontal = 8.dp, vertical = 2.dp)
-                ) {
-                    Text(
-                        text = pokemon.id.formatPokemonNumber(),
-                        color = Color(0xFF2D6A4F),
-                        fontSize = 10.sp,
-                        fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
-                    )
-                }
+        Column {
 
-                // Imagem do Pokémon
+            // PARTE SUPERIOR
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(130.dp)
+                    .background(ThemeColors.iceGreen)
+            ) {
+
+                Text(
+                    text = pokemon.id.formatPokemonNumber(),
+                    color = ThemeColors.deepGreen,
+                    fontSize = 10.sp,
+                    fontFamily = FontFamily(Font(Res.font.press_start_2p_regular)),
+                    modifier = Modifier.align(Alignment.TopCenter).padding(top = 6.dp)
+                )
+
                 AsyncImage(
                     model = pokemon.imageUrl,
                     contentDescription = pokemon.name,
@@ -56,38 +63,31 @@ fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
                 )
             }
 
-            // Metade Inferior (Textos e Tipos no fundo branco)
+            // PARTE INFERIOR
             Column(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
-                horizontalAlignment = Alignment.Start
+                modifier = Modifier.fillMaxWidth().padding(8.dp)
             ) {
+
                 Text(
                     text = pokemon.name.capitalizePokemonName(),
-                    color = Color(0xFF1B4332),
+                    color = ThemeColors.deepGreen,
                     fontWeight = FontWeight.Bold,
                     fontSize = 16.sp
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
-                // Tipos em Linha
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     pokemon.types.forEach { type ->
+
                         val typeColor = getTypeColor(type)
 
                         Box(
                             modifier = Modifier
-                                .shadow(
-                                    elevation = 8.dp,
-                                    shape = RoundedCornerShape(12.dp),
-                                    spotColor = typeColor,    // Cria o efeito de "Glow" colorido
-                                    ambientColor = typeColor
-                                )
                                 .background(typeColor, RoundedCornerShape(12.dp))
-                                .padding(horizontal = 8.dp, vertical = 4.dp),
-                            contentAlignment = Alignment.Center
+                                .padding(horizontal = 8.dp, vertical = 2.dp)
                         ) {
                             Text(
                                 text = type.uppercase(),
@@ -100,20 +100,5 @@ fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
                 }
             }
         }
-    }
-}
-
-// Função auxiliar para mapear as cores de cada tipo
-fun getTypeColor(type: String): Color {
-    return when (type.lowercase()) {
-        "grass"    -> Color(0xFF38E54D)
-        "poison"   -> Color(0xFFA020F0)
-        "fire"     -> Color(0xFFFF5722)
-        "water"    -> Color(0xFF29B6F6)
-        "electric" -> Color(0xFFFFEB3B)
-        "psychic"  -> Color(0xFFFF4081)
-        "bug"      -> Color(0xFFA2C11C)
-        "normal"   -> Color(0xFFA8A878)
-        else       -> Color(0xFFBDBDBD)
     }
 }

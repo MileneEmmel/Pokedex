@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.data.PokemonMock
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.formatPokemonNumber
 import org.jetbrains.compose.resources.Font
@@ -27,71 +30,82 @@ import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
-fun EvolutionChainCard(
-    pokemon: Pokemon,
-    modifier: Modifier = Modifier
-) {
-    // Transforma a lista de nomes em objetos da Pokédex para termos acesso à imagem e ID
+fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
+    val shape = RoundedCornerShape(24.dp)
+
     val evolutionPokemons = remember(pokemon.evolutions) {
         pokemon.evolutions.mapNotNull { name ->
             PokemonMock.pokedex.find { it.name.equals(name, ignoreCase = true) }
         }
     }
 
-    Box(
+    ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .border(2.dp, Color.White, RoundedCornerShape(24.dp))
-            .background(Color(0xFFFBFBFB), RoundedCornerShape(24.dp))
-            .padding(16.dp)
+            .border(1.dp, Color.White, shape),
+        shape = shape,
+        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = ThemeColors.lightIceGreen
+        )
     ) {
-        Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+        Column(
+            modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+
+            // TITLE
             Text(
                 text = "EVOLUTION CHAIN",
-                color = Color(0xFF2D6A4F),
+                color = ThemeColors.deepGreen,
                 fontSize = 12.sp,
-                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                fontFamily = pixelFont()
             )
 
             if (evolutionPokemons.size <= 1) {
-                // Pokémon sem evolução
+                // SEM EVOLUÇÃO
                 EvolutionItem(
                     evo = pokemon,
                     isSelected = true
                 )
             } else {
-                // Tem evoluções (Linear ou Ramificada)
-                val isEeveeBranch = evolutionPokemons.first().name.lowercase() == "eevee"
+
+                val isEeveeBranch =
+                    evolutionPokemons.first().name.equals("eevee", ignoreCase = true)
 
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+
                     if (isEeveeBranch) {
-                        // Lógica Especial para o Eevee
+
                         EvolutionItem(
                             evo = evolutionPokemons.first(),
                             isSelected = pokemon.id == evolutionPokemons.first().id
                         )
+
                         ArrowDown()
-                        // Lista as ramificações sem setas entre elas
+
                         evolutionPokemons.drop(1).forEach { evo ->
                             EvolutionItem(
                                 evo = evo,
                                 isSelected = pokemon.id == evo.id
                             )
                         }
+
                     } else {
-                        // Lógica Linear Normal (Ex: Bulbasaur -> Ivysaur -> Venusaur)
-                        // Destaca o Pokémon que o usuário estiver visualizando no momento
+
                         evolutionPokemons.forEachIndexed { index, evo ->
+
                             EvolutionItem(
                                 evo = evo,
                                 isSelected = pokemon.id == evo.id
                             )
+
                             if (index < evolutionPokemons.size - 1) {
-                                ArrowDown() // Coloca a seta apenas se não for o último
+                                ArrowDown()
                             }
                         }
                     }
@@ -107,23 +121,32 @@ fun EvolutionItem(
     isSelected: Boolean,
     modifier: Modifier = Modifier
 ) {
-    // Se o item for o Pokémon atual da tela, ganha uma borda verde chamativa.
-    // Caso contrário, ganha a borda branca padrão do layout.
-    val borderColor = if (isSelected) Color(0xFF16A34A) else Color.White
+    val shape = RoundedCornerShape(20.dp)
+
+    val borderModifier = if (isSelected) {
+        Modifier.border(
+            width = 1.dp,
+            color = ThemeColors.deepGreen,
+            shape = shape
+        )
+    } else {
+        Modifier
+    }
 
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .border(2.dp, borderColor, RoundedCornerShape(20.dp))
-            .background(Color.White, RoundedCornerShape(20.dp))
-            .padding(8.dp),
+            .then(borderModifier)
+            .background(Color.White, shape)
+            .padding(10.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
         Box(
             modifier = Modifier
                 .size(64.dp)
-                .background(Color(0xFFE8F5E9), RoundedCornerShape(16.dp))
+                .background(ThemeColors.iceGreen, RoundedCornerShape(16.dp))
                 .padding(8.dp),
             contentAlignment = Alignment.Center
         ) {
@@ -134,21 +157,19 @@ fun EvolutionItem(
             )
         }
 
-        // Informações (Nome e Número)
-        Column(
-            verticalArrangement = Arrangement.spacedBy(4.dp)
-        ) {
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
                 text = evo.name.capitalizePokemonName(),
-                color = Color(0xFF1B4332),
+                color = ThemeColors.deepGreen,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
             )
+
             Text(
                 text = evo.id.formatPokemonNumber(),
-                color = Color(0xFF2D6A4F),
+                color = ThemeColors.deepGreen,
                 fontSize = 10.sp,
-                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                fontFamily = pixelFont()
             )
         }
     }
@@ -159,7 +180,11 @@ fun ArrowDown() {
     Icon(
         imageVector = Icons.Default.ArrowDownward,
         contentDescription = "Evolves to",
-        tint = Color(0xFF2D6A4F),
+        tint = ThemeColors.deepGreen,
         modifier = Modifier.size(20.dp)
     )
 }
+
+@Composable
+private fun pixelFont(): FontFamily =
+    FontFamily(Font(Res.font.press_start_2p_regular))

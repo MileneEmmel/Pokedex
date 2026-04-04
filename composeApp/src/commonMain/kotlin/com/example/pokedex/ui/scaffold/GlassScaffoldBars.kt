@@ -4,31 +4,19 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.draw.*
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -37,8 +25,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.pokedex.ui.ThemeColors
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.painterResource
 import pokedex.composeapp.generated.resources.Res
@@ -58,25 +47,24 @@ fun GlassTopBar(
             .fillMaxWidth()
             .shadow(
                 elevation = 8.dp,
-                ambientColor = Color(0xFF14532D).copy(alpha = 0.05f),
-                spotColor = Color(0xFF14532D).copy(alpha = 0.15f)
+                ambientColor = ThemeColors.scaffoldShadowLight,
+                spotColor = ThemeColors.scaffoldShadowStrong
             )
-            .background(Color(0xFFDCFCE7).copy(alpha = 0.60f))
-            .statusBarsPadding() // Empurra a barra pra baixo da barra de status (hora, bateria)
+            .background(ThemeColors.scaffoldBackground)
+            .statusBarsPadding()
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 10.dp), // Vertical reduzido para deixar menor
+                .padding(horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             if (showBack) {
-                // Substituído o "retângulo estranho" por um círculo limpo com sombra
                 Box(
                     modifier = Modifier
-                        .shadow(elevation = 3.dp, shape = CircleShape)
-                        .background(Color.White, CircleShape)
+                        .shadow(3.dp, CircleShape)
+                        .background(ThemeColors.lightIceGreen, CircleShape)
                         .clip(CircleShape)
                         .clickable(onClick = onBackClick)
                         .padding(8.dp),
@@ -85,7 +73,7 @@ fun GlassTopBar(
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Voltar",
-                        tint = Color(0xFF14532D),
+                        tint = ThemeColors.deepGreen,
                         modifier = Modifier.size(24.dp)
                     )
                 }
@@ -95,11 +83,11 @@ fun GlassTopBar(
 
             Text(
                 text = title,
-                color = Color(0xFF14532D),
+                color = ThemeColors.deepGreen,
                 style = TextStyle(
                     fontFamily = pixelFont(),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp // Fonte levemente ajustada para caber na barra mais fina
+                    fontSize = 20.sp
                 ),
                 maxLines = 1,
                 textAlign = TextAlign.Center,
@@ -119,26 +107,33 @@ fun GlassBottomNav(
     onTeamClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val bottomShape = RoundedCornerShape(
-        topStart = GlassScaffoldTokens.bottomBarCorner,
-        topEnd = GlassScaffoldTokens.bottomBarCorner
+    val shape = RoundedCornerShape(
+        topStart = 24.dp,
+        topEnd = 24.dp
+    )
+
+    val sharedGradient = Brush.linearGradient(
+        listOf(
+            ThemeColors.darkGreen,
+            ThemeColors.mediumGreen
+        )
     )
 
     Surface(
-        color = Color(0xFFDCFCE7).copy(alpha = 0.60f), // Cor atualizada para ser igual a de cima
-        shape = bottomShape,
+        color = ThemeColors.scaffoldBackground,
+        shape = shape,
         modifier = modifier
             .fillMaxWidth()
             .shadow(
                 elevation = 20.dp,
-                shape = bottomShape,
-                spotColor = Color(0xFF14532D).copy(alpha = 0.25f), // Sombra mais moderna
-                ambientColor = Color(0xFF14532D).copy(alpha = 0.1f)
+                shape = shape,
+                spotColor = ThemeColors.scaffoldShadowStrong,
+                ambientColor = ThemeColors.scaffoldShadowLight
             )
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 drawLine(
-                    color = Color.White.copy(alpha = 0.50f),
+                    color = ThemeColors.scaffoldDivider,
                     start = Offset(0f, 0f),
                     end = Offset(size.width, 0f),
                     strokeWidth = strokeWidth * 2
@@ -148,7 +143,7 @@ fun GlassBottomNav(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .navigationBarsPadding() // Empurra os botões pra cima da barra de navegação do Android
+                .navigationBarsPadding()
                 .padding(horizontal = 16.dp, vertical = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -156,8 +151,7 @@ fun GlassBottomNav(
                 label = "POKEDEX",
                 icon = painterResource(Res.drawable.open_book),
                 selected = isPokedexSelected,
-                selectedBrush = GlassScaffoldTokens.pokedexSelectedGradient,
-                shadowColor = Color(0xFF10B981).copy(alpha = 0.3f),
+                selectedBrush = sharedGradient,
                 onClick = onPokedexClick,
                 modifier = Modifier.weight(1f)
             )
@@ -166,8 +160,7 @@ fun GlassBottomNav(
                 label = "MY TEAM",
                 icon = painterResource(Res.drawable.shield),
                 selected = isTeamSelected,
-                selectedBrush = GlassScaffoldTokens.teamSelectedGradient,
-                shadowColor = Color(0xFF14B8A6).copy(alpha = 0.3f),
+                selectedBrush = sharedGradient,
                 onClick = onTeamClick,
                 modifier = Modifier.weight(1f)
             )
@@ -181,35 +174,39 @@ private fun GlassBottomNavItem(
     icon: Painter,
     selected: Boolean,
     selectedBrush: Brush,
-    shadowColor: Color,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val shape = RoundedCornerShape(GlassScaffoldTokens.tabCorner)
+    val shape = RoundedCornerShape(16.dp)
     val scale by animateFloatAsState(if (selected) 1.05f else 1f)
 
     Box(
         modifier = modifier
             .scale(scale)
-            .then(
-                if (selected) Modifier.shadow(
-                    elevation = 15.dp,
-                    shape = shape,
-                    ambientColor = shadowColor,
-                    spotColor = shadowColor
-                ) else Modifier
+            .shadow(
+                elevation = if (selected) 15.dp else 0.dp,
+                shape = shape,
+                ambientColor = ThemeColors.scaffoldShadowStrong,
+                spotColor = ThemeColors.scaffoldShadowStrong
             )
             .background(
-                color = if (selected) Color.Transparent else Color.White.copy(alpha = 0.20f),
+                color = if (selected) androidx.compose.ui.graphics.Color.Transparent
+                else ThemeColors.scaffoldItemBackground,
                 shape = shape
             )
             .background(
-                brush = if (selected) selectedBrush else Brush.verticalGradient(listOf(Color.Transparent, Color.Transparent)),
+                brush = if (selected) selectedBrush else Brush.verticalGradient(listOf(
+                    androidx.compose.ui.graphics.Color.Transparent,
+                    androidx.compose.ui.graphics.Color.Transparent
+                )),
                 shape = shape
             )
             .border(
                 width = 1.dp,
-                color = if (selected) Color.White.copy(alpha = 0.50f) else Color.White.copy(alpha = 0.30f),
+                color = if (selected)
+                    ThemeColors.scaffoldBorderSelected
+                else
+                    ThemeColors.scaffoldBorderUnselected,
                 shape = shape
             )
             .clip(shape)
@@ -217,16 +214,26 @@ private fun GlassBottomNavItem(
             .padding(vertical = 12.dp),
         contentAlignment = Alignment.Center
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
             Icon(
                 painter = icon,
                 contentDescription = label,
-                tint = if (selected) Color.White else Color(0xFF14532D),
+                tint = if (selected)
+                    Color.White
+                else
+                    ThemeColors.deepGreen,
                 modifier = Modifier.size(26.dp)
             )
+
             Text(
                 text = label,
-                color = if (selected) Color.White else Color(0xFF14532D),
+                color = if (selected)
+                    Color.White
+                else
+                    ThemeColors.deepGreen,
                 style = TextStyle(
                     fontFamily = pixelFont(),
                     fontWeight = FontWeight.Medium,
@@ -238,4 +245,5 @@ private fun GlassBottomNavItem(
 }
 
 @Composable
-private fun pixelFont(): FontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+private fun pixelFont(): FontFamily =
+    FontFamily(Font(Res.font.press_start_2p_regular))

@@ -60,9 +60,7 @@ fun TeamEmptyCard(
             .border(1.dp, panelBorder, RoundedCornerShape(28.dp))
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(24.dp),
+            modifier = Modifier.fillMaxWidth().padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -107,7 +105,7 @@ fun TeamEmptyCard(
                     .background(Color.White.copy(alpha = 0.50f))
                     .border(2.dp, accentColor, buttonShape)
                     .clickable(onClick = onExploreClick)
-                    .padding(horizontal = 32.dp, vertical = 14.dp), // Aumentado o padding
+                    .padding(horizontal = 32.dp, vertical = 14.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
