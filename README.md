@@ -1,5 +1,6 @@
 # Pokédex Multiplatform
 
+Autores: Milene Emmel Rovedder e Daniel Henrique Da Silva
 Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS.
 
 O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes, adição ao time e uma tela de **Team Builder** com implementação diferente para cada sistema operacional.
