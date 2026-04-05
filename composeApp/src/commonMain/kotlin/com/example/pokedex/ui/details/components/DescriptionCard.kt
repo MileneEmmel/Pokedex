@@ -14,15 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun DescriptionCard(
@@ -66,7 +63,7 @@ fun DescriptionCard(
                     text = "DESCRIPTION",
                     color = ThemeColors.deepGreen,
                     fontSize = 12.sp,
-                    fontFamily = pixelFont(),
+                    fontFamily = AppFonts.pixel(),
                     fontWeight = FontWeight.Bold
                 )
             }
@@ -91,6 +88,3 @@ fun DescriptionCard(
     }
 }
 
-@Composable
-private fun pixelFont(): FontFamily =
-    FontFamily(Font(Res.font.press_start_2p_regular))

@@ -11,15 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.getTypeColor
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -49,7 +46,7 @@ fun WeaknessesCard(
                 text = "WEAKNESSES",
                 color = ThemeColors.deepGreen,
                 fontSize = 12.sp,
-                fontFamily = pixelFont()
+                fontFamily = AppFonts.pixel()
             )
 
             // TYPES
@@ -77,7 +74,7 @@ fun WeaknessesCard(
                             text = weakness.uppercase(),
                             color = Color.White,
                             fontSize = 10.sp,
-                            fontFamily = pixelFont()
+                            fontFamily = AppFonts.pixel()
                         )
                     }
                 }
@@ -86,6 +83,3 @@ fun WeaknessesCard(
     }
 }
 
-@Composable
-private fun pixelFont(): FontFamily =
-    FontFamily(Font(Res.font.press_start_2p_regular))

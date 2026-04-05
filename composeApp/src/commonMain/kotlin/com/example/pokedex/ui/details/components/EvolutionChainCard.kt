@@ -15,19 +15,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.data.PokemonMock
+import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.formatPokemonNumber
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
@@ -59,7 +56,7 @@ fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                 text = "EVOLUTION CHAIN",
                 color = ThemeColors.deepGreen,
                 fontSize = 12.sp,
-                fontFamily = pixelFont()
+                fontFamily = AppFonts.pixel()
             )
 
             if (evolutionPokemons.size <= 1) {
@@ -169,7 +166,7 @@ fun EvolutionItem(
                 text = evo.id.formatPokemonNumber(),
                 color = ThemeColors.deepGreen,
                 fontSize = 10.sp,
-                fontFamily = pixelFont()
+                fontFamily = AppFonts.pixel()
             )
         }
     }
@@ -185,6 +182,3 @@ fun ArrowDown() {
     )
 }
 
-@Composable
-private fun pixelFont(): FontFamily =
-    FontFamily(Font(Res.font.press_start_2p_regular))

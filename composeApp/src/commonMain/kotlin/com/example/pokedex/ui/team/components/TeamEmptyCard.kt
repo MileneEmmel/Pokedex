@@ -27,16 +27,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.Font
+import com.example.pokedex.ui.AppFonts
 import org.jetbrains.compose.resources.painterResource
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.ic_pokedex_empty
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 import pokedex.composeapp.generated.resources.search
 
 @Composable
@@ -120,7 +118,7 @@ fun TeamEmptyCard(
                         text = "EXPLORE POKEDEX",
                         color = titleColor,
                         style = TextStyle(
-                            fontFamily = pixelFont(),
+                            fontFamily = AppFonts.pixel(),
                             fontWeight = FontWeight.Bold,
                             fontSize = 12.sp
                         )
@@ -130,6 +128,3 @@ fun TeamEmptyCard(
         }
     }
 }
-
-@Composable
-private fun pixelFont(): FontFamily = FontFamily(Font(Res.font.press_start_2p_regular))

@@ -13,16 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.parseGenderString
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
@@ -72,7 +69,7 @@ fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                     text = "GENDER RATIO",
                     color = ThemeColors.deepGreen,
                     fontSize = 12.sp,
-                    fontFamily = pixelFont()
+                    fontFamily = AppFonts.pixel()
                 )
 
                 Row(
@@ -161,7 +158,7 @@ private fun InfoItem(
             text = title,
             color = ThemeColors.deepGreen,
             fontSize = 12.sp,
-            fontFamily = pixelFont()
+            fontFamily = AppFonts.pixel()
         )
         Text(
             text = value,
@@ -171,7 +168,3 @@ private fun InfoItem(
         )
     }
 }
-
-@Composable
-private fun pixelFont(): FontFamily =
-    FontFamily(Font(Res.font.press_start_2p_regular))

@@ -11,19 +11,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.formatPokemonNumber
 import com.example.pokedex.ui.getTypeColor
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
@@ -74,7 +71,7 @@ fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                                 text = type.uppercase(),
                                 color = Color.White,
                                 fontSize = 10.sp,
-                                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                                fontFamily = AppFonts.pixel()
                             )
                         }
                     }
@@ -104,7 +101,7 @@ fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                     text = pokemon.id.formatPokemonNumber(),
                     color = ThemeColors.deepGreen,
                     fontSize = 10.sp,
-                    fontFamily = FontFamily(Font(Res.font.press_start_2p_regular)),
+                    fontFamily = AppFonts.pixel(),
                     modifier = Modifier.align(Alignment.TopCenter).padding(top = 6.dp)
                 )
             }

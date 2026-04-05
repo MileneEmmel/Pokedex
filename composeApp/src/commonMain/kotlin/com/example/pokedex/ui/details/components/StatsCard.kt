@@ -14,16 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.getStatColor
 import com.example.pokedex.ui.getMaxStatValue
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun StatsCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
@@ -46,7 +43,7 @@ fun StatsCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                 text = "STATS",
                 color = ThemeColors.deepGreen,
                 fontSize = 12.sp,
-                fontFamily = pixelFont()
+                fontFamily = AppFonts.pixel()
             )
 
             pokemon.stats.forEach { stat -> StatRow(stat.name, stat.value) }
@@ -93,14 +90,14 @@ fun StatRow(statName: String, statValue: Int) {
                 text = fullName,
                 color = ThemeColors.deepGreen,
                 fontSize = 10.sp,
-                fontFamily = pixelFont()
+                fontFamily = AppFonts.pixel()
             )
 
             Text(
                 text = statValue.toString(),
                 color = ThemeColors.deepGreen,
                 fontSize = 10.sp,
-                fontFamily = pixelFont()
+                fontFamily = AppFonts.pixel()
             )
         }
 
@@ -121,6 +118,3 @@ fun StatRow(statName: String, statValue: Int) {
     }
 }
 
-@Composable
-private fun pixelFont(): FontFamily =
-    FontFamily(Font(Res.font.press_start_2p_regular))

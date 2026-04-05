@@ -19,13 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun MenuCard(
@@ -71,7 +67,7 @@ fun MenuCard(
                     color = Color.White,
                     style = Typography.cardTitle,
                     fontSize = 24.sp,
-                    fontFamily = FontFamily(Font(Res.font.press_start_2p_regular)),
+                    fontFamily = AppFonts.pixel(),
                     fontWeight = FontWeight.Bold
                 )
                 Text(

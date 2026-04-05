@@ -2,20 +2,13 @@ package com.example.pokedex.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 object Typography {
     @Composable
-    private fun pressStart2P(): FontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
-
-    @Composable
     fun title(): TextStyle = TextStyle(
-        fontFamily    = pressStart2P(),
+        fontFamily    = AppFonts.pixel(),
         fontWeight    = FontWeight.Black,
         fontSize      = 44.sp,
         letterSpacing = 0.8.sp
@@ -23,7 +16,7 @@ object Typography {
 
     @Composable
     fun pixelCounter(): TextStyle = TextStyle(
-        fontFamily    = pressStart2P(),
+        fontFamily    = AppFonts.pixel(),
         fontWeight    = FontWeight.ExtraBold,
         fontSize      = 14.sp,
         letterSpacing = 1.sp
@@ -31,7 +24,7 @@ object Typography {
 
     @Composable
     fun statValue(): TextStyle = TextStyle(
-        fontFamily    = pressStart2P(),
+        fontFamily    = AppFonts.pixel(),
         fontWeight    = FontWeight.ExtraBold,
         fontSize      = 30.sp,
         letterSpacing = 0.4.sp
@@ -39,7 +32,7 @@ object Typography {
 
     @Composable
     fun pixelGridItem(): TextStyle = TextStyle(
-        fontFamily = pressStart2P(),
+        fontFamily = AppFonts.pixel(),
         fontSize   = 9.sp
     )
 
