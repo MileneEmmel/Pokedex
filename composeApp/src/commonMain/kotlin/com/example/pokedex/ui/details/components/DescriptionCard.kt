@@ -14,61 +14,49 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
-import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.Typography
 
 @Composable
-fun DescriptionCard(
-    pokemon: Pokemon,
-    modifier: Modifier = Modifier
-) {
+fun DescriptionCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
+
     val shape = RoundedCornerShape(24.dp)
 
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .border(
-                width = 1.dp,
-                color = Color.White,
-                shape = shape
-            ),
-        shape = shape,
+            .border(width = 1.dp, color = Color.White, shape = shape),
+        shape     = shape,
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 8.dp),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = ThemeColors.lightIceGreen
-        )
+        colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen)
     ) {
         Column(
-            modifier = Modifier.padding(12.dp),
+            modifier            = Modifier.padding(12.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
-            // Header
+            // Cabeçalho com ícone e título
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Outlined.Description,
+                    imageVector        = Icons.Outlined.Description,
                     contentDescription = null,
-                    tint = ThemeColors.deepGreen,
-                    modifier = Modifier.size(20.dp)
+                    tint               = ThemeColors.deepGreen,
+                    modifier           = Modifier.size(20.dp)
                 )
 
                 Text(
-                    text = "DESCRIPTION",
+                    text  = "DESCRIPTION",
                     color = ThemeColors.deepGreen,
-                    fontSize = 12.sp,
-                    fontFamily = AppFonts.pixel(),
-                    fontWeight = FontWeight.Bold
+                    style = Typography.pixelCardTitle()
                 )
             }
 
-            // Divider
+            // Divisor entre título e descrição
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -76,15 +64,12 @@ fun DescriptionCard(
                     .background(ThemeColors.mediumGreen)
             )
 
-            // Texto
+            // Descrição do Pokémon
             Text(
-                text = pokemon.description,
+                text  = pokemon.description,
                 color = ThemeColors.deepGreen,
-                fontSize = 14.sp,
-                lineHeight = 22.sp,
-                fontWeight = FontWeight.Normal
+                style = Typography.descriptionText
             )
         }
     }
 }
-

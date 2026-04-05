@@ -37,7 +37,7 @@ fun DatabaseBar(currentCount: Int, totalCount: Int) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            // Título estático
+            // Título
             Text(
                 text  = "Database",
                 color = ThemeColors.deepGreen,

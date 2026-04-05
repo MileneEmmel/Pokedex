@@ -6,13 +6,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 object Typography {
-    @Composable
-    fun title(): TextStyle = TextStyle(
-        fontFamily    = AppFonts.pixel(),
-        fontWeight    = FontWeight.Black,
-        fontSize      = 44.sp,
-        letterSpacing = 0.8.sp
-    )
 
     @Composable
     fun pixelCounter(): TextStyle = TextStyle(
@@ -36,6 +29,24 @@ object Typography {
         fontSize   = 9.sp
     )
 
+    @Composable
+    fun pixelCardTitle(): TextStyle = TextStyle(
+        fontFamily = AppFonts.pixel(),
+        fontSize   = 12.sp
+    )
+
+    @Composable
+    fun pixelAbility(): TextStyle = TextStyle(
+        fontFamily = AppFonts.pixel(),
+        fontSize   = 11.sp
+    )
+
+    @Composable
+    fun pixelId(): TextStyle = TextStyle(
+        fontFamily = AppFonts.pixel(),
+        fontSize   = 10.sp
+    )
+
     val cardTitle = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize   = 33.sp
@@ -56,6 +67,17 @@ object Typography {
     )
 
     val gridItemName = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize   = 16.sp
+    )
+
+    val descriptionText = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize   = 14.sp,
+        lineHeight = 22.sp
+    )
+
+    val evolutionName = TextStyle(
         fontWeight = FontWeight.Bold,
         fontSize   = 16.sp
     )

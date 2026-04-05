@@ -110,7 +110,7 @@ fun SearchAndFilterBar(
                         modifier           = Modifier.size(24.dp).align(Alignment.Center)
                     )
 
-                    // Indicador algum filtro estiver ativo
+                    // Indicador se algum filtro estiver ativo
                     if (selectedType != null) {
                         Box(
                             modifier = Modifier
@@ -176,7 +176,6 @@ fun SearchAndFilterBar(
     }
 }
 
-// Item de lista estilizado para o painel de filtros
 @Composable
 fun FilterListItem(text: String, isSelected: Boolean, onClick: () -> Unit) {
     // Layout em linha com click habilitado para a linha toda
