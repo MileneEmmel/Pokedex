@@ -19,28 +19,27 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.Typography
 
 @Composable
 fun SearchAndFilterBar(
-    searchQuery: String,
-    onSearchQueryChange: (String) -> Unit,
-    types: List<String>,
-    selectedType: String?,
-    onTypeSelected: (String?) -> Unit
+    searchQuery: String,                   // Texto atual no campo de busca
+    onSearchQueryChange: (String) -> Unit, // Flag disparada quando o texto é alterado
+    types: List<String>,                   // Lista com todos os tipos de Pokemons
+    selectedType: String?,                 // Tipo selecionado (null = Todos)
+    onTypeSelected: (String?) -> Unit      // Flag disparada quando o filtro é alterado
 ) {
+    // Controla se o painel expansível de filtros está visível (true) ou oculto (false)
     var isExpanded by remember { mutableStateOf(false) }
+
     val shape = RoundedCornerShape(24.dp)
 
-    val sortedTypes = remember(types) {
-        types.sortedBy { it.lowercase() }
-    }
+    // Ordena a lista de tipos em ordem alfabética
+    val sortedTypes = remember(types) { types.sortedBy { it.lowercase() } }
 
     Column(modifier = Modifier.fillMaxWidth()) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -49,70 +48,69 @@ fun SearchAndFilterBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            // 🔍 SEARCH BAR
-            Surface(
+            // Campo de busca com ícone
+            ElevatedCard(
                 modifier = Modifier
-                    .weight(0.75f)
+                    .weight(0.75f) // Ocupa 75% da linha
                     .height(56.dp)
                     .border(1.dp, Color.White, shape),
                 shape = shape,
-                color = ThemeColors.lightIceGreen,
-                shadowElevation = 6.dp,
-                tonalElevation = 2.dp
+                colors = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen),
+                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp)
             ) {
                 OutlinedTextField(
-                    value = searchQuery,
-                    onValueChange = onSearchQueryChange,
-                    placeholder = {
+                    value         = searchQuery,         // Texto atual no campo de busca
+                    onValueChange = onSearchQueryChange, // Flag disparada quando o texto é alterado
+                    placeholder   = {
                         Text(
-                            "Search Pokémon...",
-                            color = ThemeColors.deepGreen.copy(alpha = 0.5f)
+                            text  = "Search Pokémon...",
+                            color = ThemeColors.deepGreen.copy(alpha = 0.5f),
+                            style = Typography.placeHolder
                         )
                     },
                     leadingIcon = {
                         Icon(
-                            imageVector = Icons.Default.Search,
+                            imageVector        = Icons.Default.Search,
                             contentDescription = null,
-                            tint = ThemeColors.deepGreen
+                            tint               = ThemeColors.deepGreen
                         )
                     },
-                    modifier = Modifier.fillMaxSize(),
+                    modifier   = Modifier.fillMaxSize(),
                     singleLine = true,
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
+                    colors     = OutlinedTextFieldDefaults.colors(
+                        focusedContainerColor   = Color.Transparent,
                         unfocusedContainerColor = Color.Transparent,
-                        focusedBorderColor = Color.Transparent,
-                        unfocusedBorderColor = Color.Transparent,
-                        cursorColor = ThemeColors.deepGreen,
-                        focusedTextColor = ThemeColors.deepGreen,
-                        unfocusedTextColor = ThemeColors.deepGreen
-                    )
+                        focusedBorderColor      = Color.Transparent,
+                        unfocusedBorderColor    = Color.Transparent,
+                        cursorColor             = ThemeColors.deepGreen,
+                        focusedTextColor        = ThemeColors.deepGreen,
+                        unfocusedTextColor      = ThemeColors.deepGreen
+                    ),
+                    textStyle = Typography.placeHolder
                 )
             }
 
-            // 🎛️ FILTER BUTTON
-            Surface(
+            // Botão de filtro com indicador de seleção ativa
+            ElevatedCard(
                 modifier = Modifier
-                    .weight(0.25f)
+                    .weight(0.25f) // Ocupa 25% restante da linha
                     .height(56.dp)
                     .border(1.dp, Color.White, shape)
                     .clickable { isExpanded = !isExpanded },
-                shape = shape,
-                color = ThemeColors.lightIceGreen,
-                shadowElevation = 6.dp,
-                tonalElevation = 2.dp
+                shape     = shape,
+                colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen),
+                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp)
             ) {
                 Box(modifier = Modifier.fillMaxSize()) {
-
+                    // Ícone do botão de filtro
                     Icon(
-                        imageVector = Icons.Default.FilterList,
+                        imageVector        = Icons.Default.FilterList,
                         contentDescription = null,
-                        tint = ThemeColors.deepGreen,
-                        modifier = Modifier
-                            .size(24.dp)
-                            .align(Alignment.Center)
+                        tint               = ThemeColors.deepGreen,
+                        modifier           = Modifier.size(24.dp).align(Alignment.Center)
                     )
 
+                    // Indicador algum filtro estiver ativo
                     if (selectedType != null) {
                         Box(
                             modifier = Modifier
@@ -126,44 +124,47 @@ fun SearchAndFilterBar(
             }
         }
 
+        // Painel expansível com a lista de tipos
         AnimatedVisibility(
             visible = isExpanded,
-            enter = expandVertically(tween(300)) + fadeIn(),
-            exit = shrinkVertically(tween(300)) + fadeOut()
+            // Abre o fltro de cima para baixo
+            enter   = expandVertically(tween(300)) + fadeIn(),
+            // Fecha o filtro com movimento inverso
+            exit    = shrinkVertically(tween(300)) + fadeOut()
         ) {
-            Surface(
+            ElevatedCard(
                 modifier = Modifier
                     .padding(top = 8.dp)
                     .fillMaxWidth()
                     .height(200.dp)
                     .border(1.dp, Color.White, shape),
-                shape = shape,
-                color = ThemeColors.lightIceGreen,
-                shadowElevation = 6.dp,
-                tonalElevation = 2.dp
+                shape     = shape,
+                colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen),
+                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp)
             ) {
 
-                LazyColumn(
-                    modifier = Modifier.padding(12.dp),
+                LazyColumn( // Lista de rolagem das opções do filtro
+                    modifier            = Modifier.padding(12.dp),
                     verticalArrangement = Arrangement.spacedBy(3.dp)
                 ) {
 
+                    // Primeira opção "All", limpa o filtro
                     item {
                         FilterListItem(
-                            text = "All",
+                            text       = "All",
                             isSelected = selectedType == null,
-                            onClick = {
+                            onClick    = {
                                 onTypeSelected(null)
                                 isExpanded = false
                             }
                         )
                     }
 
-                    items(sortedTypes) { type ->
-                        FilterListItem(
-                            text = type,
+                    // Lista todos os tipos, filtra pelo tipo escolhido
+                    items(sortedTypes) { type -> FilterListItem(
+                            text       = type,
                             isSelected = selectedType == type,
-                            onClick = {
+                            onClick    = {
                                 onTypeSelected(type)
                                 isExpanded = false
                             }
@@ -175,13 +176,10 @@ fun SearchAndFilterBar(
     }
 }
 
-// Item de lista estilizado para o painel expandido
+// Item de lista estilizado para o painel de filtros
 @Composable
-fun FilterListItem(
-    text: String,
-    isSelected: Boolean,
-    onClick: () -> Unit
-) {
+fun FilterListItem(text: String, isSelected: Boolean, onClick: () -> Unit) {
+    // Layout em linha com click habilitado para a linha toda
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -191,19 +189,21 @@ fun FilterListItem(
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
+        // Nome do tipo
         Text(
-            text = text.replaceFirstChar { it.uppercase() },
+            text  = text.replaceFirstChar { it.uppercase() }, // Primeira letra maiúscula
             color = ThemeColors.deepGreen,
-            fontSize = 14.sp,
-            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+            // Negrito para tipo selecionado
+            style = if (isSelected) Typography.filterItemBold else Typography.filterItemRegular
         )
 
+        // Ícone de 'check' no tipo selecionado
         if (isSelected) {
             Icon(
-                imageVector = Icons.Default.Check,
+                imageVector        = Icons.Default.Check,
                 contentDescription = null,
-                tint = ThemeColors.deepGreen,
-                modifier = Modifier.size(20.dp)
+                tint               = ThemeColors.deepGreen,
+                modifier           = Modifier.size(20.dp)
             )
         }
     }

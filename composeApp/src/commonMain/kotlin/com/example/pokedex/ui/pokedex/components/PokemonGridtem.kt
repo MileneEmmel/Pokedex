@@ -6,21 +6,15 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.Typography
 import com.example.pokedex.ui.capitalizePokemonName
 import com.example.pokedex.ui.formatPokemonNumber
 import com.example.pokedex.ui.getTypeColor
-import org.jetbrains.compose.resources.Font
-import pokedex.composeapp.generated.resources.Res
-import pokedex.composeapp.generated.resources.press_start_2p_regular
 
 @Composable
 fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
@@ -28,60 +22,49 @@ fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
     val shape = RoundedCornerShape(20.dp)
 
     ElevatedCard(
-        onClick = onClick,
-        shape = shape,
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = Color.White
-        ),
+        onClick   = onClick,
+        shape     = shape,
+        colors    = CardDefaults.elevatedCardColors(containerColor = Color.White),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .border(1.dp, Color.White, shape)
-    ) {
+        modifier  = Modifier.fillMaxWidth().border(1.dp, Color.White, shape)) {
         Column {
-
-            // PARTE SUPERIOR
+            // Parte superior: Número e imagem do Pokemon
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(130.dp)
                     .background(ThemeColors.iceGreen)
             ) {
-
+                // Número do Pokemon
                 Text(
-                    text = pokemon.id.formatPokemonNumber(),
+                    text  = pokemon.id.formatPokemonNumber(),
                     color = ThemeColors.deepGreen,
-                    fontSize = 10.sp,
-                    fontFamily = FontFamily(Font(Res.font.press_start_2p_regular)),
+                    style = Typography.pixelGridItem(),
                     modifier = Modifier.align(Alignment.TopCenter).padding(top = 6.dp)
                 )
 
+                // Imagem do Pokemon
                 AsyncImage(
-                    model = pokemon.imageUrl,
+                    model              = pokemon.imageUrl,
                     contentDescription = pokemon.name,
-                    modifier = Modifier.size(100.dp).align(Alignment.BottomCenter)
+                    modifier           = Modifier.size(100.dp).align(Alignment.BottomCenter)
                 )
             }
 
-            // PARTE INFERIOR
-            Column(
-                modifier = Modifier.fillMaxWidth().padding(8.dp)
-            ) {
-
+            // Parte inferior: Nome e tipos do Pokemon
+            Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
+                // Nome do Pokemon
                 Text(
-                    text = pokemon.name.capitalizePokemonName(),
+                    text  = pokemon.name.capitalizePokemonName(),
                     color = ThemeColors.deepGreen,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
+                    style = Typography.gridItemName
                 )
-
                 Spacer(modifier = Modifier.height(6.dp))
 
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp)
-                ) {
+                // Tipos do Pokemon -> Listados horizontalmente
+                Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                     pokemon.types.forEach { type ->
-
+                        // Cor correspondente ao tipo para o background do texto
                         val typeColor = getTypeColor(type)
 
                         Box(
@@ -90,10 +73,9 @@ fun PokemonGridItem(pokemon: Pokemon, onClick: () -> Unit) {
                                 .padding(horizontal = 8.dp, vertical = 2.dp)
                         ) {
                             Text(
-                                text = type.uppercase(),
+                                text  = type.uppercase(),
                                 color = Color.White,
-                                fontSize = 9.sp,
-                                fontFamily = FontFamily(Font(Res.font.press_start_2p_regular))
+                                style = Typography.pixelGridItem()
                             )
                         }
                     }
