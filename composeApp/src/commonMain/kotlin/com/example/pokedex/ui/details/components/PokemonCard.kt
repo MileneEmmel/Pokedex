@@ -28,7 +28,7 @@ fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
-            .border(1.dp, ThemeColors.borderMediumGreen, shape),
+            .border(1.dp, ThemeColors.mediumGreen, shape),
         shape     = shape,
         colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.mediumGreen),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp),
@@ -82,7 +82,7 @@ fun PokemonCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(150.dp)
                     .background(ThemeColors.iceGreen, RoundedCornerShape(20.dp))
-                    .border(1.dp, ThemeColors.borderMediumGreen, RoundedCornerShape(20.dp)),
+                    .border(1.dp, ThemeColors.mediumGreen, RoundedCornerShape(20.dp)),
                 contentAlignment = Alignment.Center
             ) {
 

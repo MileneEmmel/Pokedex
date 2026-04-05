@@ -63,6 +63,7 @@ fun TeamEmptyCard(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
+            // Empty-team illustration.
             Box(
                 modifier = Modifier
                     .size(100.dp)
@@ -97,6 +98,7 @@ fun TeamEmptyCard(
 
             val buttonShape = RoundedCornerShape(24.dp)
 
+            // Explore action.
             Box(
                 modifier = Modifier
                     .clip(buttonShape)

@@ -14,9 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.details.components.PhysicalInfoCard
 import com.example.pokedex.ui.details.components.PokemonCard
 import com.example.pokedex.ui.details.components.StatsCard
@@ -51,7 +51,7 @@ fun PokemonDetailScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                Brush.verticalGradient(listOf(Color(0xFFD0EBD1), Color(0xFFA5E0CC)))
+                Brush.verticalGradient(listOf(ThemeColors.topBackground, ThemeColors.bottomBackground))
             )
             .verticalScroll(rememberScrollState())
             .padding(horizontal = 16.dp),

@@ -1,7 +1,6 @@
 package com.example.pokedex.ui
 
 import androidx.compose.ui.graphics.Color
-import kotlin.invoke
 
 object  ThemeColors {
 
@@ -17,27 +16,53 @@ object  ThemeColors {
     val neonOrange = Color(0xFFFF9500)
     val neonPurple = Color(0xFFBF5AF2)
     val neonBlue = Color(0xFF0A84FF)
-    val neonCyan = Color(0xFF00E5FF)
 
     val pink = Color(0xFFFFB6C1)
     val lightBlue = Color(0xFFBFDDF3)
+
     // VERDES
+    val greenPrimary = Color(0xFF16A34A)
     val lightIceGreen = Color(0xFFE6F4EA)
     val iceGreen = Color(0xFFD5EED8)
-    val mediumGreen = Color(0xFF16A34A).copy(alpha = 0.7f)
-    val borderMediumGreen = Color(0xFF227643).copy(alpha = 0.5f)
-    val darkGreen = Color(0xFF10B981)
+    val mediumGreen = Color(0xFF227643).copy(alpha = 0.5f)
     val deepGreen = Color(0xFF14532D)
+
+    // SHARED TEAM COLORS
+    val teamDeleteRed = Color(0xFFDC2626)
+    val teamCardGradientStart = Color(0xFFDCFCE7)
+    val teamCardGradientEnd = Color(0xFFA7F3D0)
+
+    // NEUTRALS
+    val white = Color.White
+    val lightGray = Color.LightGray
+    val gray = Color.Gray
 
 
     // SCAFFOLD
     val scaffoldBackground = Color(0x99DCFCE7)
-    val scaffoldDivider = Color(0xB3E6F4EA)
     val scaffoldShadowLight = Color(0x2614532D)
     val scaffoldShadowStrong = Color(0x4014532D)
     val scaffoldItemBackground = Color(0x66E6F4EA)
     val scaffoldBorderSelected = Color(0x99E6F4EA)
     val scaffoldBorderUnselected = Color(0x4DE6F4EA)
+
+    // ANDROID TEAM STYLE
+    val androidTeamPanel = Color(0xFFC9E3CC)
+    val androidTeamTitle = Color(0xFF0D5A36)
+    val androidTeamSubtitle = Color(0xFF2A6A4A)
+    val androidTeamChipText = Color(0xFF315F47)
+    val androidTeamBadge = Color(0xFF7DFF00)
+
+    // IOS TEAM STYLE
+    val iosBackgroundTop = Color(0xFFF6F7F9)
+    val iosBackgroundBottom = Color(0xFFEAF6EE)
+    val iosDecorMint = Color(0xFFB8F2C8)
+    val iosDecorMintSoft = Color(0xFFD9F7E3)
+    val iosPanelBorder = Color(0xFFE5E7EB)
+    val iosTitle = Color(0xFF111827)
+    val iosSubtitle = Color(0xFF4B5563)
+    val iosMintSurface = Color(0xFFEAF7EE)
+    val iosAccent = Color(0xFF4ADE80)
 
 
     // POKEMON TYPES

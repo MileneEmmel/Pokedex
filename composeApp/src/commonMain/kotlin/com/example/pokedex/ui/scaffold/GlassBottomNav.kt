@@ -36,8 +36,8 @@ fun GlassBottomNav(
 
     val sharedGradient = Brush.linearGradient(
         listOf(
-            ThemeColors.darkGreen,
-            ThemeColors.mediumGreen
+            ThemeColors.greenPrimary,
+            ThemeColors.greenPrimary.copy(alpha = 0.7f)
         )
     )
 

@@ -61,7 +61,7 @@ fun DescriptionCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(1.dp)
-                    .background(ThemeColors.mediumGreen)
+                        .background(ThemeColors.greenPrimary.copy(alpha = 0.7f))
             )
 
             // Descrição do Pokémon

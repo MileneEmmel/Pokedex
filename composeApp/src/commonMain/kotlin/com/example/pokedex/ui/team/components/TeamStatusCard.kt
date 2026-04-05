@@ -44,27 +44,27 @@ fun TeamStatusCard(
             .fillMaxWidth()
             .border(
                 width = 3.dp,
-                color = Color.White.copy(alpha = 0.50f),
+                color = ThemeColors.white.copy(alpha = 0.50f),
                 shape = RoundedCornerShape(24.dp)
             ),
         shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = Color.White.copy(alpha = 0.30f)),
+        colors = CardDefaults.elevatedCardColors(containerColor = ThemeColors.white.copy(alpha = 0.30f)),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth().padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Team Size Card - Agora mais arredondado (32.dp)
+            // TEAM SIZE
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(Color(0xFF16A34A).copy(alpha = 0.72f),
+                    .background(ThemeColors.greenPrimary.copy(alpha = 0.7f),
                         shape = RoundedCornerShape(32.dp)
                     )
                     .border(
                         width = 2.dp,
-                        color = Color(0xFF227643).copy(alpha = 0.50f),
+                        color = ThemeColors.mediumGreen,
                         shape = RoundedCornerShape(32.dp)
                     )
                     .padding(12.dp)
@@ -76,7 +76,7 @@ fun TeamStatusCard(
                 ) {
                     Text(
                         text = "Team Size",
-                        color = Color.White,
+                        color = ThemeColors.white,
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Text(
@@ -89,8 +89,8 @@ fun TeamStatusCard(
                 }
             }
 
+            // AVG STATS
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                // Título AVG STATS com o ícone
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(horizontal = 4.dp)
@@ -98,13 +98,13 @@ fun TeamStatusCard(
                     Icon(
                         painter = painterResource(Res.drawable.trending_up),
                         contentDescription = "Trending Up",
-                        tint = Color(0xFF16A34A),
+                        tint = ThemeColors.greenPrimary,
                         modifier = Modifier.size(20.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "AVG STATS",
-                        color = Color(0xFF166534),
+                        color = ThemeColors.deepGreen,
                         style = Typography.statValue(),
                         fontWeight = FontWeight.ExtraBold,
                         fontSize = 16.sp
@@ -114,12 +114,12 @@ fun TeamStatusCard(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(Color(0xFF16A34A).copy(alpha = 0.72f),
+                        .background(ThemeColors.greenPrimary.copy(alpha = 0.7f),
                             shape = RoundedCornerShape(32.dp)
                         )
                         .border(
                             width = 2.dp,
-                            color = Color(0xFF227643).copy(alpha = 0.50f),
+                            color = ThemeColors.mediumGreen,
                             shape = RoundedCornerShape(32.dp)
                         )
                         .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 8.dp)

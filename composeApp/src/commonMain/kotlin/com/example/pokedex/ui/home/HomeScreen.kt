@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.example.pokedex.data.PokemonMock
 import com.example.pokedex.ui.HeaderSection
 import com.example.pokedex.ui.MenuCard
+import com.example.pokedex.ui.ThemeColors
 import org.jetbrains.compose.resources.painterResource
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.my_team
@@ -33,15 +34,16 @@ fun HomeScreen(
     onSeePokedexClick: () -> Unit,
     onSeeTeamClick: () -> Unit = {}
 ) {
+    // HOME STATS
     val pokemons = remember { PokemonMock.getPokemonList() }
     val pokemonCountStr = pokemons.size.toString()
     val typesCountStr = pokemons.flatMap { it.types }.distinct().size.toString()
 
+    // BACKGROUND
     val screenGradient = Brush.linearGradient(
-        colors = listOf(
-            Color(0xFF86EFAC),
-            Color(0xFF22C55E),
-            Color(0xFF15803D)
+        listOf(
+            ThemeColors.greenPrimary.copy(alpha = 0.7f),
+            ThemeColors.greenPrimary,
         )
     )
 
@@ -58,12 +60,13 @@ fun HomeScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
-                    // Padding do topo reduzido para a imagem subir
                     .padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+                // HEADER
                 HeaderSection()
 
+                // QUICK STATS
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -71,11 +74,12 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    StatItem(value = pokemonCountStr, label = "Pokémon", valueColor = Color.White)
-                    StatItem(value = typesCountStr, label = "Types", valueColor = Color(0xFFFDE047))
-                    StatItem(value = "6", label = "Max Team", valueColor = Color(0xFF93C5FD))
+                    StatItem(value = pokemonCountStr, label = "Pokémon", valueColor = ThemeColors.white)
+                    StatItem(value = typesCountStr, label = "Types", valueColor = ThemeColors.white)
+                    StatItem(value = "6", label = "Max Team", valueColor = ThemeColors.white)
                 }
 
+                // MAIN ACTIONS
                 MenuCard(
                     title = "Pokédex",
                     subtitle = "Explore all available Pokémon",

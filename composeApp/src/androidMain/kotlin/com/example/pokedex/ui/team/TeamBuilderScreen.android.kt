@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.team.styles.TeamBuilderStyle
 
 @Composable
@@ -28,7 +29,7 @@ actual fun TeamBuilderScreen(
             .fillMaxSize()
             .background(
                 Brush.verticalGradient(
-                    listOf(Color(0xFFD0EBD1), Color(0xFFA5E0CC))
+                    listOf(ThemeColors.topBackground, ThemeColors.bottomBackground)
                 )
             )
     ) {
@@ -49,16 +50,16 @@ actual fun TeamBuilderScreen(
 
         val style = TeamBuilderStyle(
             backgroundBrush = Brush.verticalGradient(
-                listOf(Color(0xFFD0EBD1), Color(0xFFA5E0CC))
+                listOf(ThemeColors.topBackground, ThemeColors.bottomBackground)
             ),
-            panelColor = Color(0xFFC9E3CC),
-            panelBorder = Color.White.copy(alpha = 0.48f),
-            titleColor = Color(0xFF0D5A36),
-            subtitleColor = Color(0xFF2A6A4A),
-            chipBackground = Color.White.copy(alpha = 0.78f),
-            chipTextColor = Color(0xFF315F47),
-            badgeColor = Color(0xFF7DFF00).copy(alpha = 0.20f),
-            accentColor = Color(0xFF16A34A).copy(alpha = 0.72f),
+            panelColor = ThemeColors.androidTeamPanel,
+            panelBorder = ThemeColors.white.copy(alpha = 0.48f),
+            titleColor = ThemeColors.androidTeamTitle,
+            subtitleColor = ThemeColors.androidTeamSubtitle,
+            chipBackground = ThemeColors.white.copy(alpha = 0.78f),
+            chipTextColor = ThemeColors.androidTeamChipText,
+            badgeColor = ThemeColors.androidTeamBadge.copy(alpha = 0.20f),
+            accentColor = ThemeColors.greenPrimary.copy(alpha = 0.7f),
             headerTitle = "MY TEAM",
             headerSubtitle = "",
             emptyTitle = "Team empty",

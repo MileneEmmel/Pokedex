@@ -34,9 +34,11 @@ fun TeamBuilderContent(
             .fillMaxSize()
             .background(style.backgroundBrush)
             .padding(horizontal = 16.dp, vertical = 20.dp),
+        // Keeps list items visible below top and bottom scaffold bars.
         contentPadding = PaddingValues(top = 90.dp, bottom = 100.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        // TEAM SUMMARY
         item {
             TeamStatusCard(
                 teamSize = team.size,
@@ -48,6 +50,7 @@ fun TeamBuilderContent(
         }
 
         if (team.isEmpty()) {
+            // EMPTY STATE
             item {
                 TeamEmptyCard(
                     title = style.emptyTitle,
@@ -61,6 +64,7 @@ fun TeamBuilderContent(
                 )
             }
         } else {
+            // TEAM LIST
             items(team, key = { it.id }) { pokemon ->
                 TeamMemberCard(
                     pokemon = pokemon,

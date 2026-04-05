@@ -1,35 +1,72 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Pokédex Multiplatform
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes, adição ao time e uma tela de **Team Builder** com implementação diferente para cada sistema operacional.
 
-### Build and Run Android Application
+## Visão geral
 
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
+- **Home**: dashboard inicial com atalhos para Pokédex e Meu Time.
+- **Pokédex**: listagem de Pokémon em `LazyVerticalGrid`, com busca, cards em `ElevatedCard` e gradientes por tipo.
+- **Detalhes do Pokémon**: exibe descrição, tipos, atributos, barra de progresso dos stats e botão para adicionar ao time.
+- **Meu Time / Team Builder**: lista os Pokémon selecionados e exibe um resumo do time.
 
-### Build and Run iOS Application
+## Stack
 
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+- Kotlin Multiplatform
+- Compose Multiplatform
+- Material 3
+- Navegação tipada com `@Serializable`
+- `expect/actual` para diferenciar a tela de Team Builder por plataforma
+- Dados mockados em `PokemonMock`
 
----
+## Estrutura principal
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+O código compartilhado fica em `composeApp/src/commonMain` e está organizado em:
+
+- `data`: modelos e mock de Pokémon
+- `navigation`: rotas tipadas
+- `ui`: telas, componentes e helpers de interface
+
+As implementações específicas ficam em:
+
+- `composeApp/src/androidMain`: UI do Android
+- `composeApp/src/iosMain`: UI do iOS
+
+## Navegação
+
+O fluxo principal do app é:
+
+1. `HomeRoute`
+2. `PokedexRoute`
+3. `PokemonDetailRoute(pokemonId)`
+4. `MyTeamRoute`
+
+O `Scaffold` centraliza a estrutura visual com:
+
+- `topBar` dinâmica, com título variando conforme a rota atual
+- `bottomBar` para alternar entre **Pokédex** e **Meu Time**
+
+## Diferenças entre Android e iOS
+
+### Android
+
+- Tela de Team Builder com visual inspirado em **Material Design 3**
+- Cores, superfícies e gradientes mais próximos da linguagem do Android
+- Mantém o comportamento compartilhado de adicionar/remover Pokémon do time
+
+### iOS
+
+- Tela de Team Builder com estética mais próxima das **Human Interface Guidelines**
+- Layout e tons visuais mais leves, com identidade própria para a plataforma
+- Usa a mesma lógica de estado compartilhado, mas com aparência adaptada ao iOS
+
+## Funcionalidades principais
+
+- navegação tipada entre telas
+- mock de Pokémon com múltiplos tipos e atributos
+- busca na Pokédex
+- cards com gradientes baseados nos tipos
+- tela de detalhes com stats e botão de adicionar ao time
+- limite de até 6 Pokémon no time
+- visual diferenciado para Android e iOS na tela de Team Builder
