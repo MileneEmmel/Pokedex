@@ -19,7 +19,7 @@ object PokemonMock {
                 PokemonStat("defense", 49), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 45)
             ),
-            description = "Bulbasaur carrega uma semente em suas costas desde o nascimento, que cresce com ele."
+            description = "A strange seed was planted on its back at birth. The plant sprouts and grows with this Pokémon."
         ),
         Pokemon(
             id = 2,
@@ -37,7 +37,7 @@ object PokemonMock {
                 PokemonStat("defense", 63), PokemonStat("special-attack", 80),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 60)
             ),
-            description = "O bulbo em suas costas cresce absorvendo nutrientes e muita luz solar."
+            description = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs."
         ),
         Pokemon(
             id = 3,
@@ -55,7 +55,7 @@ object PokemonMock {
                 PokemonStat("defense", 83), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 80)
             ),
-            description = "A flor em suas costas libera um aroma que acalma as emoções e traz paz ao ambiente."
+            description = "The plant blooms by absorbing solar energy. It flowers and becomes more colorful under sunlight."
         ),
         Pokemon(
             id = 4,
@@ -73,7 +73,7 @@ object PokemonMock {
                 PokemonStat("defense", 43), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 65)
             ),
-            description = "Charmander possui uma chama na ponta da cauda que indica sua vitalidade e emoções."
+            description = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
         ),
         Pokemon(
             id = 5,
@@ -91,7 +91,7 @@ object PokemonMock {
                 PokemonStat("defense", 58), PokemonStat("special-attack", 80),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 80)
             ),
-            description = "Charmeleon é impetuoso e possui garras afiadas que usa em suas exibições de poder."
+            description = "When it swings its burning tail, it elevates the temperature to unbearably high levels."
         ),
         Pokemon(
             id = 6,
@@ -109,7 +109,7 @@ object PokemonMock {
                 PokemonStat("defense", 78), PokemonStat("special-attack", 109),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 100)
             ),
-            description = "Charizard voa alto pelos céus em busca de desafios, mas nunca ataca oponentes mais fracos."
+            description = "Spits fire that is hot enough to melt boulders. Known to cause forest fires unintentionally."
         ),
         Pokemon(
             id = 7,
@@ -127,7 +127,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 64), PokemonStat("speed", 43)
             ),
-            description = "Squirtle se protege com seu casco resistente e lança fortes jatos d’água."
+            description = "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth."
         ),
         Pokemon(
             id = 8,
@@ -145,7 +145,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 58)
             ),
-            description = "Wartortle possui orelhas peludas e uma cauda que são símbolos de longevidade."
+            description = "Often hides in water to elude hasty attackers. It can move quickly to avoid being spotted."
         ),
         Pokemon(
             id = 9,
@@ -163,7 +163,7 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 105), PokemonStat("speed", 78)
             ),
-            description = "Blastoise possui canhões de água em seu casco que disparam jatos de alta pressão."
+            description = "A brutal Pokémon with pressurized water jets on its shell. They are used for high speed tackles."
         ),
         Pokemon(
             id = 10,
@@ -181,7 +181,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 20),
                 PokemonStat("special-defense", 20), PokemonStat("speed", 45)
             ),
-            description = "Caterpie usa as antenas em sua cabeça para afastar ameaças com um odor forte."
+            description = "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls."
         ),
         Pokemon(
             id = 11,
@@ -199,7 +199,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 25),
                 PokemonStat("special-defense", 25), PokemonStat("speed", 30)
             ),
-            description = "Metapod possui uma carapaça rígida e aguarda pacientemente até o momento de evoluir."
+            description = "This Pokémon is vulnerable to attack while its shell is soft, exposing its weak and tender body."
         ),
         Pokemon(
             id = 12,
@@ -217,7 +217,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 90),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 70)
             ),
-            description = "Butterfree coleta néctar de flores com grande habilidade enquanto voa graciosamente."
+            description = "In battle, it flaps its wings at high speed to release highly toxic dust into the air."
         ),
         Pokemon(
             id = 13,
@@ -235,7 +235,7 @@ object PokemonMock {
                 PokemonStat("defense", 30), PokemonStat("special-attack", 20),
                 PokemonStat("special-defense", 20), PokemonStat("speed", 50)
             ),
-            description = "Weedle tem um ferrão venenoso na cabeça que usa para se defender na natureza."
+            description = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head."
         ),
         Pokemon(
             id = 14,
@@ -253,7 +253,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 25),
                 PokemonStat("special-defense", 25), PokemonStat("speed", 35)
             ),
-            description = "Kakuna permanece imóvel em árvores, protegendo-se enquanto se prepara para evoluir."
+            description = "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators."
         ),
         Pokemon(
             id = 15,
@@ -271,7 +271,7 @@ object PokemonMock {
                 PokemonStat("defense", 40), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 75)
             ),
-            description = "Beedrill voa em alta velocidade e é extremamente territorial com sua colmeia."
+            description = "Flies at high speed and attacks using its three venomous stingers on its forelegs and abdomen."
         ),
         Pokemon(
             id = 16,
@@ -289,7 +289,7 @@ object PokemonMock {
                 PokemonStat("defense", 40), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 35), PokemonStat("speed", 56)
             ),
-            description = "Pidgey é muito dócil e prefere evitar conflitos, jogando areia para se esconder."
+            description = "A common sight in forests and woods. It flaps its wings at ground level to kick up blinding sand."
         ),
         Pokemon(
             id = 17,
@@ -307,7 +307,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 71)
             ),
-            description = "Pidgeotto patrulha seu território voando em grandes círculos pelo céu."
+            description = "Very protective of its sprawling territorial area, this Pokémon will fiercely peck at any intruder."
         ),
         Pokemon(
             id = 18,
@@ -325,7 +325,7 @@ object PokemonMock {
                 PokemonStat("defense", 75), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 101)
             ),
-            description = "Pidgeot possui penas maravilhosas e consegue voar a velocidades incrivelmente altas."
+            description = "When hunting, it skims the surface of water at high speed to pick off unwary prey such as Magikarp."
         ),
         Pokemon(
             id = 19,
@@ -343,7 +343,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 25),
                 PokemonStat("special-defense", 35), PokemonStat("speed", 72)
             ),
-            description = "Rattata é cauteloso e muito resistente, vivendo em praticamente qualquer ambiente."
+            description = "Bites anything when it attacks. Small and very quick, it is a common sight in many places."
         ),
         Pokemon(
             id = 20,
@@ -361,7 +361,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 97)
             ),
-            description = "Raticate usa seus dentes fortes para roer obstáculos que encontra pelo caminho."
+            description = "It uses its whiskers to maintain its balance. It apparently slows down if they are cut off."
         ),
         Pokemon(
             id = 21,
@@ -379,7 +379,7 @@ object PokemonMock {
                 PokemonStat("defense", 30), PokemonStat("special-attack", 31),
                 PokemonStat("special-defense", 31), PokemonStat("speed", 70)
             ),
-            description = "Spearow voa furtivamente e tem um piado muito agudo que pode ser ouvido de longe."
+            description = "Eats bugs in grassy areas. It has to flap its short wings very fast to stay airborne."
         ),
         Pokemon(
             id = 22,
@@ -397,7 +397,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 61),
                 PokemonStat("special-defense", 61), PokemonStat("speed", 100)
             ),
-            description = "Fearow usa seu longo bico e suas asas largas para pairar nos céus o dia todo."
+            description = "With its huge and magnificent wings, it can keep aloft without ever having to land for rest."
         ),
         Pokemon(
             id = 23,
@@ -415,7 +415,7 @@ object PokemonMock {
                 PokemonStat("defense", 44), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 54), PokemonStat("speed", 55)
             ),
-            description = "Ekans se move de forma sorrateira e repousa enrolada para reagir a qualquer direção."
+            description = "Moves silently and stealthily. Eats the eggs of birds, such as Pidgey and Spearow, whole."
         ),
         Pokemon(
             id = 24,
@@ -433,7 +433,7 @@ object PokemonMock {
                 PokemonStat("defense", 69), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 79), PokemonStat("speed", 80)
             ),
-            description = "Arbok intimida intrusos com o padrão assustador desenhado em seu peito."
+            description = "It is rumored that the ferocious warning markings on its belly differ from area to area."
         ),
         Pokemon(
             id = 25,
@@ -451,7 +451,7 @@ object PokemonMock {
                 PokemonStat("defense", 40), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 90)
             ),
-            description = "Pikachu armazena eletricidade em suas bochechas, que estalam quando está alerta."
+            description = "When several of these Pokémon gather, their electricity could build and cause lightning storms."
         ),
         Pokemon(
             id = 26,
@@ -469,7 +469,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 90),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 110)
             ),
-            description = "Raichu descarrega o excesso de eletricidade no solo através de sua cauda longa."
+            description = "Its long tail serves as a ground to protect itself from its own high-voltage power."
         ),
         Pokemon(
             id = 27,
@@ -487,7 +487,7 @@ object PokemonMock {
                 PokemonStat("defense", 85), PokemonStat("special-attack", 20),
                 PokemonStat("special-defense", 30), PokemonStat("speed", 40)
             ),
-            description = "Sandshrew se enrola como uma bola apertada para se proteger e quicar no chão."
+            description = "Burrows deep underground in arid locations far from water. It only emerges to hunt for food."
         ),
         Pokemon(
             id = 28,
@@ -505,7 +505,7 @@ object PokemonMock {
                 PokemonStat("defense", 110), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 65)
             ),
-            description = "Sandslash usa as garras de suas costas para criar nuvens de poeira como defesa."
+            description = "Curls up into a spiny ball when threatened. It can roll while curled up to attack or escape."
         ),
         Pokemon(
             id = 29,
@@ -523,7 +523,7 @@ object PokemonMock {
                 PokemonStat("defense", 52), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 41)
             ),
-            description = "Nidoran♀ possui pequenos chifres venenosos que usa de forma defensiva ao ser acuada."
+            description = "Although small, its venomous barbs render this Pokémon dangerous. The female has smaller horns."
         ),
         Pokemon(
             id = 30,
@@ -541,7 +541,7 @@ object PokemonMock {
                 PokemonStat("defense", 67), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 56)
             ),
-            description = "Nidorina tem um temperamento dócil e vive de forma unida e afetuosa em grupo."
+            description = "The female's horn develops slowly. Prefers physical attacks such as clawing and biting."
         ),
         Pokemon(
             id = 31,
@@ -559,7 +559,7 @@ object PokemonMock {
                 PokemonStat("defense", 87), PokemonStat("special-attack", 75),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 76)
             ),
-            description = "Nidoqueen é coberta de escamas duras e protege sua família com sua própria vida."
+            description = "Its hard scales provide strong protection. It uses its hefty bulk to execute powerful moves."
         ),
         Pokemon(
             id = 32,
@@ -577,7 +577,7 @@ object PokemonMock {
                 PokemonStat("defense", 40), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 50)
             ),
-            description = "Nidoran♂ capta sons de todas as direções usando suas orelhas grandes e atentas."
+            description = "Stiffens its ears to sense danger. The larger its horns, the more powerful its secreted venom."
         ),
         Pokemon(
             id = 33,
@@ -595,7 +595,7 @@ object PokemonMock {
                 PokemonStat("defense", 57), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 65)
             ),
-            description = "Nidorino se irrita facilmente e usa seu chifre duro como diamante em investidas."
+            description = "An aggressive Pokémon that is quick to attack. The horn on its head secretes a powerful venom."
         ),
         Pokemon(
             id = 34,
@@ -613,7 +613,7 @@ object PokemonMock {
                 PokemonStat("defense", 77), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 85)
             ),
-            description = "Nidoking possui uma cauda incrivelmente forte capaz de derrubar torres metálicas."
+            description = "It uses its powerful tail in battle to smash, constrict, then break the prey's bones."
         ),
         Pokemon(
             id = 35,
@@ -631,7 +631,7 @@ object PokemonMock {
                 PokemonStat("defense", 48), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 35)
             ),
-            description = "Clefairy é rara e muito admirada, sendo conhecida por dançar sob a luz do luar."
+            description = "Its magical and cute appearance has many admirers. It is rare and found only in certain areas."
         ),
         Pokemon(
             id = 36,
@@ -649,7 +649,7 @@ object PokemonMock {
                 PokemonStat("defense", 73), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 90), PokemonStat("speed", 60)
             ),
-            description = "Clefable tem uma audição aguçada, podendo ouvir um alfinete cair a quilômetros."
+            description = "A timid fairy Pokémon that is rarely seen. It will run and hide the moment it senses people."
         ),
         Pokemon(
             id = 37,
@@ -667,7 +667,7 @@ object PokemonMock {
                 PokemonStat("defense", 40), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 65)
             ),
-            description = "Vulpix nasce com uma única cauda branca que se divide à medida que cresce."
+            description = "At the time of its birth, it has only one white tail. The tail separates into six if this Pokémon receives plenty of love."
         ),
         Pokemon(
             id = 38,
@@ -685,7 +685,7 @@ object PokemonMock {
                 PokemonStat("defense", 75), PokemonStat("special-attack", 81),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 100)
             ),
-            description = "Ninetales possui pelagem dourada e é dito que suas nove caudas guardam poderes místicos."
+            description = "Very smart and very vengeful. Grabbing one of its many tails could result in a 1000-year curse."
         ),
         Pokemon(
             id = 39,
@@ -703,7 +703,7 @@ object PokemonMock {
                 PokemonStat("defense", 20), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 25), PokemonStat("speed", 20)
             ),
-            description = "Jigglypuff infla seus pulmões e canta uma canção de ninar irresistível."
+            description = "When its huge eyes light up, it sings a mysteriously soothing melody that lulls its enemies to sleep."
         ),
         Pokemon(
             id = 40,
@@ -721,7 +721,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 45)
             ),
-            description = "Wigglytuff tem pelo macio e luxuoso, e pode inflar seu corpo para intimidar adversários."
+            description = "The body is soft and rubbery. When angered, it will suck in air and inflate itself to an enormous size."
         ),
         Pokemon(
             id = 41,
@@ -739,7 +739,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 30),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 55)
             ),
-            description = "Zubat evita a luz solar e usa ondas ultrassônicas para voar e explorar cavernas escuras."
+            description = "Forms colonies in perpetually dark places. Uses ultrasonic waves to identify and locate targets."
         ),
         Pokemon(
             id = 42,
@@ -757,7 +757,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 90)
             ),
-            description = "Golbat voa silenciosamente na calada da noite e tem presas incrivelmente afiadas."
+            description = "Once it strikes, it will not stop draining energy from the victim even if it gets too heavy to fly."
         ),
         Pokemon(
             id = 43,
@@ -775,7 +775,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 75),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 30)
             ),
-            description = "Oddish se enterra no solo durante o dia e caminha pelas noites iluminadas pela lua."
+            description = "During the day, it keeps its face buried in the ground. At night, it wanders around sowing its seeds."
         ),
         Pokemon(
             id = 44,
@@ -793,7 +793,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 40)
             ),
-            description = "Gloom libera um aroma forte para afastar aproximações indesejadas."
+            description = "The fluid that oozes from its mouth isn't drool. It is a nectar that is used to attract prey."
         ),
         Pokemon(
             id = 45,
@@ -811,7 +811,7 @@ object PokemonMock {
                 PokemonStat("defense", 85), PokemonStat("special-attack", 110),
                 PokemonStat("special-defense", 90), PokemonStat("speed", 50)
             ),
-            description = "Vileplume tem pétalas que dispersam pólen de alergia intensa."
+            description = "The larger its petals, the more toxic pollen it contains. Its big head is heavy and hard to hold up."
         ),
         Pokemon(
             id = 46,
@@ -829,7 +829,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 25)
             ),
-            description = "Paras tem cogumelos mágicos crescendo em suas costas que absorvem nutrientes."
+            description = "Burrows to suck tree roots. The mushrooms on its back grow by drawing nutrients from the bug host."
         ),
         Pokemon(
             id = 47,
@@ -847,7 +847,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 30)
             ),
-            description = "O cogumelo em suas costas cresceu tanto que passou a controlar o corpo do inseto."
+            description = "A host-parasite pair in which the bug host has been devoured by the mushroom on its back. It prefers dark places."
         ),
         Pokemon(
             id = 48,
@@ -865,7 +865,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 45)
             ),
-            description = "Venonat tem olhos compostos que funcionam como radares para caçar no escuro."
+            description = "Lives in the shadows of tall trees where it eats insects. It is attracted by light at night."
         ),
         Pokemon(
             id = 49,
@@ -883,7 +883,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 90),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 90)
             ),
-            description = "Espalha escamas finas como poeira a cada bater de suas asas graciosas."
+            description = "The dust-like scales covering its wings are color-coded to indicate the kinds of poison they contain."
         ),
         Pokemon(
             id = 50,
@@ -901,7 +901,7 @@ object PokemonMock {
                 PokemonStat("defense", 25), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 95)
             ),
-            description = "Diglett vive no subsolo e suas escavações deixam a terra perfeita para o plantio."
+            description = "Lives about one yard underground where it feeds on plant roots. It sometimes appears above ground."
         ),
         Pokemon(
             id = 51,
@@ -919,7 +919,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 120)
             ),
-            description = "Três Digletts que cavam em sincronia perfeita, alcançando grandes profundidades."
+            description = "A team of Diglett triplets. It triggers huge earthquakes by burrowing 60 miles underground."
         ),
         Pokemon(
             id = 52,
@@ -937,7 +937,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 90)
             ),
-            description = "Meowth é fascinado por objetos brilhantes e redondos."
+            description = "Adores circular objects. Wanders the streets on a nightly basis to look for dropped loose change."
         ),
         Pokemon(
             id = 53,
@@ -955,7 +955,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 115)
             ),
-            description = "Persian tem uma atitude orgulhosa e é muito ágil."
+            description = "Although its fur has many admirers, it is tough to raise as a pet because of its fickle meanness."
         ),
         Pokemon(
             id = 54,
@@ -973,7 +973,7 @@ object PokemonMock {
                 PokemonStat("defense", 48), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 55)
             ),
-            description = "Psyduck sofre com dores de cabeça constantes que liberam poderes psíquicos."
+            description = "While lulling its enemies with its vacant look, this wily Pokémon will use psychokinetic powers."
         ),
         Pokemon(
             id = 55,
@@ -991,7 +991,7 @@ object PokemonMock {
                 PokemonStat("defense", 78), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 85)
             ),
-            description = "Um nadador exímio que é muitas vezes confundido com o mítico Kappa."
+            description = "Often seen swimming elegantly by lake shores. It is often mistaken for the Japanese monster Kappa."
         ),
         Pokemon(
             id = 56,
@@ -1009,7 +1009,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 70)
             ),
-            description = "Mankey se irrita por qualquer motivo e ataca em bando."
+            description = "Extremely quick to anger. It could be docile one moment then thrashing away the next instant."
         ),
         Pokemon(
             id = 57,
@@ -1027,7 +1027,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 95)
             ),
-            description = "Sempre furioso. Seus ataques são impetuosos e implacáveis."
+            description = "Always furious and tenacious to boot. It will not abandon chasing its quarry until it is caught."
         ),
         Pokemon(
             id = 58,
@@ -1045,7 +1045,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 60)
             ),
-            description = "Growlithe é valente e leal, defendendo seu território com bravura."
+            description = "Very protective of its territory. It will bark and bite to repel intruders from its space."
         ),
         Pokemon(
             id = 59,
@@ -1063,7 +1063,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 95)
             ),
-            description = "Sua velocidade majestosa o faz parecer que está voando."
+            description = "A Pokémon that has been admired since the past for its beauty. It runs agilely as if on wings."
         ),
         Pokemon(
             id = 60,
@@ -1081,7 +1081,7 @@ object PokemonMock {
                 PokemonStat("defense", 40), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 90)
             ),
-            description = "A espiral em sua barriga são seus órgãos internos visíveis através da pele fina."
+            description = "Its newly grown legs are unsteady. It seems to prefer swimming to walking on them."
         ),
         Pokemon(
             id = 61,
@@ -1099,7 +1099,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 90)
             ),
-            description = "Consegue viver fora da água, mas prefere rios calmos."
+            description = "Capable of living in or out of water. When out of water, it sweats to keep its body slimy."
         ),
         Pokemon(
             id = 62,
@@ -1117,7 +1117,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 90), PokemonStat("speed", 70)
             ),
-            description = "Nadador exímio e lutador potente com músculos invejáveis."
+            description = "An adept swimmer at both the front crawl and breaststroke. Easily overtakes the best human swimmers."
         ),
         Pokemon(
             id = 63,
@@ -1135,7 +1135,7 @@ object PokemonMock {
                 PokemonStat("defense", 15), PokemonStat("special-attack", 105),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 90)
             ),
-            description = "Dorme 18 horas por dia e usa teletransporte instintivo se atacado."
+            description = "Using its ability to read minds, it will identify impending danger and Teleport to safety."
         ),
         Pokemon(
             id = 64,
@@ -1153,7 +1153,7 @@ object PokemonMock {
                 PokemonStat("defense", 30), PokemonStat("special-attack", 120),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 105)
             ),
-            description = "Emite ondas psíquicas fortes que podem quebrar máquinas por perto."
+            description = "It emits special alpha waves from its body that induce headaches just by being close by."
         ),
         Pokemon(
             id = 65,
@@ -1171,7 +1171,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 135),
                 PokemonStat("special-defense", 95), PokemonStat("speed", 120)
             ),
-            description = "Seu cérebro nunca para de crescer, dando-lhe um QI superior a 5000."
+            description = "Its brain can outperform a supercomputer. Its intelligence quotient is said to be 5,000."
         ),
         Pokemon(
             id = 66,
@@ -1189,7 +1189,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 35), PokemonStat("speed", 35)
             ),
-            description = "Treina constantemente carregando pedras para fortalecer seus músculos."
+            description = "Loves to build its muscles. It trains in all styles of martial arts to become even stronger."
         ),
         Pokemon(
             id = 67,
@@ -1207,7 +1207,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 60), PokemonStat("speed", 45)
             ),
-            description = "Usa um cinturão especial para conter sua força transbordante."
+            description = "Its muscular body is so powerful, it must wear a power save belt to help regulate its motions."
         ),
         Pokemon(
             id = 68,
@@ -1225,7 +1225,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 55)
             ),
-            description = "Seus quatro braços permitem disparar socos de múltiplos ângulos."
+            description = "Using its four hugely muscular arms, it delivers a torrent of countless punches and chops at blinding speed."
         ),
         Pokemon(
             id = 69,
@@ -1243,7 +1243,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 30), PokemonStat("speed", 40)
             ),
-            description = "Enraíza seus pés para absorver nutrientes, mas é ágil o suficiente para caçar insetos."
+            description = "A carnivorous Pokémon that traps and eats bugs. It uses its root feet to soak up needed moisture."
         ),
         Pokemon(
             id = 70,
@@ -1261,7 +1261,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 55)
             ),
-            description = "Usa seu gancho traseiro para se pendurar em galhos e surpreender presas."
+            description = "It spits out Poison Powder to immobilize the enemy and then finishes it with a spray of Acid."
         ),
         Pokemon(
             id = 71,
@@ -1279,7 +1279,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 70)
             ),
-            description = "Atrai presas com um aroma doce e as dissolve com ácido vegetal."
+            description = "Said to live in huge colonies deep in jungles, although no one has ever returned from there."
         ),
         Pokemon(
             id = 72,
@@ -1297,7 +1297,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 70)
             ),
-            description = "Composto majoritariamente de água, vagando pelo mar usando tentáculos venenosos."
+            description = "Drifts in shallow seas. Anglers who hook them by accident are often punished by its stingers."
         ),
         Pokemon(
             id = 73,
@@ -1315,7 +1315,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 80),
                 PokemonStat("special-defense", 120), PokemonStat("speed", 100)
             ),
-            description = "Possui 80 tentáculos e é conhecido como o gângster do mar."
+            description = "The short tentacles stay coiled up at all times, but are extended to snare and stun prey."
         ),
         Pokemon(
             id = 74,
@@ -1333,7 +1333,7 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 30),
                 PokemonStat("special-defense", 30), PokemonStat("speed", 20)
             ),
-            description = "Comumente confundido com pedras em trilhas montanhosas."
+            description = "Found in fields and mountains. Mistaking them for boulders, people often step on them or trip over them."
         ),
         Pokemon(
             id = 75,
@@ -1351,7 +1351,7 @@ object PokemonMock {
                 PokemonStat("defense", 115), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 35)
             ),
-            description = "Rola morro abaixo para se locomover, atropelando o que estiver na frente."
+            description = "Rolls down slopes to move. It rolls over any obstacle without slowing down or changing its direction."
         ),
         Pokemon(
             id = 76,
@@ -1369,7 +1369,7 @@ object PokemonMock {
                 PokemonStat("defense", 130), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 45)
             ),
-            description = "Tão resistente que nem dinamite causa arranhões em sua casca rochosa."
+            description = "It is enclosed in a hard shell that is as rugged as slabs of rock. It sheds its skin once a year."
         ),
         Pokemon(
             id = 77,
@@ -1387,7 +1387,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 90)
             ),
-            description = "Suas patas são capazes de saltar sobre prédios altos."
+            description = "About an hour after birth, its fiery mane and tail grow out, giving it an impressive appearance."
         ),
         Pokemon(
             id = 78,
@@ -1405,7 +1405,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 80),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 105)
             ),
-            description = "Galopa a 240 km/h com sua crina flamejante ao vento."
+            description = "At full gallop, its four hooves barely touch the ground because it moves so incredibly fast."
         ),
         Pokemon(
             id = 79,
@@ -1423,7 +1423,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 15)
             ),
-            description = "Lento em tudo o que faz. Demora para sentir dor até quando mordem sua cauda."
+            description = "Incredibly slow and dopey. It takes five seconds for it to feel pain when under attack."
         ),
         Pokemon(
             id = 80,
@@ -1441,7 +1441,7 @@ object PokemonMock {
                 PokemonStat("defense", 110), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 30)
             ),
-            description = "Evoluiu após um Shellder morder sua cauda."
+            description = "When a Shellder bites onto a Slowpoke's tail, it somehow evolves into a Slowbro."
         ),
         Pokemon(
             id = 81,
@@ -1459,7 +1459,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 45)
             ),
-            description = "Flutua usando magnetismo e é atraído por ondas eletromagnéticas."
+            description = "Uses anti-gravity to stay suspended. Appears without warning and uses Thunder Wave and similar moves."
         ),
         Pokemon(
             id = 82,
@@ -1477,7 +1477,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 120),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 70)
             ),
-            description = "Três Magnemites unidos por uma força magnética intensa."
+            description = "Formed by several Magnemites linked together. They frequently appear when sunspots flare up."
         ),
         Pokemon(
             id = 83,
@@ -1495,7 +1495,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 58),
                 PokemonStat("special-defense", 62), PokemonStat("speed", 60)
             ),
-            description = "Defende seu alho-poró ferozmente, usando-o como uma espada."
+            description = "The sprig of green onions it holds is its weapon. It is used much like a metal sword."
         ),
         Pokemon(
             id = 84,
@@ -1513,7 +1513,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 35), PokemonStat("speed", 75)
             ),
-            description = "Suas duas cabeças estão interligadas telepaticamente."
+            description = "A bird that makes up for its poor flying with its fast foot speed. Leaves giant footprints."
         ),
         Pokemon(
             id = 85,
@@ -1531,7 +1531,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 60), PokemonStat("speed", 110)
             ),
-            description = "Três cabeças representam alegria, tristeza e raiva."
+            description = "Uses its three heads to execute complex plans. While two heads sleep, one head stays awake."
         ),
         Pokemon(
             id = 86,
@@ -1549,7 +1549,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 45)
             ),
-            description = "Vive em icebergs e usa o chifre para furar o gelo."
+            description = "The protruding horn on its head is very hard. It is used for bashing through thick ice."
         ),
         Pokemon(
             id = 87,
@@ -1567,7 +1567,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 95), PokemonStat("speed", 70)
             ),
-            description = "Prefere descansar em águas frias, onde armazena energia térmica."
+            description = "Stores thermal energy within its body. It stays safe and active even in frigid water."
         ),
         Pokemon(
             id = 88,
@@ -1585,7 +1585,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 25)
             ),
-            description = "Nascido do lodo poluído dos esgotos urbanos."
+            description = "Appears in filthy areas. Thrives by sucking up polluted sludge that is pumped out of factories."
         ),
         Pokemon(
             id = 89,
@@ -1603,7 +1603,7 @@ object PokemonMock {
                 PokemonStat("defense", 75), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 50)
             ),
-            description = "Suas toxinas contaminam o solo por onde passa."
+            description = "Thickly covered with a filthy, vile sludge. It is so toxic, even its footprints contain poison."
         ),
         Pokemon(
             id = 90,
@@ -1621,7 +1621,7 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 25), PokemonStat("speed", 40)
             ),
-            description = "Nada rapidamente abrindo e fechando seu casco resistente."
+            description = "Its hard shell repels any kind of attack. It is vulnerable only when its shell is open."
         ),
         Pokemon(
             id = 91,
@@ -1639,7 +1639,7 @@ object PokemonMock {
                 PokemonStat("defense", 180), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 70)
             ),
-            description = "Sua concha é tão dura que nem uma bomba consegue destruí-la."
+            description = "When attacked, it launches its horns in quick succession. Its innards have never been seen."
         ),
         Pokemon(
             id = 92,
@@ -1657,7 +1657,7 @@ object PokemonMock {
                 PokemonStat("defense", 30), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 35), PokemonStat("speed", 80)
             ),
-            description = "Um ser gasoso que pode envolver e asfixiar presas de qualquer tamanho."
+            description = "Almost invisible, this gaseous Pokémon cloaks the target and puts it to sleep without notice."
         ),
         Pokemon(
             id = 93,
@@ -1675,7 +1675,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 115),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 95)
             ),
-            description = "Gosta de lamber as pessoas para roubar sua energia vital."
+            description = "Because of its ability to slip through block walls, it is said to be from another dimension."
         ),
         Pokemon(
             id = 94,
@@ -1693,7 +1693,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 130),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 110)
             ),
-            description = "Esconde-se nas sombras e sente prazer em assustar viajantes."
+            description = "Under a full moon, this Pokémon likes to mimic the shadows of people and laugh at their fright."
         ),
         Pokemon(
             id = 95,
@@ -1711,7 +1711,7 @@ object PokemonMock {
                 PokemonStat("defense", 160), PokemonStat("special-attack", 30),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 70)
             ),
-            description = "Cava túneis no subsolo a altas velocidades em busca de comida."
+            description = "As it grows, the stone portions of its body harden to become similar to a diamond, but colored black."
         ),
         Pokemon(
             id = 96,
@@ -1729,7 +1729,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 43),
                 PokemonStat("special-defense", 90), PokemonStat("speed", 42)
             ),
-            description = "Pode pressentir o que as pessoas estão sonhando."
+            description = "Puts enemies to sleep then eats their dreams. Occasionally gets sick from eating bad dreams."
         ),
         Pokemon(
             id = 97,
@@ -1747,7 +1747,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 73),
                 PokemonStat("special-defense", 115), PokemonStat("speed", 67)
             ),
-            description = "Evite olhar para seu pêndulo ou será hipnotizado instantaneamente."
+            description = "When it locks eyes with an enemy, it will use a mix of PSI moves such as Hypnosis and Confusion."
         ),
         Pokemon(
             id = 98,
@@ -1765,7 +1765,7 @@ object PokemonMock {
                 PokemonStat("defense", 90), PokemonStat("special-attack", 25),
                 PokemonStat("special-defense", 25), PokemonStat("speed", 50)
             ),
-            description = "Seu bico pode quebrar conchas duras com facilidade."
+            description = "Its pincers are not only powerful weapons, they are used for balance when walking sideways."
         ),
         Pokemon(
             id = 99,
@@ -1783,7 +1783,7 @@ object PokemonMock {
                 PokemonStat("defense", 115), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 75)
             ),
-            description = "Uma de suas garras cresceu enormemente, sendo uma arma poderosa."
+            description = "The large pincer has 10,000 hp of crushing power. However, its huge size makes it unwieldy to use."
         ),
         Pokemon(
             id = 100,
@@ -1801,7 +1801,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 100)
             ),
-            description = "Muitas vezes confundido com uma Pokébola, explode ao menor toque."
+            description = "Usually found in power plants. Easily mistaken for a Poké Ball, it has zapped many people."
         ),
         Pokemon(
             id = 101,
@@ -1819,7 +1819,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 80),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 150)
             ),
-            description = "Acumula tanta eletricidade que explode sob a menor estimulação."
+            description = "It stores electric energy under very high pressure. It often explodes with little or no provocation."
         ),
         Pokemon(
             id = 102,
@@ -1837,7 +1837,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 40)
             ),
-            description = "Seis sementes que se mantêm unidas por telepatia."
+            description = "Often mistaken for eggs. When disturbed, they quickly gather and attack in swarms."
         ),
         Pokemon(
             id = 103,
@@ -1855,7 +1855,7 @@ object PokemonMock {
                 PokemonStat("defense", 85), PokemonStat("special-attack", 125),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 55)
             ),
-            description = "Diz-se que cada uma de suas cabeças pensa de forma independente."
+            description = "Legend has it that on rare occasions, one of its heads will drop off and continue on as an Exeggcute."
         ),
         Pokemon(
             id = 104,
@@ -1873,7 +1873,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 35)
             ),
-            description = "Chora pela mãe que perdeu e usa seu crânio como capacete."
+            description = "Because it never removes its skull helmet, no one has ever seen this Pokémon's real face."
         ),
         Pokemon(
             id = 105,
@@ -1891,7 +1891,7 @@ object PokemonMock {
                 PokemonStat("defense", 110), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 45)
             ),
-            description = "Tornou-se feroz e usa um osso como arma de combate."
+            description = "The bone it holds is its primary weapon. It throws the bone skillfully like a boomerang to KO targets."
         ),
         Pokemon(
             id = 106,
@@ -1909,7 +1909,7 @@ object PokemonMock {
                 PokemonStat("defense", 53), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 110), PokemonStat("speed", 87)
             ),
-            description = "Suas pernas podem esticar-se para desferir chutes devastadores."
+            description = "When in a hurry, its legs lengthen progressively. It runs smoothly with extra long, loping strides."
         ),
         Pokemon(
             id = 107,
@@ -1927,7 +1927,7 @@ object PokemonMock {
                 PokemonStat("defense", 79), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 110), PokemonStat("speed", 76)
             ),
-            description = "Desfere socos tão rápidos que são invisíveis ao olho humano."
+            description = "While apparently doing nothing, it fires punches in lightning fast bursts that are invisible to the eye."
         ),
         Pokemon(
             id = 108,
@@ -1945,7 +1945,7 @@ object PokemonMock {
                 PokemonStat("defense", 75), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 30)
             ),
-            description = "Usa sua língua enorme para paralisar e capturar presas."
+            description = "Its tongue can be extended like a chameleon's. It leaves a tingling sensation when it licks enemies."
         ),
         Pokemon(
             id = 109,
@@ -1963,7 +1963,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 35)
             ),
-            description = "Seu corpo está cheio de gases tóxicos e explosivos."
+            description = "Because it stores several kinds of toxic gases in its body, it is prone to exploding without warning."
         ),
         Pokemon(
             id = 110,
@@ -1981,7 +1981,7 @@ object PokemonMock {
                 PokemonStat("defense", 120), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 60)
             ),
-            description = "Vive em locais poluídos e adora gases de lixo."
+            description = "Where two kinds of poison gases fuse, two Koffings can fuse into a Weezing over many years."
         ),
         Pokemon(
             id = 111,
@@ -1993,13 +1993,13 @@ object PokemonMock {
             abilities = listOf("lightning-rod", "rock-head"),
             gender = "50% M, 50% F",
             weaknesses = listOf("water", "grass", "ice", "fighting", "ground", "steel"),
-            evolutions = listOf("rhyhorn", "rhydon"),
+            evolutions = listOf("rhyhorn", "rhydon", "rhyperior"),
             stats = listOf(
                 PokemonStat("hp", 80), PokemonStat("attack", 85),
                 PokemonStat("defense", 95), PokemonStat("special-attack", 30),
                 PokemonStat("special-defense", 30), PokemonStat("speed", 25)
             ),
-            description = "Sua carga destrutiva pode derrubar até edifícios."
+            description = "Its massive bones are 1000 times harder than human bones. It can easily knock a trailer truck flying."
         ),
         Pokemon(
             id = 112,
@@ -2011,13 +2011,13 @@ object PokemonMock {
             abilities = listOf("lightning-rod", "rock-head"),
             gender = "50% M, 50% F",
             weaknesses = listOf("water", "grass", "ice", "fighting", "ground", "steel"),
-            evolutions = listOf("rhyhorn", "rhydon"),
+            evolutions = listOf("rhyhorn", "rhydon", "rhyperior"),
             stats = listOf(
                 PokemonStat("hp", 105), PokemonStat("attack", 130),
                 PokemonStat("defense", 120), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 40)
             ),
-            description = "Sua pele é tão grossa que pode nadar em lava."
+            description = "Protected by an armor-like hide, it is capable of living in molten lava of 3,600 degrees."
         ),
         Pokemon(
             id = 113,
@@ -2029,13 +2029,13 @@ object PokemonMock {
             abilities = listOf("natural-cure", "serene-grace"),
             gender = "0% M, 100% F",
             weaknesses = listOf("fighting"),
-            evolutions = listOf("chansey"),
+            evolutions = listOf("happiny", "chansey", "blissey"),
             stats = listOf(
                 PokemonStat("hp", 250), PokemonStat("attack", 5),
                 PokemonStat("defense", 5), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 105), PokemonStat("speed", 50)
             ),
-            description = "Um Pokémon bondoso que partilha seus ovos nutritivos com os feridos."
+            description = "A gentle and kind-hearted Pokémon that shares its nutritious eggs if it sees an injured person."
         ),
         Pokemon(
             id = 114,
@@ -2053,7 +2053,7 @@ object PokemonMock {
                 PokemonStat("defense", 115), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 40), PokemonStat("speed", 60)
             ),
-            description = "O seu corpo está envolto em vinhas que nunca param de crescer."
+            description = "The whole body is swathed with wide vines that are similar to seaweed. Its vines shake as it walks."
         ),
         Pokemon(
             id = 115,
@@ -2071,7 +2071,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 90)
             ),
-            description = "Protege o seu filhote na bolsa da barriga com extrema ferocidade."
+            description = "The infant rarely ventures out of its mother's protective pouch until it is three years old."
         ),
         Pokemon(
             id = 116,
@@ -2089,7 +2089,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 25), PokemonStat("speed", 60)
             ),
-            description = "Cospe tinta para confundir inimigos e fugir."
+            description = "Known to shoot down flying bugs with precision blasts of ink from the surface of the water."
         ),
         Pokemon(
             id = 117,
@@ -2107,7 +2107,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 85)
             ),
-            description = "Seus espinhos são venenosos e podem causar paralisia."
+            description = "Capable of swimming backwards by rapidly flapping its wing-like pectoral fins and stout tail."
         ),
         Pokemon(
             id = 118,
@@ -2125,7 +2125,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 35),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 63)
             ),
-            description = "Nada com elegância, mas ataca ferozmente com o seu chifre."
+            description = "Its tail fin billows like an elegant ballroom dress, giving it the nickname of the Water Queen."
         ),
         Pokemon(
             id = 119,
@@ -2143,7 +2143,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 68)
             ),
-            description = "Usa o seu chifre potente para perfurar rochas e fazer ninhos."
+            description = "In the autumn spawning season, they can be seen swimming powerfully up rivers and creeks."
         ),
         Pokemon(
             id = 120,
@@ -2161,7 +2161,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 85)
             ),
-            description = "O núcleo no seu centro brilha intensamente à noite."
+            description = "An enigmatic Pokémon that can effortlessly regenerate any appendage it loses in fight."
         ),
         Pokemon(
             id = 121,
@@ -2179,7 +2179,7 @@ object PokemonMock {
                 PokemonStat("defense", 85), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 115)
             ),
-            description = "O seu núcleo brilha com as cores do arco-íris."
+            description = "Its central core glows with the seven colors of the rainbow. Some people value the core as a gem."
         ),
         Pokemon(
             id = 122,
@@ -2197,7 +2197,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 120), PokemonStat("speed", 90)
             ),
-            description = "Cria paredes invisíveis usando os seus dedos."
+            description = "If interrupted while it is miming, it will suddenly slap the offender with its broad hands."
         ),
         Pokemon(
             id = 123,
@@ -2215,7 +2215,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 80), PokemonStat("speed", 105)
             ),
-            description = "Suas garras em forma de foice podem cortar troncos grossos."
+            description = "With ninja-like agility and speed, it can create the illusion that there is more than one."
         ),
         Pokemon(
             id = 124,
@@ -2233,7 +2233,7 @@ object PokemonMock {
                 PokemonStat("defense", 35), PokemonStat("special-attack", 115),
                 PokemonStat("special-defense", 95), PokemonStat("speed", 95)
             ),
-            description = "Dança de forma sedutora para colocar inimigos em transe."
+            description = "It seductively wiggles its hips as it walks. It can cause people to dance in unison with it."
         ),
         Pokemon(
             id = 125,
@@ -2245,13 +2245,13 @@ object PokemonMock {
             abilities = listOf("static", "vital-spirit"),
             gender = "75% M, 25% F",
             weaknesses = listOf("ground"),
-            evolutions = listOf("electabuzz", "electivire"),
+            evolutions = listOf("electabuzz"),
             stats = listOf(
                 PokemonStat("hp", 65), PokemonStat("attack", 83),
                 PokemonStat("defense", 57), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 105)
             ),
-            description = "Alimenta-se de eletricidade e causa apagões em cidades."
+            description = "Normally found near power plants, they can wander away and cause major blackouts in cities."
         ),
         Pokemon(
             id = 126,
@@ -2269,7 +2269,7 @@ object PokemonMock {
                 PokemonStat("defense", 57), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 93)
             ),
-            description = "O seu corpo queima a uma temperatura altíssima."
+            description = "Its body always burns with an orange glow that enables it to hide perfectly among flames."
         ),
         Pokemon(
             id = 127,
@@ -2287,7 +2287,7 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 85)
             ),
-            description = "Esmaga presas com os seus chifres poderosos."
+            description = "If it fails to crush the victim in its pincers, it will swing it around and toss it hard."
         ),
         Pokemon(
             id = 128,
@@ -2305,7 +2305,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 40),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 110)
             ),
-            description = "Um Pokémon violento que ataca qualquer coisa que se mova."
+            description = "When it targets an enemy, it charges furiously while whipping its body with its three long tails."
         ),
         Pokemon(
             id = 129,
@@ -2323,7 +2323,7 @@ object PokemonMock {
                 PokemonStat("defense", 55), PokemonStat("special-attack", 15),
                 PokemonStat("special-defense", 20), PokemonStat("speed", 80)
             ),
-            description = "Famoso por ser o Pokémon mais fraco do mundo."
+            description = "In the distant past, it was somewhat stronger than the horribly weak descendants that exist today."
         ),
         Pokemon(
             id = 130,
@@ -2341,7 +2341,7 @@ object PokemonMock {
                 PokemonStat("defense", 79), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 81)
             ),
-            description = "Pode destruir cidades inteiras num acesso de fúria."
+            description = "Rarely seen in the wild. Huge and vicious, it is capable of destroying entire cities in a rage."
         ),
         Pokemon(
             id = 131,
@@ -2359,7 +2359,7 @@ object PokemonMock {
                 PokemonStat("defense", 80), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 95), PokemonStat("speed", 60)
             ),
-            description = "Um Pokémon dócil que gosta de transportar pessoas no dorso."
+            description = "A Pokémon that has been overhunted almost to extinction. It can ferry people across the water."
         ),
         Pokemon(
             id = 132,
@@ -2377,7 +2377,7 @@ object PokemonMock {
                 PokemonStat("defense", 48), PokemonStat("special-attack", 48),
                 PokemonStat("special-defense", 48), PokemonStat("speed", 48)
             ),
-            description = "Pode transformar-se em qualquer outro Pokémon."
+            description = "Capable of copying an enemy's genetic code to instantly transform itself into a duplicate of the enemy."
         ),
         Pokemon(
             id = 133,
@@ -2395,7 +2395,7 @@ object PokemonMock {
                 PokemonStat("defense", 50), PokemonStat("special-attack", 45),
                 PokemonStat("special-defense", 65), PokemonStat("speed", 55)
             ),
-            description = "Tem um código genético instável que lhe permite evoluir para várias formas."
+            description = "Its genetic code is irregular. It may mutate if it is exposed to radiation from element Stones."
         ),
         Pokemon(
             id = 134,
@@ -2413,7 +2413,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 110),
                 PokemonStat("special-defense", 95), PokemonStat("speed", 65)
             ),
-            description = "A sua estrutura celular é semelhante à das moléculas de água."
+            description = "Lives close to water. Its long tail is ridged with a fin which is often mistaken for a mermaid's."
         ),
         Pokemon(
             id = 135,
@@ -2431,7 +2431,7 @@ object PokemonMock {
                 PokemonStat("defense", 60), PokemonStat("special-attack", 110),
                 PokemonStat("special-defense", 95), PokemonStat("speed", 130)
             ),
-            description = "Acumula iões negativos no pelo para disparar choques elétricos."
+            description = "It accumulates negative ions from the atmosphere to blast out 10,000-volt lightning bolts."
         ),
         Pokemon(
             id = 136,
@@ -2443,13 +2443,13 @@ object PokemonMock {
             abilities = listOf("flash-fire", "guts"),
             gender = "87.5% M, 12.5% F",
             weaknesses = listOf("water", "ground", "rock"),
-            evolutions = listOf("eevee", "vaporeon", "jolteon", "flareon", "espeon", "umbreon", "leafeon", "glaceon", "sylveon"),
+            evolutions = listOf("eevee", "vaporeon", "jolteon", "flareon"),
             stats = listOf(
                 PokemonStat("hp", 65), PokemonStat("attack", 130),
                 PokemonStat("defense", 60), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 110), PokemonStat("speed", 65)
             ),
-            description = "Armazena calor no seu corpo e pode atingir temperaturas extremas."
+            description = "When storing thermal energy in its body, its temperature could soar to over 1,600 degrees."
         ),
         Pokemon(
             id = 137,
@@ -2467,7 +2467,7 @@ object PokemonMock {
                 PokemonStat("defense", 70), PokemonStat("special-attack", 85),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 40)
             ),
-            description = "O primeiro Pokémon artificial criado pela ciência."
+            description = "A Pokémon that consists entirely of programming code. Capable of moving freely in cyberspace."
         ),
         Pokemon(
             id = 138,
@@ -2485,7 +2485,7 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 90),
                 PokemonStat("special-defense", 55), PokemonStat("speed", 35)
             ),
-            description = "Pokémon fóssil ressuscitado a partir de vestígios antigos."
+            description = "An ancient Pokémon that was recovered from a fossil. It uses its 10 tentacles to swim about."
         ),
         Pokemon(
             id = 139,
@@ -2503,7 +2503,7 @@ object PokemonMock {
                 PokemonStat("defense", 125), PokemonStat("special-attack", 115),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 55)
             ),
-            description = "O peso da sua concha dificultava a sua sobrevivência e locomoção."
+            description = "A prehistoric Pokémon that died out when its heavy shell made it too slow to catch prey."
         ),
         Pokemon(
             id = 140,
@@ -2521,7 +2521,7 @@ object PokemonMock {
                 PokemonStat("defense", 90), PokemonStat("special-attack", 55),
                 PokemonStat("special-defense", 45), PokemonStat("speed", 55)
             ),
-            description = "Pokémon fóssil que usava a carapaça para se esconder no fundo do mar."
+            description = "A Pokémon that was resurrected from a fossil found in what was once the ocean floor eons ago."
         ),
         Pokemon(
             id = 141,
@@ -2539,7 +2539,7 @@ object PokemonMock {
                 PokemonStat("defense", 105), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 80)
             ),
-            description = "Um predador marinho letal com garras afiadas."
+            description = "Its sleek shape is perfect for swimming. It slashes prey with its claws and drains the body fluids."
         ),
         Pokemon(
             id = 142,
@@ -2557,7 +2557,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 60),
                 PokemonStat("special-defense", 75), PokemonStat("speed", 130)
             ),
-            description = "O rei dos céus na era pré-histórica."
+            description = "A ferocious, prehistoric Pokémon that goes for the enemy's throat with its serrated saw-like teeth."
         ),
         Pokemon(
             id = 143,
@@ -2575,7 +2575,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 65),
                 PokemonStat("special-defense", 110), PokemonStat("speed", 30)
             ),
-            description = "Passa o dia todo a comer e a dormir."
+            description = "Very lazy. Just eats and sleeps. As its rotund bulk builds, it becomes steadily more slothful."
         ),
         Pokemon(
             id = 144,
@@ -2584,7 +2584,7 @@ object PokemonMock {
             types = listOf("ice", "flying"),
             height = 1.7,
             weight = 55.4,
-            abilities = listOf("pressure"),
+            abilities = listOf("pressure", "snow-cloak"),
             gender = "genderless",
             weaknesses = listOf("rock", "fire", "electric", "steel"),
             evolutions = listOf("articuno"),
@@ -2593,7 +2593,7 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 95),
                 PokemonStat("special-defense", 125), PokemonStat("speed", 85)
             ),
-            description = "Uma das aves lendárias, diz-se que aparece aos perdidos em montanhas geladas."
+            description = "A legendary bird Pokémon that is said to appear to doomed people who are lost in icy mountains."
         ),
         Pokemon(
             id = 145,
@@ -2602,7 +2602,7 @@ object PokemonMock {
             types = listOf("electric", "flying"),
             height = 1.6,
             weight = 52.6,
-            abilities = listOf("pressure"),
+            abilities = listOf("pressure", "static"),
             gender = "genderless",
             weaknesses = listOf("ice", "rock"),
             evolutions = listOf("zapdos"),
@@ -2611,7 +2611,7 @@ object PokemonMock {
                 PokemonStat("defense", 85), PokemonStat("special-attack", 125),
                 PokemonStat("special-defense", 90), PokemonStat("speed", 100)
             ),
-            description = "Diz-se que vive em nuvens de tempestade e ganha força ao ser atingido por raios."
+            description = "A legendary bird Pokémon that is said to appear from clouds while wielding enormous lightning bolts."
         ),
         Pokemon(
             id = 146,
@@ -2620,7 +2620,7 @@ object PokemonMock {
             types = listOf("fire", "flying"),
             height = 2.0,
             weight = 60.0,
-            abilities = listOf("pressure"),
+            abilities = listOf("pressure", "flame-body"),
             gender = "genderless",
             weaknesses = listOf("rock", "water", "electric"),
             evolutions = listOf("moltres"),
@@ -2629,7 +2629,7 @@ object PokemonMock {
                 PokemonStat("defense", 90), PokemonStat("special-attack", 125),
                 PokemonStat("special-defense", 85), PokemonStat("speed", 90)
             ),
-            description = "A sua presença anuncia a chegada da primavera."
+            description = "Known as the legendary bird of fire. Every flap of its wings creates a dazzling flash of flames."
         ),
         Pokemon(
             id = 147,
@@ -2638,7 +2638,7 @@ object PokemonMock {
             types = listOf("dragon"),
             height = 1.8,
             weight = 3.3,
-            abilities = listOf("shed-skin"),
+            abilities = listOf("shed-skin", "marvel-scale"),
             gender = "50% M, 50% F",
             weaknesses = listOf("ice", "dragon", "fairy"),
             evolutions = listOf("dratini", "dragonair", "dragonite"),
@@ -2647,7 +2647,7 @@ object PokemonMock {
                 PokemonStat("defense", 45), PokemonStat("special-attack", 50),
                 PokemonStat("special-defense", 50), PokemonStat("speed", 50)
             ),
-            description = "Pokémon raro que vive em águas calmas e profundas."
+            description = "Long considered a mythical Pokémon until recently, when a small colony was found living underwater."
         ),
         Pokemon(
             id = 148,
@@ -2656,7 +2656,7 @@ object PokemonMock {
             types = listOf("dragon"),
             height = 4.0,
             weight = 16.5,
-            abilities = listOf("shed-skin"),
+            abilities = listOf("shed-skin", "marvel-scale"),
             gender = "50% M, 50% F",
             weaknesses = listOf("ice", "dragon", "fairy"),
             evolutions = listOf("dratini", "dragonair", "dragonite"),
@@ -2665,7 +2665,7 @@ object PokemonMock {
                 PokemonStat("defense", 65), PokemonStat("special-attack", 70),
                 PokemonStat("special-defense", 70), PokemonStat("speed", 70)
             ),
-            description = "Diz-se que altera o clima através da energia mística das suas esferas."
+            description = "A mystical Pokémon that exudes a gentle aura. Has the ability to change climate conditions freely."
         ),
         Pokemon(
             id = 149,
@@ -2674,7 +2674,7 @@ object PokemonMock {
             types = listOf("dragon", "flying"),
             height = 2.2,
             weight = 210.0,
-            abilities = listOf("inner-focus"),
+            abilities = listOf("inner-focus", "multiscale"),
             gender = "50% M, 50% F",
             weaknesses = listOf("ice", "rock", "dragon", "fairy"),
             evolutions = listOf("dratini", "dragonair", "dragonite"),
@@ -2683,7 +2683,7 @@ object PokemonMock {
                 PokemonStat("defense", 95), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 80)
             ),
-            description = "Pokémon muito bondoso que salva marinheiros perdidos em tempestades."
+            description = "An extremely rarely seen marine Pokémon. Its intelligence is said to match that of humans."
         ),
         Pokemon(
             id = 150,
@@ -2692,7 +2692,7 @@ object PokemonMock {
             types = listOf("psychic"),
             height = 2.0,
             weight = 122.0,
-            abilities = listOf("pressure"),
+            abilities = listOf("pressure", "unnerve"),
             gender = "genderless",
             weaknesses = listOf("bug", "ghost", "dark"),
             evolutions = listOf("mewtwo"),
@@ -2701,7 +2701,7 @@ object PokemonMock {
                 PokemonStat("defense", 90), PokemonStat("special-attack", 154),
                 PokemonStat("special-defense", 90), PokemonStat("speed", 130)
             ),
-            description = "Criado em laboratório, o seu poder psíquico é incomparável."
+            description = "It was created by a scientist after years of horrific gene splicing and DNA engineering experiments."
         ),
         Pokemon(
             id = 151,
@@ -2719,13 +2719,9 @@ object PokemonMock {
                 PokemonStat("defense", 100), PokemonStat("special-attack", 100),
                 PokemonStat("special-defense", 100), PokemonStat("speed", 100)
             ),
-            description = "Diz-se que contém o código genético de todos os Pokémon."
+            description = "So rare that it is still said to be a mirage by many experts. Only a few people have seen it worldwide."
         )
     )
-
-    fun getPokemonList(): List<Pokemon> {
-        return pokedex
-    }
 
     fun findById(id: Int): Pokemon? = pokedex.firstOrNull { it.id == id }
 }
