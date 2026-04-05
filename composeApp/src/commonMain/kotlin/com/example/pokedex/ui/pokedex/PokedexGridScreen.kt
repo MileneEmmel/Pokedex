@@ -50,7 +50,7 @@ fun PokedexGridScreen(onPokemonClick: (Int) -> Unit) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(top = 8.dp, bottom = 16.dp),
+            contentPadding = PaddingValues(top = 90.dp, bottom = 100.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {

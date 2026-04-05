@@ -33,7 +33,6 @@ fun HomeScreen(onSeePokedexClick: () -> Unit, onSeeTeamClick: () -> Unit = {}) {
         )
     )
 
-
     val contentHorizontalPadding = 16.dp
     val contentTopPadding = 24.dp
 

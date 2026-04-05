@@ -54,9 +54,12 @@ fun PokemonDetailScreen(
                 Brush.verticalGradient(listOf(Color(0xFFD0EBD1), Color(0xFFA5E0CC)))
             )
             .verticalScroll(rememberScrollState())
-            .padding(horizontal = 16.dp, vertical = 24.dp),
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+
+        Spacer(modifier = Modifier.height(80.dp))
+
         PokemonCard(pokemon = pokemon)
         DescriptionCard(pokemon = pokemon)
         PhysicalInfoCard(pokemon = pokemon)
@@ -66,14 +69,12 @@ fun PokemonDetailScreen(
         EvolutionChainCard(pokemon = pokemon)
 
 
-        // Botões de Ação do Time
         TeamActionButtons(
             onAddToTeamClick = { pokemon?.let { onAddToTeamClick(it) } },
             onViewTeamClick = { onViewTeamClick() },
             isInTeam = isInTeam
         )
 
-        // Espaço extra no final para a GlassBottomNav não cobrir o botão "View Team"
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(100.dp))
     }
 }

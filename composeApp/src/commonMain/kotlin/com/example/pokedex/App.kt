@@ -1,10 +1,12 @@
 package com.example.pokedex
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -60,6 +62,8 @@ fun App() {
         val showTopBar = currentDestination?.hasRoute<HomeRoute>() != true
 
         Scaffold(
+            // Fundo transparente para garantir que a cor venha da tela, não do Scaffold
+            containerColor = Color.Transparent,
             topBar = {
                 if (showTopBar) {
                     GlassTopBar(
@@ -85,7 +89,9 @@ fun App() {
             NavHost(
                 navController = navController,
                 startDestination = HomeRoute,
-                modifier = Modifier.padding(innerPadding)
+                // AQUI TÁ A MÁGICA: Trocamos o padding por fillMaxSize().
+                // A tela agora vai de ponta a ponta e passa por baixo das barras!
+                modifier = Modifier.fillMaxSize()
             ) {
                 composable<HomeRoute> {
                     HomeScreen(
@@ -112,7 +118,7 @@ fun App() {
                         modifier = Modifier,
                         onExploreClick = {
                             navController.navigate(PokedexRoute) {
-                                 popUpTo(PokedexRoute) { inclusive = true }
+                                popUpTo(PokedexRoute) { inclusive = true }
                             }
                         },
                         onViewDetailsClick = { pokemonId ->

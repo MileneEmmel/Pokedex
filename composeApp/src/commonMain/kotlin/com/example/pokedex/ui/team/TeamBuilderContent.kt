@@ -2,6 +2,7 @@ package com.example.pokedex.ui.team
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -33,6 +34,7 @@ fun TeamBuilderContent(
             .fillMaxSize()
             .background(style.backgroundBrush)
             .padding(horizontal = 16.dp, vertical = 20.dp),
+        contentPadding = PaddingValues(top = 90.dp, bottom = 100.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {

@@ -45,12 +45,24 @@ fun GlassTopBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
+            // Sombra moderna e difusa com spotColor levemente mais forte
             .shadow(
-                elevation = 8.dp,
-                ambientColor = ThemeColors.scaffoldShadowLight,
-                spotColor = ThemeColors.scaffoldShadowStrong
+                elevation = 20.dp,
+                ambientColor = ThemeColors.scaffoldShadowLight.copy(alpha = 0.08f),
+                spotColor = ThemeColors.scaffoldShadowStrong.copy(alpha = 0.2f),
+                clip = false
             )
-            .background(ThemeColors.scaffoldBackground)
+            // 🔹 AJUSTE AQUI: Aumentado o alpha para 0.95f para ficar MENOS transparente
+            .background(ThemeColors.scaffoldBackground.copy(alpha = 0.95f))
+            // Linha sutil embaixo para simular o corte do vidro
+            .drawBehind {
+                drawLine(
+                    color = Color.White.copy(alpha = 0.25f),
+                    start = Offset(0f, size.height),
+                    end = Offset(size.width, size.height),
+                    strokeWidth = 1.dp.toPx()
+                )
+            }
             .statusBarsPadding()
     ) {
         Row(
@@ -120,20 +132,22 @@ fun GlassBottomNav(
     )
 
     Surface(
-        color = ThemeColors.scaffoldBackground,
+        // 🔹 AJUSTE AQUI: Aumentado o alpha para 0.95f para ficar MENOS transparente
+        color = ThemeColors.scaffoldBackground.copy(alpha = 0.95f),
         shape = shape,
         modifier = modifier
             .fillMaxWidth()
+            // Sombra difusa e profunda para aumentar a sensação tátil
             .shadow(
-                elevation = 20.dp,
+                elevation = 24.dp,
                 shape = shape,
-                spotColor = ThemeColors.scaffoldShadowStrong,
-                ambientColor = ThemeColors.scaffoldShadowLight
+                spotColor = ThemeColors.scaffoldShadowStrong.copy(alpha = 0.25f),
+                ambientColor = ThemeColors.scaffoldShadowLight.copy(alpha = 0.12f)
             )
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 drawLine(
-                    color = ThemeColors.scaffoldDivider,
+                    color = Color.White.copy(alpha = 0.4f), // Borda superior iluminada mais nítida
                     start = Offset(0f, 0f),
                     end = Offset(size.width, 0f),
                     strokeWidth = strokeWidth * 2
@@ -191,7 +205,8 @@ private fun GlassBottomNavItem(
             )
             .background(
                 color = if (selected) androidx.compose.ui.graphics.Color.Transparent
-                else ThemeColors.scaffoldItemBackground,
+                // 🔹 AJUSTE AQUI: Aumentado o alpha do item inativo para 0.7f
+                else ThemeColors.scaffoldItemBackground.copy(alpha = 0.7f),
                 shape = shape
             )
             .background(
@@ -203,10 +218,11 @@ private fun GlassBottomNavItem(
             )
             .border(
                 width = 1.dp,
+                // 🔹 AJUSTE AQUI: Aumentado o alpha da borda inativa para 0.4f
                 color = if (selected)
                     ThemeColors.scaffoldBorderSelected
                 else
-                    ThemeColors.scaffoldBorderUnselected,
+                    ThemeColors.scaffoldBorderUnselected.copy(alpha = 0.4f),
                 shape = shape
             )
             .clip(shape)
