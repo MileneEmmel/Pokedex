@@ -137,7 +137,7 @@ fun EvolutionItem(evo: Pokemon, isSelected: Boolean, modifier: Modifier = Modifi
             Text(
                 text  = evo.name.capitalizePokemonName(),
                 color = ThemeColors.deepGreen,
-                style = Typography.evolutionName
+                style = Typography.gridItemName
             )
 
             Text(

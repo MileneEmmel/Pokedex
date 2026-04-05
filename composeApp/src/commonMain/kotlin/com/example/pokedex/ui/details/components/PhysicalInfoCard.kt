@@ -4,8 +4,13 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FitnessCenter
+import androidx.compose.material.icons.filled.Leaderboard
+import androidx.compose.material.icons.filled.Straighten
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -13,16 +18,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
-import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.Typography
 import com.example.pokedex.ui.parseGenderString
 
 @Composable
 fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
+
+    // Calcula as proporções de gênero
     val (maleRatio, femaleRatio) = remember(pokemon.gender) {
         parseGenderString(pokemon.gender)
     }
@@ -33,45 +39,55 @@ fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxWidth()
             .border(1.dp, Color.White, shape),
-        shape = shape,
+        shape     = shape,
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = ThemeColors.lightIceGreen
-        )
+        colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen)
     ) {
         Column(
-            modifier = Modifier.padding(18.dp),
+            modifier            = Modifier.padding(18.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            // HEIGHT + WEIGHT
+            // InfoItem de Altura e Peso um ao lado do outro
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier              = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                InfoItem(
-                    title = "HEIGHT",
-                    value = "${pokemon.height} m",
+                InfoItem( // Altura
+                    title    = "HEIGHT",
+                    value    = "${pokemon.height} m",
+                    icon     = Icons.Default.Straighten,
                     modifier = Modifier.weight(1f)
                 )
 
-                InfoItem(
-                    title = "WEIGHT",
-                    value = "${pokemon.weight} kg",
+                InfoItem( // Peso
+                    title    = "WEIGHT",
+                    value    = "${pokemon.weight} kg",
+                    icon     = Icons.Default.FitnessCenter,
                     modifier = Modifier.weight(1f)
                 )
             }
 
-            // GENDER
+            // Proporção de Gênero
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                Row(
+                    verticalAlignment     = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Icon( // Ícone
+                        imageVector        = Icons.Default.Leaderboard,
+                        contentDescription = null,
+                        tint               = ThemeColors.deepGreen,
+                        modifier           = Modifier.size(18.dp)
+                    )
+                    Text( // Título
+                        text  = "GENDER RATIO",
+                        color = ThemeColors.deepGreen,
+                        style = Typography.pixelCardTitle()
+                    )
+                }
 
-                Text(
-                    text = "GENDER RATIO",
-                    color = ThemeColors.deepGreen,
-                    fontSize = 12.sp,
-                    fontFamily = AppFonts.pixel()
-                )
-
+                // Barra de progresso segmentada
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -81,20 +97,17 @@ fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
 
+                    // Masculino (Azul)
                     if (maleRatio > 0f) {
                         Box(
-                            modifier = Modifier
-                                .weight(maleRatio)
-                                .fillMaxHeight()
-                                .background(ThemeColors.lightBlue),
+                            modifier         = Modifier.weight(maleRatio).fillMaxHeight().background(ThemeColors.lightBlue),
                             contentAlignment = Alignment.Center
                         ) {
                             if (maleRatio >= 20f) {
                                 Text(
-                                    text = "♂ ${maleRatio.toInt()}%",
-                                    color = ThemeColors.deepGreen,
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
+                                    text     = "♂ ${maleRatio.toInt()}%",
+                                    color    = ThemeColors.deepGreen,
+                                    style    = Typography.genderLabel,
                                     maxLines = 1,
                                     softWrap = false
                                 )
@@ -102,20 +115,17 @@ fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                         }
                     }
 
+                    // Feminino (Rosa)
                     if (femaleRatio > 0f) {
                         Box(
-                            modifier = Modifier
-                                .weight(femaleRatio)
-                                .fillMaxHeight()
-                                .background(ThemeColors.pink),
+                            modifier         = Modifier.weight(femaleRatio).fillMaxHeight().background(ThemeColors.pink),
                             contentAlignment = Alignment.Center
                         ) {
                             if (femaleRatio >= 20f) {
                                 Text(
-                                    text = "♀ ${femaleRatio.toInt()}%",
-                                    color = ThemeColors.deepGreen,
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Bold,
+                                    text     = "♀ ${femaleRatio.toInt()}%",
+                                    color    = ThemeColors.deepGreen,
+                                    style    = Typography.genderLabel,
                                     maxLines = 1,
                                     softWrap = false
                                 )
@@ -123,18 +133,16 @@ fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                         }
                     }
 
+                    // Sem gênero (Cinza)
                     if (maleRatio == 0f && femaleRatio == 0f) {
                         Box(
-                            modifier = Modifier
-                                .fillMaxSize()
-                                .background(Color.Gray),
+                            modifier         = Modifier.fillMaxSize().background(Color.Gray),
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "GENDERLESS",
+                                text  = "GENDERLESS",
                                 color = ThemeColors.lightIceGreen,
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight.Bold
+                                style = Typography.genderLabel
                             )
                         }
                     }
@@ -144,27 +152,33 @@ fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
     }
 }
 
+
 @Composable
-private fun InfoItem(
-    title: String,
-    value: String,
-    modifier: Modifier = Modifier
-) {
+private fun InfoItem(title: String, value: String, icon: ImageVector, modifier: Modifier = Modifier) {
     Column(
-        modifier = modifier,
+        modifier            = modifier,
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        Text(
-            text = title,
+        Row(
+            verticalAlignment     = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Icon( // Ícone
+                imageVector        = icon,
+                contentDescription = null,
+                tint               = ThemeColors.deepGreen,
+                modifier           = Modifier.size(16.dp)
+            )
+            Text( // Título
+                text  = title,
+                color = ThemeColors.deepGreen,
+                style = Typography.pixelCardTitle()
+            )
+        }
+        Text( // Valor
+            text  = value,
             color = ThemeColors.deepGreen,
-            fontSize = 12.sp,
-            fontFamily = AppFonts.pixel()
-        )
-        Text(
-            text = value,
-            color = ThemeColors.deepGreen,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium
+            style = Typography.descriptionText
         )
     }
 }

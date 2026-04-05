@@ -72,7 +72,7 @@ fun AbilitiesCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                     // Fundo da habilidade: Gradiente se o Pokémon tiver mais de um tipo
                     val backgroundModifier = when (typeColors.size) {
                         0 -> Modifier.background( // Sem tipos
-                            color = ThemeColors.darkGreen,
+                            color = ThemeColors.iceGreen,
                             shape = RoundedCornerShape(16.dp)
                         )
 

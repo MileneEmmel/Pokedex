@@ -77,8 +77,18 @@ object Typography {
         lineHeight = 22.sp
     )
 
-    val evolutionName = TextStyle(
-        fontWeight = FontWeight.Bold,
+    val infoValue = TextStyle(
+        fontWeight = FontWeight.Medium,
         fontSize   = 16.sp
+    )
+
+    val genderLabel = TextStyle(
+        fontWeight = FontWeight.Bold,
+        fontSize   = 14.sp
+    )
+
+    val pokemonCardName = TextStyle(
+        fontWeight = FontWeight.ExtraBold,
+        fontSize   = 24.sp
     )
 }

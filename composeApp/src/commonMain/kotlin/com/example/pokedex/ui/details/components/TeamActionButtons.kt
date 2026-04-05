@@ -14,10 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.Typography
 
 @Composable
 fun TeamActionButtons(
@@ -27,61 +26,60 @@ fun TeamActionButtons(
     isInTeam: Boolean = false
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier            = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Add to Team
-         Button(
-             onClick = onAddToTeamClick,
-             modifier = Modifier
-                 .fillMaxWidth()
-                 .height(56.dp)
-                 .shadow(4.dp, RoundedCornerShape(16.dp)),
-             shape = RoundedCornerShape(16.dp),
-             colors = ButtonDefaults.buttonColors(
-                 containerColor = if (isInTeam) ThemeColors.mediumGreen else ThemeColors.lightIceGreen,
-                 disabledContainerColor = Color(0xFF16A34A),
-                 disabledContentColor = Color.White
-             ),
-             enabled = !isInTeam
-         ) {
-             Row(
-                 verticalAlignment = Alignment.CenterVertically,
-                 horizontalArrangement = Arrangement.Center
-             ) {
-                 Icon(
-                     imageVector = if (isInTeam) Icons.Default.Check else Icons.Default.Add,
-                     contentDescription = if (isInTeam) "Added" else "Add",
-                     tint = ThemeColors.deepGreen,
-                     modifier = Modifier.size(20.dp)
-                 )
-                 Spacer(modifier = Modifier.width(8.dp))
-                 Text(
-                     text = if (isInTeam) "ADDED TO TEAM" else "ADD TO TEAM",
-                     color = ThemeColors.deepGreen,
-                     fontSize = 16.sp,
-                     fontWeight = FontWeight.Bold
-                 )
-             }
-         }
-
-        //View Team
+        // Adicionar ao time
         Button(
-            onClick = onViewTeamClick,
+            onClick  = onAddToTeamClick,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(56.dp)
+                .shadow(4.dp, RoundedCornerShape(16.dp)),
+            shape    = RoundedCornerShape(16.dp),
+            colors   = ButtonDefaults.buttonColors(
+                // Altera a cor do botão quando o Pokémon está no time
+                containerColor         = if (isInTeam) ThemeColors.mediumGreen else ThemeColors.lightIceGreen,
+                disabledContainerColor = Color(0xFF16A34A),
+                disabledContentColor   = Color.White
+            ),
+            // Desabilita o clique se o Pokémon já estiver no time
+            enabled  = !isInTeam
+        ) {
+            Row(
+                verticalAlignment     = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                // Troca o ícone de '+' para um 'check' quando o Pokémon está no time
+                Icon(
+                    imageVector        = if (isInTeam) Icons.Default.Check else Icons.Default.Add,
+                    contentDescription = if (isInTeam) "Added" else "Add",
+                    tint               = ThemeColors.deepGreen,
+                    modifier           = Modifier.size(20.dp)
+                )
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text  = if (isInTeam) "ADDED TO TEAM" else "ADD TO TEAM",
+                    color = ThemeColors.deepGreen,
+                    style = Typography.gridItemName
+                )
+            }
+        }
+
+        // Ir para tela 'Meu Time'
+        Button(
+            onClick  = onViewTeamClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(56.dp)
                 .shadow(2.dp, RoundedCornerShape(16.dp)),
-            shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = ThemeColors.lightIceGreen
-            )
+            shape    = RoundedCornerShape(16.dp),
+            colors   = ButtonDefaults.buttonColors(containerColor = ThemeColors.lightIceGreen)
         ) {
             Text(
-                text = "VIEW TEAM",
+                text  = "VIEW TEAM",
                 color = ThemeColors.deepGreen,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Bold
+                style = Typography.gridItemName
             )
         }
     }

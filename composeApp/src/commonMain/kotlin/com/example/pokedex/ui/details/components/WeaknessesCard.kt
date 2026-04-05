@@ -4,59 +4,66 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardDoubleArrowDown
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.pokedex.data.Pokemon
-import com.example.pokedex.ui.AppFonts
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.Typography
 import com.example.pokedex.ui.getTypeColor
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun WeaknessesCard(
-    pokemon: Pokemon,
-    modifier: Modifier = Modifier
-) {
+fun WeaknessesCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
     val shape = RoundedCornerShape(24.dp)
 
     ElevatedCard(
         modifier = modifier
             .fillMaxWidth()
             .border(1.dp, Color.White, shape),
-        shape = shape,
+        shape     = shape,
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
-        colors = CardDefaults.elevatedCardColors(
-            containerColor = ThemeColors.lightIceGreen
-        )
+        colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen)
     ) {
         Column(
-            modifier = Modifier.padding(18.dp),
+            modifier            = Modifier.padding(18.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            // TITLE
-            Text(
-                text = "WEAKNESSES",
-                color = ThemeColors.deepGreen,
-                fontSize = 12.sp,
-                fontFamily = AppFonts.pixel()
-            )
+            Row(
+                verticalAlignment     = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Icon( // Ícone
+                    imageVector        = Icons.Default.KeyboardDoubleArrowDown,
+                    contentDescription = null,
+                    tint               = ThemeColors.deepGreen,
+                    modifier           = Modifier.size(20.dp)
+                )
 
-            // TYPES
+                Text( // Título
+                    text  = "WEAKNESSES",
+                    color = ThemeColors.deepGreen,
+                    style = Typography.pixelCardTitle()
+                )
+            }
+
+            // Lista horizontalmente as fraquezas e se faltar espaço joga para a linha de baixo
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
-                modifier = Modifier.fillMaxWidth()
+                verticalArrangement   = Arrangement.spacedBy(12.dp),
+                modifier              = Modifier.fillMaxWidth()
             ) {
                 pokemon.weaknesses.forEach { weakness ->
-
+                    // Cor correspondente ao tipo para o background do texto
                     val typeColor = getTypeColor(weakness)
 
                     Box(
@@ -71,10 +78,9 @@ fun WeaknessesCard(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = weakness.uppercase(),
+                            text  = weakness.uppercase(),
                             color = Color.White,
-                            fontSize = 10.sp,
-                            fontFamily = AppFonts.pixel()
+                            style = Typography.pixelGridItem()
                         )
                     }
                 }
@@ -82,4 +88,3 @@ fun WeaknessesCard(
         }
     }
 }
-
