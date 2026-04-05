@@ -25,7 +25,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.pokedex.ui.Typography
-import com.example.pokedex.ui.StatItem
 import com.example.pokedex.ui.ThemeColors
 import org.jetbrains.compose.resources.painterResource
 import pokedex.composeapp.generated.resources.Res
@@ -138,5 +137,24 @@ fun TeamStatusCard(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun StatItem(value: Int, label: String, valueColor: Color) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = value.toString(),
+            color = valueColor,
+            style = Typography.statValue(),
+            fontWeight = FontWeight.ExtraBold,
+            fontSize = 20.sp
+        )
+        Text(
+            text = label,
+            color = Color.White.copy(alpha = 0.80f),
+            style = MaterialTheme.typography.bodySmall,
+            fontSize = 10.sp
+        )
     }
 }

@@ -19,10 +19,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.pokedex.data.Pokemon
+import com.example.pokedex.data.PokemonMock
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.Typography
 import com.example.pokedex.ui.getStatColor
-import com.example.pokedex.ui.getMaxStatValue
 
 @Composable
 fun StatsCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
@@ -131,4 +131,26 @@ fun StatRow(statName: String, statValue: Int) {
             )
         }
     }
+}
+
+// Função auxiliar para pegar o teto de cada status com base no PokemonMock
+@Composable
+fun getMaxStatValue(statName: String): Float {
+    val name = statName.lowercase()
+
+    // Remember guarda o mapa de valores máximos -> Recalcula apenas se PokemonMock for alterado.
+    val maxStatsMap = remember(PokemonMock.pokedex) {
+        // Lista de atributos
+        val statsList = listOf("hp", "attack", "defense", "special-attack", "special-defense", "speed")
+
+        // Mapa: Chave é o nome do atributo, valor é o valor máximo encontrado
+        statsList.associateWith { currentStat ->
+            PokemonMock.pokedex
+                .flatMap { it.stats }                          // Transforma 151 listas de stats em uma única lista gigante
+                .filter { it.name.lowercase() == currentStat } // Filtra apenas o atributo atual do loop (ex: só "hp")
+                .maxOfOrNull { it.value }?.toFloat() ?: 255f   // Converte para Float ou define o padrão 255 se a lista estiver vazia
+        }
+    }
+
+    return maxStatsMap[name] ?: 255f
 }

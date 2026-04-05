@@ -2723,5 +2723,7 @@ object PokemonMock {
         )
     )
 
+    fun getPokemonList(): List<Pokemon> { return pokedex }
+
     fun findById(id: Int): Pokemon? = pokedex.firstOrNull { it.id == id }
 }

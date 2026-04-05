@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.Typography
-import com.example.pokedex.ui.parseGenderString
 
 @Composable
 fun PhysicalInfoCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
@@ -181,4 +180,26 @@ private fun InfoItem(title: String, value: String, icon: ImageVector, modifier: 
             style = Typography.descriptionText
         )
     }
+}
+
+// Função auxiliar para pegar proporção de gênero
+fun parseGenderString(gender: String): Pair<Float, Float> {
+    if (gender.contains("genderless", ignoreCase = true)) {
+        return Pair(0f, 0f)
+    }
+
+    var male   = 0f
+    var female = 0f
+
+    val parts = gender.split(",")
+    for (part in parts) {
+        val p = part.trim()
+        if (p.endsWith("M", ignoreCase = true)) {
+            male = p.replace("%", "").replace("M", "", ignoreCase = true).trim().toFloatOrNull() ?: 0f
+        } else if (p.endsWith("F", ignoreCase = true)) {
+            female = p.replace("%", "").replace("F", "", ignoreCase = true).trim().toFloatOrNull() ?: 0f
+        }
+    }
+
+    return Pair(male, female)
 }
