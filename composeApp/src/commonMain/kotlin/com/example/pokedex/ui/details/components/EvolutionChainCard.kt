@@ -35,6 +35,10 @@ fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
             PokemonMock.pokedex.find { it.name.equals(name, ignoreCase = true) }
         }
     }
+    val isEeveeBranchEvolution = remember(evolutionPokemons) {
+        evolutionPokemons.size > 2 &&
+            evolutionPokemons.firstOrNull()?.name.equals("eevee", ignoreCase = true)
+    }
 
     ElevatedCard(
         modifier = modifier
@@ -71,6 +75,28 @@ fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
             // Caso o Pokémon não tenha evoluções, exibe apenas ele mesmo
             if (evolutionPokemons.size <= 1) {
                 EvolutionItem(evo = pokemon, isSelected = true)
+            } else if (isEeveeBranchEvolution) {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    val baseEvolution = evolutionPokemons.first()
+                    EvolutionItem(
+                        evo = baseEvolution,
+                        isSelected = pokemon.id == baseEvolution.id
+                    )
+
+                    // Eevee branches to multiple options, so keep a single connector.
+                    ArrowDown()
+
+                    evolutionPokemons.drop(1).forEach { evo ->
+                        EvolutionItem(
+                            evo = evo,
+                            isSelected = pokemon.id == evo.id
+                        )
+                    }
+                }
             } else {
                 Column(
                     modifier            = Modifier.fillMaxWidth(),

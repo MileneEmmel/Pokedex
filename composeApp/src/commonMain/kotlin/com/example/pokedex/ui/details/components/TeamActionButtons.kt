@@ -1,5 +1,7 @@
 package com.example.pokedex.ui.details.components
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -12,9 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.Typography
 
@@ -29,7 +34,7 @@ fun TeamActionButtons(
         modifier            = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Adicionar ao time
+        // Botão "Add to Team" - Mantido original com Button
         Button(
             onClick  = onAddToTeamClick,
             modifier = Modifier
@@ -38,19 +43,16 @@ fun TeamActionButtons(
                 .shadow(4.dp, RoundedCornerShape(16.dp)),
             shape    = RoundedCornerShape(16.dp),
             colors   = ButtonDefaults.buttonColors(
-                // Altera a cor do botão quando o Pokémon está no time
                 containerColor         = if (isInTeam) ThemeColors.mediumGreen else ThemeColors.lightIceGreen,
-                disabledContainerColor = Color(0xFF16A34A),
+                disabledContainerColor = ThemeColors.greenPrimary,
                 disabledContentColor   = Color.White
             ),
-            // Desabilita o clique se o Pokémon já estiver no time
             enabled  = !isInTeam
         ) {
             Row(
                 verticalAlignment     = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                // Troca o ícone de '+' para um 'check' quando o Pokémon está no time
                 Icon(
                     imageVector        = if (isInTeam) Icons.Default.Check else Icons.Default.Add,
                     contentDescription = if (isInTeam) "Added" else "Add",
@@ -66,15 +68,16 @@ fun TeamActionButtons(
             }
         }
 
-        // Ir para tela 'Meu Time'
-        Button(
-            onClick  = onViewTeamClick,
+        // Botão "View Team"
+        Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp)
-                .shadow(2.dp, RoundedCornerShape(16.dp)),
-            shape    = RoundedCornerShape(16.dp),
-            colors   = ButtonDefaults.buttonColors(containerColor = ThemeColors.lightIceGreen)
+                .shadow(2.dp, RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(16.dp))
+                .background(ThemeColors.lightIceGreen)
+                .clickable(onClick = onViewTeamClick)
+                .padding(vertical = 20.dp),
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 text  = "VIEW TEAM",

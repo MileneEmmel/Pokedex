@@ -18,6 +18,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.pokedex.ui.ThemeColors
@@ -95,6 +96,7 @@ fun SearchAndFilterBar(
                 modifier = Modifier
                     .weight(0.25f) // Ocupa 25% restante da linha
                     .height(56.dp)
+                    .clip(shape)
                     .border(1.dp, Color.White, shape)
                     .clickable { isExpanded = !isExpanded },
                 shape     = shape,

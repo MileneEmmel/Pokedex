@@ -24,6 +24,7 @@ import com.example.pokedex.ui.details.components.WeaknessesCard
 import com.example.pokedex.ui.details.components.AbilitiesCard
 import com.example.pokedex.ui.details.components.DescriptionCard
 import com.example.pokedex.ui.details.components.EvolutionChainCard
+import com.example.pokedex.ui.details.components.FullTeamAlert
 import com.example.pokedex.ui.details.components.TeamActionButtons
 
 @Composable
@@ -32,7 +33,9 @@ fun PokemonDetailScreen(
     onBackClick: () -> Unit,
     onAddToTeamClick: (Pokemon) -> Unit = {},
     onViewTeamClick: () -> Unit = {},
-    isInTeam: Boolean = false
+    isInTeam: Boolean = false,
+    showTeamFullAlert: Boolean = false,
+    onDismissTeamFullAlert: () -> Unit = {}
 ) {
     if (pokemon == null) {
         Column(
@@ -45,6 +48,10 @@ fun PokemonDetailScreen(
             )
         }
         return
+    }
+
+    if (showTeamFullAlert) {
+        FullTeamAlert(onDismiss = onDismissTeamFullAlert)
     }
 
     Column(
@@ -70,7 +77,7 @@ fun PokemonDetailScreen(
 
 
         TeamActionButtons(
-            onAddToTeamClick = { pokemon?.let { onAddToTeamClick(it) } },
+            onAddToTeamClick = { onAddToTeamClick(pokemon) },
             onViewTeamClick = { onViewTeamClick() },
             isInTeam = isInTeam
         )

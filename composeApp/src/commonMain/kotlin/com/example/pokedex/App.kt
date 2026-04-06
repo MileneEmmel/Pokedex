@@ -31,9 +31,11 @@ import com.example.pokedex.ui.team.TeamBuilderScreen
 @Preview
 fun App() {
     MaterialTheme {
+        val maxTeamSize = 6
         val navController = rememberNavController()
         val backStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = backStackEntry?.destination
+        var showTeamFullAlert by remember { mutableStateOf(false) }
         val currentPokemon = backStackEntry
             ?.takeIf { currentDestination?.hasRoute<PokemonDetailRoute>() == true }
             ?.toRoute<PokemonDetailRoute>()
@@ -137,14 +139,21 @@ fun App() {
                             navController.popBackStack()
                         },
                         onAddToTeamClick = { pokemonToAdd ->
-                            if (!visualTeam.any { it.id == pokemonToAdd.id } && visualTeam.size < 6) {
+                            if (visualTeam.any { it.id == pokemonToAdd.id }) {
+                                showTeamFullAlert = false
+                            } else if (visualTeam.size >= maxTeamSize) {
+                                showTeamFullAlert = true
+                            } else {
                                 visualTeam.add(pokemonToAdd)
+                                showTeamFullAlert = false
                             }
                         },
                         onViewTeamClick = {
                             navController.navigate(MyTeamRoute)
                         },
-                        isInTeam = isInTeam
+                        isInTeam = isInTeam,
+                        showTeamFullAlert = showTeamFullAlert,
+                        onDismissTeamFullAlert = { showTeamFullAlert = false }
                     )
                 }
             }
