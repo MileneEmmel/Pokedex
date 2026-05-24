@@ -43,7 +43,7 @@ fun TeamActionButtons(
                 .shadow(4.dp, RoundedCornerShape(16.dp)),
             shape    = RoundedCornerShape(16.dp),
             colors   = ButtonDefaults.buttonColors(
-                containerColor         = if (isInTeam) ThemeColors.mediumGreen else ThemeColors.lightIceGreen,
+                containerColor         = if (isInTeam) ThemeColors.greenPrimary else ThemeColors.lightIceGreen,
                 disabledContainerColor = ThemeColors.greenPrimary,
                 disabledContentColor   = Color.White
             ),

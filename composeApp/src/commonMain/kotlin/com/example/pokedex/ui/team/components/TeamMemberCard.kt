@@ -183,13 +183,22 @@ fun TeamMemberCard(
                                 listOf("hp", "attack", "defense", "speed").forEach { statName ->
                                     MiniStat(
                                         label = getStatAbbreviation(statName),
-                                        value = pokemon.stats.firstOrNull { it.name == statName }?.value ?: 0,
+                                        value = pokemon.stats.find { it.name.lowercase() == statName }?.value ?: 0,
                                         valueColor = getStatColor(statName),
                                         bgColor = ThemeColors.deepGreen.copy(alpha = 0.15f),
                                         borderColor = getStatColor(statName).copy(alpha = 0.2f)
                                     )
                                 }
                             }
+
+                            Text(
+                                text = pokemon.description,
+                                color = ThemeColors.deepGreen.copy(alpha = 0.7f),
+                                style = Typography.descriptionText,
+                                fontSize = 11.sp,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
                         }
                     }
                     // Primary action for opening details.

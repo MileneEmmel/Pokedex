@@ -3,93 +3,135 @@ package com.example.pokedex.ui.pokedex
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.*
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.pokedex.data.PokemonMock
+import com.example.pokedex.data.Pokemon
 import com.example.pokedex.ui.ThemeColors
+import com.example.pokedex.ui.UiState
 import com.example.pokedex.ui.pokedex.components.DatabaseBar
 import com.example.pokedex.ui.pokedex.components.SearchAndFilterBar
 import com.example.pokedex.ui.pokedex.components.PokemonGridItem
 
 @Composable
-fun PokedexGridScreen(onPokemonClick: (Int) -> Unit) {
+fun PokedexGridScreen(
+    viewModel: PokedexViewModel, // <-- Injeção do ViewModel exigido na M2
+    onPokemonClick: (Int) -> Unit
+) {
+    val uiState by viewModel.uiState.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
+    val selectedType by viewModel.selectedType.collectAsState()
 
-    // Lista de Pokemons do mock
-    val pokemons = remember { PokemonMock.getPokemonList() }
+    // Lista de tipos disponíveis (já que a PokeAPI inicial não traz os tipos detalhados)
+    val availableTypes = listOf("normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dark", "dragon", "steel", "fairy")
 
-    // Estados do texto digitado na SearchBar e o tipo selecionado no filtro
-    var searchQuery by remember { mutableStateOf("") }
-    var selectedType by remember { mutableStateOf<String?>(null) }
-
-    // Lista filtrada
-    val filteredList by remember(searchQuery, selectedType, pokemons) {
-        derivedStateOf { // A lista é recalculada apenas quando SearchBar ou Filtro são modificados
-            pokemons.filter { // Filtro
-
-                // Condição 01: Verifica se o nome contém o texto digitado
-                val matchesName = it.name.contains(searchQuery, ignoreCase = true)
-
-                // Condição 02: Verifica se o Pokémon possui o tipo selecionado
-                val matchesType = selectedType == null || it.types.contains(selectedType)
-
-                // Mantém na lista se atender nas duas condições
-                matchesName && matchesType
-            }
-        }
-    }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                Brush.verticalGradient( // Gradiente vertical no background
+                Brush.verticalGradient(
                     listOf(ThemeColors.topBackground, ThemeColors.bottomBackground)
                 )
             )
             .padding(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-
-        // Grid de rolagem com 2 colunas
-        LazyVerticalGrid(
-            columns  = GridCells.Fixed(2),
-            modifier = Modifier.fillMaxSize(),
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalArrangement   = Arrangement.spacedBy(12.dp),
-
-            // Padding interno da lista para evitar que os últimos itens fiquem escondidos sob a barra do sistema
-            contentPadding        = PaddingValues(top = 90.dp, bottom = 100.dp),
-        ) {
-
-            // DatabaseBar -> Ocupa a linha inteira
-            item(span = { GridItemSpan(maxLineSpan) }) {
-                DatabaseBar(currentCount = filteredList.size, totalCount = pokemons.size)
+        // Controle Reativo de Estado (Loading, Success, Error)
+        when (val state = uiState) {
+            is UiState.Loading -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator(color = Color.White)
+                }
             }
-
-            // SearchBar + Filtro -> Ocupa a linha inteira
-            item(span = { GridItemSpan(maxLineSpan) }) {
-                SearchAndFilterBar(
-                    searchQuery         = searchQuery,          // Texto atual no campo de busca
-                    onSearchQueryChange = { searchQuery = it }, // Flag disparada quando o texto é alterado
-
-                    types          = pokemons.flatMap { it.types }.distinct(), // Todos os tipos sem duplicatas
-                    selectedType   = selectedType,                             // Tipo selecionado (null = Todos)
-                    onTypeSelected = { selectedType = it }                     // Flag disparada quando o filtro é alterado
-                )
+            is UiState.Error -> {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(text = "Erro: ${state.message}", color = Color.White)
+                }
             }
+            is UiState.Success -> {
+                val filteredList = state.data 
+                val gridState = rememberLazyGridState()
 
-            // Renderiza os cards dos Pokémons usando a lista pós filtro
-            items(
-                items = filteredList,
-                key = { it.id } // pokemon.id como chave
-            ) { pokemon ->
-                PokemonGridItem(
-                    pokemon = pokemon,
-                    // Quando clickado, retorna o ID do pokemon
-                    onClick = { onPokemonClick(pokemon.id) }
-                )
+                // Lógica de Paginação: Carrega mais quando chega perto do fim
+                val shouldLoadMore = remember {
+                    derivedStateOf {
+                        val lastVisibleItem = gridState.layoutInfo.visibleItemsInfo.lastOrNull()
+                            ?: return@derivedStateOf false
+                        lastVisibleItem.index >= gridState.layoutInfo.totalItemsCount - 5
+                    }
+                }
+
+                LaunchedEffect(shouldLoadMore.value) {
+                    if (shouldLoadMore.value) {
+                        viewModel.loadMore()
+                    }
+                }
+
+                LazyVerticalGrid(
+                    state = gridState,
+                    columns  = GridCells.Fixed(2),
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                    verticalArrangement   = Arrangement.spacedBy(12.dp),
+                    contentPadding        = PaddingValues(top = 90.dp, bottom = 100.dp),
+                ) {
+
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        // Total count genérico, ou você pode buscar do DAO depois
+                        DatabaseBar(currentCount = filteredList.size, totalCount = 1302)
+                    }
+
+                    item(span = { GridItemSpan(maxLineSpan) }) {
+                        SearchAndFilterBar(
+                            searchQuery         = searchQuery,
+                            onSearchQueryChange = { viewModel.updateSearchQuery(it) },
+                            types          = availableTypes,
+                            selectedType   = selectedType,
+                            onTypeSelected = { viewModel.updateSelectedType(it) }
+                        )
+                    }
+
+                    items(
+                        items = filteredList,
+                        key = { it.id }
+                    ) { pokemonCache ->
+
+                        // Carrega os detalhes completos se os tipos estiverem vazios 
+                        // ou se houver apenas um tipo e tivermos um filtro ativo (pode ser um pokemon de 2 tipos)
+                        LaunchedEffect(pokemonCache.id, selectedType) {
+                            val hasOnlyOneType = !pokemonCache.types.contains(",")
+                            if (pokemonCache.types.isBlank() || (selectedType != null && hasOnlyOneType)) {
+                                viewModel.fetchPokemonTypes(pokemonCache.id)
+                            }
+                        }
+
+                        val mappedTypes = if (pokemonCache.types.isNotBlank()) {
+                            pokemonCache.types.split(",")
+                        } else {
+                            listOf("...") // Mostra reticências até baixar magicamente
+                        }
+
+                        // Mapeado a Entidade do Banco para a classe Pokemon antiga para não quebrar o layout Visual!
+                        val mappedPokemon = Pokemon(
+                            id = pokemonCache.id,
+                            name = pokemonCache.name,
+                            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonCache.id}.png",
+                            types = mappedTypes,
+                            height = 0.0, weight = 0.0, abilities = emptyList(), gender = "", weaknesses = emptyList(), evolutions = emptyList(), stats = emptyList(), description = ""
+                        )
+
+                        PokemonGridItem(
+                            pokemon = mappedPokemon,
+                            onClick = { onPokemonClick(mappedPokemon.id) }
+                        )
+                    }
+                }
             }
         }
     }

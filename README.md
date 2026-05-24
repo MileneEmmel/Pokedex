@@ -2,33 +2,34 @@
 
 Autores: Milene Emmel Rovedder e Daniel Henrique Da Silva
 
-Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS.
+Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS, agora utilizando uma arquitetura **Offline-First** com **PokeAPI** e **Room Database**.
 
 O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes, adição ao time e uma tela de **Team Builder** com implementação diferente para cada sistema operacional.
 
 ## Visão geral
 
 - **Home**: dashboard inicial com atalhos para Pokédex e Meu Time.
-- **Pokédex**: listagem de Pokémon em `LazyVerticalGrid`, com busca, cards em `ElevatedCard` e gradientes por tipo.
-- **Detalhes do Pokémon**: exibe descrição, tipos, atributos, barra de progresso dos stats e botão para adicionar ao time.
-- **Meu Time / Team Builder**: lista os Pokémon selecionados e exibe um resumo do time.
+- **Pokédex**: listagem real via **PokeAPI** com paginação dinâmica, busca por nome/ID e filtros por tipo.
+- **Detalhes do Pokémon**: exibe descrição, tipos, atributos reais (stats), cadeia de evolução recursiva e localização de captura.
+- **Meu Time / Team Builder**: gerencia até 6 Pokémon com persistência local total via Room.
 
 ## Stack
 
 - Kotlin Multiplatform
 - Compose Multiplatform
+- **Ktor**: Consumo da PokeAPI
+- **Room Database**: Cache local e persistência do time (Offline-First)
 - Material 3
 - Navegação tipada com `@Serializable`
 - `expect/actual` para diferenciar a tela de Team Builder por plataforma
-- Dados mockados em `PokemonMock`
 
 ## Estrutura principal
 
 O código compartilhado fica em `composeApp/src/commonMain` e está organizado em:
 
-- `data`: modelos e mock de Pokémon
-- `navigation`: rotas tipadas
-- `ui`: telas, componentes e helpers de interface
+- **data**: modelos, repositórios e acesso a dados (API / Banco de Dados)
+- **navigation**: rotas tipadas e grafo de navegação
+- **ui**: telas reativas, ViewModels e componentes de interface
 
 As implementações específicas ficam em:
 
@@ -41,7 +42,7 @@ O fluxo principal do app é:
 
 1. `HomeRoute`
 2. `PokedexRoute`
-3. `PokemonDetailRoute(pokemonId)`
+3. `PokemonDetailRoute(id)`
 4. `MyTeamRoute`
 
 O `Scaffold` centraliza a estrutura visual com:
@@ -54,7 +55,7 @@ O `Scaffold` centraliza a estrutura visual com:
 ### Android
 
 - Tela de Team Builder com visual inspirado em **Material Design 3**
-- Cores, superfícies e gradientes mais próximos da linguagem do Android
+- Cores, superfícies e gradientes dinâmicos baseados nos tipos do Pokémon
 - Mantém o comportamento compartilhado de adicionar/remover Pokémon do time
 
 ### iOS
@@ -65,10 +66,11 @@ O `Scaffold` centraliza a estrutura visual com:
 
 ## Funcionalidades principais
 
-- navegação tipada entre telas
-- mock de Pokémon com múltiplos tipos e atributos
-- busca na Pokédex
-- cards com gradientes baseados nos tipos
-- tela de detalhes com stats e botão de adicionar ao time
-- limite de até 6 Pokémon no time
-- visual diferenciado para Android e iOS na tela de Team Builder
+- Navegação tipada entre telas
+- **Integração com PokeAPI**: Dados reais e em tempo real
+- **Arquitetura Offline-First**: Sincronização e cache de dados no Room para funcionamento sem internet
+- **Paginação Real**: Carregamento sob demanda (Lazy Loading) na listagem principal
+- **Busca e Filtros Reativos**: Atualização instantânea da UI ao pesquisar ou filtrar tipos
+- **Persistência de Atributos**: Stats completos e local de captura salvos permanentemente no time
+- **Evolução Completa**: Mapeamento de toda a cadeia evolutiva via API
+- Visual diferenciado para Android e iOS na tela de Team Builder
