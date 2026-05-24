@@ -14,9 +14,7 @@ data class PokemonResult(
     val url: String
 )
 
-// ==========================================
-// DTOs PARA A TELA DE DETALHES
-// ==========================================
+//  DTOs para os detalhes do Pokémon (Endpoint separado)
 @Serializable
 data class PokemonDetailDto(
     val id: Int,
@@ -41,9 +39,7 @@ data class AbilitySlotDto(val ability: NamedResourceDto)
 @Serializable
 data class StatSlotDto(val base_stat: Int, val stat: NamedResourceDto)
 
-// ==========================================
-// DTO PARA BUSCAR A DESCRIÇÃO E DETALHES EXTRAS (Endpoint separado)
-// ==========================================
+// DTOs para os detalhes da espécie (Endpoint separado)
 @Serializable
 data class PokemonSpeciesDto(
     val flavor_text_entries: List<FlavorTextDto>,
@@ -62,7 +58,7 @@ data class EvolutionChainUrlDto(
     val url: String
 )
 
-// 2. CRIAR os novos DTOs para ler o endpoint de Evoluções
+// DTOs para a cadeia de evolução (Endpoint separado)
 @Serializable
 data class EvolutionChainResponseDto(
     val chain: ChainLinkDto

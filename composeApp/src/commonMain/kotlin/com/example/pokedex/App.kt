@@ -35,7 +35,7 @@ import com.example.pokedex.ui.team.TeamViewModel
 
 @Composable
 fun App(
-    databaseBuilder: RoomDatabase.Builder<AppDatabase> // Recebemos o Banco aqui!
+    databaseBuilder: RoomDatabase.Builder<AppDatabase>
 ) {
     MaterialTheme {
         val maxTeamSize = 6
@@ -43,33 +43,26 @@ fun App(
         val backStackEntry by navController.currentBackStackEntryAsState()
         val currentDestination = backStackEntry?.destination
 
-        // =========================================================
-        // 1. INJEÇÃO DE DEPENDÊNCIAS (Rodam apenas 1x ao abrir o app)
-        // =========================================================
-        val database = remember { databaseBuilder.build() }
-        val api = remember { KtorPokeApi() }
+        val database   = remember { databaseBuilder.build() }
+        val api        = remember { KtorPokeApi() }
         val repository = remember { PokemonRepository(api, database.pokemonDao()) }
 
-        // =========================================================
-        // 2. VIEWMODELS OFICIAIS (Gerenciam as telas)
-        // =========================================================
+        // VieModels
         val pokedexViewModel = remember { PokedexViewModel(repository) }
-        val detailViewModel = remember { PokemonDetailViewModel(repository) }
-        val teamViewModel = remember { TeamViewModel(repository) }
+        val detailViewModel  = remember { PokemonDetailViewModel(repository) }
+        val teamViewModel    = remember { TeamViewModel(repository) }
 
         var showTeamFullAlert by remember { mutableStateOf(false) }
 
-        // Mantém o time sincronizado globalmente com o Banco de Dados
-        LaunchedEffect(Unit) {
-            teamViewModel.loadTeam()
-        }
+        // Mantém o time sincronizado globalmente com o BD
         val teamEntities by teamViewModel.teamState.collectAsState()
 
-        // Lógica do Título Dinâmico (Agora busca do ViewModel de Detalhes!)
+        // Título Dinâmico
         val title = when {
-            currentDestination?.hasRoute<HomeRoute>() == true -> "POKÉDEX"
+            currentDestination?.hasRoute<HomeRoute>()    == true -> "POKÉDEX"
             currentDestination?.hasRoute<PokedexRoute>() == true -> "POKÉDEX"
-            currentDestination?.hasRoute<MyTeamRoute>() == true -> "MY TEAM"
+            currentDestination?.hasRoute<MyTeamRoute>()  == true -> "MY TEAM"
+            // Para a tela de detalhes, tenta pegar o nome do Pokémon. Se não tiver carregado ainda, mostra "Detalhes"
             currentDestination?.hasRoute<PokemonDetailRoute>() == true -> {
                 val state by detailViewModel.detailState.collectAsState()
                 val currentState = state
@@ -79,8 +72,7 @@ fun App(
         }
 
         val showBottomBar =
-            currentDestination?.hasRoute<PokedexRoute>() == true ||
-                    currentDestination?.hasRoute<MyTeamRoute>() == true
+            currentDestination?.hasRoute<PokedexRoute>() == true || currentDestination?.hasRoute<MyTeamRoute>() == true
 
         val showTopBar = currentDestination?.hasRoute<HomeRoute>() != true
 
@@ -89,8 +81,8 @@ fun App(
             topBar = {
                 if (showTopBar) {
                     GlassTopBar(
-                        title = title,
-                        showBack = currentDestination?.hasRoute<PokemonDetailRoute>() == true,
+                        title       = title,
+                        showBack    = currentDestination?.hasRoute<PokemonDetailRoute>() == true,
                         onBackClick = { navController.popBackStack() }
                     )
                 }
@@ -100,56 +92,53 @@ fun App(
                     currentDestination.let { destination ->
                         GlassBottomNav(
                             isPokedexSelected = destination.hasRoute<PokedexRoute>(),
-                            isTeamSelected = destination.hasRoute<MyTeamRoute>(),
-                            onPokedexClick = { navController.navigate(PokedexRoute) },
-                            onTeamClick = { navController.navigate(MyTeamRoute) }
+                            isTeamSelected    = destination.hasRoute<MyTeamRoute>(),
+                            onPokedexClick    = { navController.navigate(PokedexRoute) },
+                            onTeamClick       = { navController.navigate(MyTeamRoute) }
                         )
                     }
                 }
             }
         ) { _ ->
             NavHost(
-                navController = navController,
+                navController    = navController,
                 startDestination = HomeRoute,
-                modifier = Modifier.fillMaxSize()
+                modifier         = Modifier.fillMaxSize()
             ) {
 
-                // ROTA: HOME
+                // Rota: HOME
                 composable<HomeRoute> {
                     HomeScreen(
                         onSeePokedexClick = { navController.navigate(PokedexRoute) },
-                        onSeeTeamClick = { navController.navigate(MyTeamRoute) }
+                        onSeeTeamClick    = { navController.navigate(MyTeamRoute) }
                     )
                 }
 
-                // ROTA: POKEDEX
+                // Rota: POKEDEX
                 composable<PokedexRoute> {
                     PokedexGridScreen(
-                        viewModel = pokedexViewModel, // Usa o BD e Ktor!
+                        viewModel      = pokedexViewModel, // Usa o BD e Ktor
                         onPokemonClick = { pokemonId ->
                             navController.navigate(PokemonDetailRoute(pokemonId))
                         },
                     )
                 }
 
-                // ROTA: MY TEAM
+                // Rota: MY TEAM
                 composable<MyTeamRoute> {
-                    // Recarrega do banco de dados toda vez que entra na tela do time
-                    LaunchedEffect(Unit) {
-                        teamViewModel.loadTeam()
-                    }
+                    // O Flow do ViewModel mantém o time sincronizado com o DB
 
-                    // Transforma os dados do Banco no formato visual que os seus Cards já usam
+                    // Transforma os dados do BD no formato dos Cards
                     val mappedTeam = teamEntities.map { favorite ->
                         Pokemon(
-                            id = favorite.id,
-                            name = favorite.name,
-                            imageUrl = favorite.imageUrl,
-                            types = favorite.types.split(","),
-                            height = 0.0,
-                            weight = 0.0,
-                            abilities = emptyList(),
-                            gender = "",
+                            id         = favorite.id,
+                            name       = favorite.name,
+                            imageUrl   = favorite.imageUrl,
+                            types      = favorite.types.split(","),
+                            height     = 0.0,
+                            weight     = 0.0,
+                            abilities  = emptyList(),
+                            gender     = "",
                             weaknesses = emptyList(),
                             evolutions = emptyList(),
                             stats = listOf(
@@ -166,9 +155,7 @@ fun App(
                         team = mappedTeam,
                         modifier = Modifier,
                         onExploreClick = {
-                            navController.navigate(PokedexRoute) {
-                                popUpTo(PokedexRoute) { inclusive = true }
-                            }
+                            navController.navigate(PokedexRoute) { popUpTo(PokedexRoute) { inclusive = true } }
                         },
                         onViewDetailsClick = { pokemonId ->
                             navController.navigate(PokemonDetailRoute(pokemonId))
@@ -179,24 +166,20 @@ fun App(
                     )
                 }
 
-                // ROTA: DETALHES
+                // Rota: DETALHES
                 composable<PokemonDetailRoute> { backStackEntry ->
                     val route = backStackEntry.toRoute<PokemonDetailRoute>()
 
-                    // Verifica se já está no time consultando o state do banco
+                    // Verifica se já está no time consultando no BD
                     val isInTeam = teamEntities.any { it.id == route.pokemonId }
 
                     PokemonDetailScreen(
-                        pokemonId = route.pokemonId,
-                        viewModel = detailViewModel, // API de tempo real!
-                        onBackClick = {
-                            navController.popBackStack()
-                        },
-                        onViewTeamClick = {
-                            navController.navigate(MyTeamRoute)
-                        },
-                        isInTeam = isInTeam,
-                        showTeamFullAlert = showTeamFullAlert,
+                        pokemonId              = route.pokemonId,
+                        viewModel              = detailViewModel,
+                        onBackClick            = { navController.popBackStack() },
+                        onViewTeamClick        = { navController.navigate(MyTeamRoute) },
+                        isInTeam               = isInTeam,
+                        showTeamFullAlert      = showTeamFullAlert,
                         onDismissTeamFullAlert = { showTeamFullAlert = false }
                     )
                 }

@@ -26,49 +26,50 @@ fun CaptureLocationDialog(
     onDismiss: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    // Diálogo para inserir a localização onde o Pokémon foi encontrado
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
             Text(
-                text = "Capture Location",
-                color = ThemeColors.deepGreen,
-                style = Typography.pixelCardTitle(),
-                fontSize = 18.sp,
-                modifier = Modifier.fillMaxWidth(),
+                text      = "Capture Location",
+                color     = ThemeColors.deepGreen,
+                style     = Typography.pixelCardTitle(),
+                fontSize  = 18.sp,
+                modifier  = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
         },
         text = {
             Column(
-                modifier = modifier.fillMaxWidth(),
+                modifier            = modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Image(
-                    painter = painterResource(Res.drawable.local),
+                    painter            = painterResource(Res.drawable.local),
                     contentDescription = "Capture",
-                    modifier = Modifier.size(200.dp)
+                    modifier           = Modifier.size(200.dp)
                 )
                 
                 Text(
-                    text = "Where did you find this Pokémon?",
-                    color = ThemeColors.deepGreen,
+                    text      = "Where did you find this Pokémon?",
+                    color     = ThemeColors.deepGreen,
                     textAlign = TextAlign.Center,
-                    style = Typography.descriptionText
+                    style     = Typography.descriptionText
                 )
                 
                 OutlinedTextField(
-                    value = location,
+                    value         = location,
                     onValueChange = onLocationChange,
-                    placeholder = { Text("Ex: Route 1, Viridian Forest...", color = Color.Gray.copy(alpha = 0.6f)) },
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(16.dp),
-                    colors = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor = ThemeColors.deepGreen,
+                    placeholder   = { Text("Ex: Route 1, Viridian Forest...", color = Color.Gray.copy(alpha = 0.6f)) },
+                    modifier      = Modifier.fillMaxWidth(),
+                    shape         = RoundedCornerShape(16.dp),
+                    colors        = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor   = ThemeColors.deepGreen,
                         unfocusedBorderColor = ThemeColors.deepGreen.copy(alpha = 0.5f),
-                        cursorColor = ThemeColors.deepGreen,
-                        focusedTextColor = ThemeColors.deepGreen,
-                        unfocusedTextColor = ThemeColors.deepGreen
+                        cursorColor          = ThemeColors.deepGreen,
+                        focusedTextColor     = ThemeColors.deepGreen,
+                        unfocusedTextColor   = ThemeColors.deepGreen
                     ),
                     singleLine = true
                 )
@@ -76,33 +77,36 @@ fun CaptureLocationDialog(
         },
         confirmButton = {
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier            = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
+                // Botão de confirmar para salvar a localização
                 Button(
-                    onClick = onConfirm,
-                    enabled = location.isNotBlank(),
-                    shape = RoundedCornerShape(999.dp),
+                    // Chama a função de confirmação ao clicar
+                    onClick  = onConfirm,
+                    // Habilita o botão apenas se a localização não estiver vazia
+                    enabled  = location.isNotBlank(),
+                    shape    = RoundedCornerShape(999.dp),
                     modifier = Modifier.widthIn(min = 150.dp),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = ThemeColors.greenPrimary.copy(alpha = 0.7f),
-                        contentColor = ThemeColors.white,
+                    colors   = ButtonDefaults.buttonColors(
+                        containerColor         = ThemeColors.greenPrimary.copy(alpha = 0.7f),
+                        contentColor           = ThemeColors.white,
                         disabledContainerColor = Color.Gray.copy(alpha = 0.3f)
                     )
                 ) {
                     Text(
-                        text = "SAVE TO TEAM",
+                        text  = "SAVE TO TEAM",
                         color = ThemeColors.white,
                         style = Typography.pixelCardTitle()
                     )
                 }
-                
+                // Botão de cancelar para fechar o diálogo sem salvar
                 TextButton(onClick = onDismiss) {
                     Text(
-                        text = "CANCEL",
-                        color = Color.Gray,
-                        style = Typography.pixelCardTitle(),
+                        text     = "CANCEL",
+                        color    = Color.Gray,
+                        style    = Typography.pixelCardTitle(),
                         fontSize = 12.sp
                     )
                 }

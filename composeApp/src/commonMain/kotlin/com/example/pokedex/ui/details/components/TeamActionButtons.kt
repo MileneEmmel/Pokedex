@@ -34,7 +34,7 @@ fun TeamActionButtons(
         modifier            = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Botão "Add to Team" - Mantido original com Button
+        // Botão "Add to Team"
         Button(
             onClick  = onAddToTeamClick,
             modifier = Modifier

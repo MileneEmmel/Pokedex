@@ -45,10 +45,10 @@ fun GlassBottomNavItem(
         modifier = modifier
             .scale(scale)
             .shadow(
-                elevation = if (selected) 15.dp else 0.dp,
-                shape = shape,
+                elevation    = if (selected) 15.dp else 0.dp,
+                shape        = shape,
                 ambientColor = ThemeColors.scaffoldShadowStrong,
-                spotColor = ThemeColors.scaffoldShadowStrong
+                spotColor    = ThemeColors.scaffoldShadowStrong
             )
             .background(
                 color = if (selected) Color.Transparent else ThemeColors.scaffoldItemBackground.copy(alpha = 0.7f),
@@ -76,19 +76,19 @@ fun GlassBottomNavItem(
             verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             Icon(
-                painter = icon,
+                painter            = icon,
                 contentDescription = label,
-                tint = if (selected) Color.White else ThemeColors.deepGreen,
-                modifier = Modifier.size(26.dp)
+                tint               = if (selected) Color.White else ThemeColors.deepGreen,
+                modifier           = Modifier.size(26.dp)
             )
 
             Text(
-                text = label,
+                text  = label,
                 color = if (selected) Color.White else ThemeColors.deepGreen,
                 style = TextStyle(
                     fontFamily = AppFonts.pixel(),
                     fontWeight = FontWeight.Medium,
-                    fontSize = 10.sp
+                    fontSize   = 10.sp
                 )
             )
         }

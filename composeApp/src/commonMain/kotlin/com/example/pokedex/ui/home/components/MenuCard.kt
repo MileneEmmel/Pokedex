@@ -34,11 +34,11 @@ fun MenuCard(
     iconTint: Color = Color.White
 ) {
     Card(
-        onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(28.dp),
-        colors = CardDefaults.cardColors(containerColor = cardColor),
-        border = BorderStroke(3.dp, Color.White.copy(alpha = 0.34f)),
+        onClick   = onClick,
+        modifier  = modifier.fillMaxWidth(),
+        shape     = RoundedCornerShape(28.dp),
+        colors    = CardDefaults.cardColors(containerColor = cardColor),
+        border    = BorderStroke(3.dp, Color.White.copy(alpha = 0.34f)),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Row(
@@ -54,24 +54,24 @@ fun MenuCard(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = icon,
+                    painter            = icon,
                     contentDescription = title,
-                    modifier = Modifier.size(50.dp),
-                    tint = iconTint
+                    modifier           = Modifier.size(50.dp),
+                    tint               = iconTint
                 )
             }
 
             Column(modifier = Modifier.padding(start = 18.dp)) {
                 Text(
-                    text = title,
-                    color = Color.White,
-                    style = Typography.cardTitle,
-                    fontSize = 24.sp,
+                    text       = title,
+                    color      = Color.White,
+                    style      = Typography.cardTitle,
+                    fontSize   = 24.sp,
                     fontFamily = AppFonts.pixel(),
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = subtitle,
+                    text  = subtitle,
                     color = Color.White.copy(alpha = 0.86f),
                     style = MaterialTheme.typography.bodyMedium
                 )

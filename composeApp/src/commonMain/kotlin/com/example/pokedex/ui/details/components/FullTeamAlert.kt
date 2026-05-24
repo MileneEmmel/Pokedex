@@ -33,49 +33,48 @@ fun FullTeamAlert(
 		onDismissRequest = onDismiss,
 		title = {
 			Text(
-				text = "Team Full",
-				color = ThemeColors.deepGreen,
-				style = Typography.pixelCardTitle(),
-				fontSize = 18.sp,
-				modifier = Modifier.fillMaxWidth(),
+				text      = "Team Full",
+				color     = ThemeColors.deepGreen,
+				style     = Typography.pixelCardTitle(),
+				fontSize  = 18.sp,
+				modifier  = Modifier.fillMaxWidth(),
 				textAlign = TextAlign.Center
 			)
 		},
 		text = {
 			Column(
-				modifier = modifier.fillMaxWidth(),
+				modifier            = modifier.fillMaxWidth(),
 				horizontalAlignment = Alignment.CenterHorizontally,
 				verticalArrangement = Arrangement.spacedBy(10.dp)
 			) {
 				Image(
-					painter = painterResource(Res.drawable.team_full),
+					painter            = painterResource(Res.drawable.team_full),
 					contentDescription = "Team full",
-					modifier = Modifier.size(88.dp)
+					modifier           = Modifier.size(88.dp)
 				)
 				Text(
-					text = "Your team already has 6 Pokemon. Remove one before adding another.",
-					color = ThemeColors.deepGreen,
+					text      = "Your team already has 6 Pokemon. Remove one before adding another.",
+					color     = ThemeColors.deepGreen,
 					textAlign = TextAlign.Center
 				)
 			}
 		},
 		confirmButton = {
 			Column(
-				modifier = Modifier.fillMaxWidth(),
+				modifier            = Modifier.fillMaxWidth(),
 				horizontalAlignment = Alignment.CenterHorizontally
 			) {
 				Button(
-					onClick = onDismiss,
-					shape = RoundedCornerShape(999.dp),
-					modifier = Modifier
-									.widthIn(min = 120.dp),
-								colors = ButtonDefaults.buttonColors(
-									containerColor = ThemeColors.greenPrimary.copy(alpha = 0.7f),
-									contentColor = ThemeColors.white
-								)
+					onClick  = onDismiss,
+					shape    = RoundedCornerShape(999.dp),
+					modifier = Modifier.widthIn(min = 120.dp),
+					colors   = ButtonDefaults.buttonColors(
+						containerColor = ThemeColors.greenPrimary.copy(alpha = 0.7f),
+						contentColor   = ThemeColors.white
+					)
 				) {
 					Text(
-						text = "OK",
+						text  = "OK",
 						color = ThemeColors.white,
 						style = Typography.pixelCardTitle()
 					)

@@ -33,10 +33,10 @@ import pokedex.composeapp.generated.resources.trending_up
 @Composable
 fun TeamStatusCard(
     teamSize: Int,
-    avgHp: Int,
-    avgAtk: Int,
-    avgDef: Int,
-    avgSpd: Int,
+    avgHp   : Int,
+    avgAtk  : Int,
+    avgDef  : Int,
+    avgSpd  : Int,
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
@@ -47,12 +47,12 @@ fun TeamStatusCard(
                 color = ThemeColors.white.copy(alpha = 0.50f),
                 shape = RoundedCornerShape(24.dp)
             ),
-        shape = RoundedCornerShape(24.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = ThemeColors.white.copy(alpha = 0.30f)),
+        shape     = RoundedCornerShape(24.dp),
+        colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.white.copy(alpha = 0.30f)),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp)
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(24.dp),
+            modifier            = Modifier.fillMaxWidth().padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             // TEAM SIZE
@@ -70,21 +70,21 @@ fun TeamStatusCard(
                     .padding(12.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier              = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
+                    verticalAlignment     = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Team Size",
+                        text  = "Team Size",
                         color = ThemeColors.white,
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Text(
-                        text = "$teamSize/6",
-                        color = ThemeColors.neonGreen,
-                        style = Typography.statValue(),
+                        text       = "$teamSize/6",
+                        color      = ThemeColors.neonGreen,
+                        style      = Typography.statValue(),
                         fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp
+                        fontSize   = 24.sp
                     )
                 }
             }
@@ -93,21 +93,21 @@ fun TeamStatusCard(
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(horizontal = 4.dp)
+                    modifier          = Modifier.padding(horizontal = 4.dp)
                 ) {
                     Icon(
-                        painter = painterResource(Res.drawable.trending_up),
+                        painter            = painterResource(Res.drawable.trending_up),
                         contentDescription = "Trending Up",
-                        tint = ThemeColors.greenPrimary,
-                        modifier = Modifier.size(20.dp)
+                        tint               = ThemeColors.greenPrimary,
+                        modifier           = Modifier.size(20.dp)
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "AVG STATS",
-                        color = ThemeColors.deepGreen,
-                        style = Typography.statValue(),
+                        text       = "AVG STATS",
+                        color      = ThemeColors.deepGreen,
+                        style      = Typography.statValue(),
                         fontWeight = FontWeight.ExtraBold,
-                        fontSize = 16.sp
+                        fontSize   = 16.sp
                     )
                 }
 
@@ -125,9 +125,9 @@ fun TeamStatusCard(
                         .padding(start = 12.dp, end = 12.dp, top = 16.dp, bottom = 8.dp)
                 ) {
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier              = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceEvenly,
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalAlignment     = Alignment.CenterVertically
                     ) {
                         StatItem(avgHp, "HP", ThemeColors.neonRed)
                         StatItem(avgAtk, "ATK", ThemeColors.neonOrange)
@@ -144,16 +144,16 @@ fun TeamStatusCard(
 fun StatItem(value: Int, label: String, valueColor: Color) {
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
-            text = value.toString(),
-            color = valueColor,
-            style = Typography.statValue(),
+            text       = value.toString(),
+            color      = valueColor,
+            style      = Typography.statValue(),
             fontWeight = FontWeight.ExtraBold,
-            fontSize = 20.sp
+            fontSize   = 20.sp
         )
         Text(
-            text = label,
-            color = Color.White.copy(alpha = 0.80f),
-            style = MaterialTheme.typography.bodySmall,
+            text     = label,
+            color    = Color.White.copy(alpha = 0.80f),
+            style    = MaterialTheme.typography.bodySmall,
             fontSize = 10.sp
         )
     }

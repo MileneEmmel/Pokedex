@@ -21,21 +21,21 @@ fun StatItem(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier
+        modifier            = modifier
     ) {
         Text(
-            text = value,
-            color = valueColor,
+            text       = value,
+            color      = valueColor,
             fontFamily = AppFonts.pixel(),
-            fontSize = 22.sp,
+            fontSize   = 22.sp,
             fontWeight = FontWeight.Bold
         )
         Text(
-            text = label,
-            color = Color.White.copy(alpha = 0.8f),
-            fontSize = 10.sp,
+            text       = label,
+            color      = Color.White.copy(alpha = 0.8f),
+            fontSize   = 10.sp,
             fontWeight = FontWeight.Medium,
-            modifier = Modifier.padding(top = 4.dp)
+            modifier   = Modifier.padding(top = 4.dp)
         )
     }
 }

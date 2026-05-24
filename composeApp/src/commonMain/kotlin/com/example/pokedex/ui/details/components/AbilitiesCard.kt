@@ -36,7 +36,7 @@ fun AbilitiesCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
         colors    = CardDefaults.elevatedCardColors(containerColor = ThemeColors.lightIceGreen)
     ) {
         Column(
-            modifier = Modifier.padding(18.dp),
+            modifier            = Modifier.padding(18.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
 
@@ -62,7 +62,7 @@ fun AbilitiesCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
             FlowRow(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalArrangement   = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxWidth()
+                modifier              = Modifier.fillMaxWidth()
             ) {
                 pokemon.abilities.forEach { ability ->
 

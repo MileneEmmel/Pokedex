@@ -13,10 +13,10 @@ actual fun TeamBuilderScreen(
     modifier: Modifier
 ) {
     TeamBuilderIosContent(
-        team = team,
-        onExploreClick = onExploreClick,
+        team               = team,
+        onExploreClick     = onExploreClick,
         onViewDetailsClick = onViewDetailsClick,
-        onRemovePokemon = onRemovePokemon,
-        modifier = modifier
+        onRemovePokemon    = onRemovePokemon,
+        modifier           = modifier
     )
 }

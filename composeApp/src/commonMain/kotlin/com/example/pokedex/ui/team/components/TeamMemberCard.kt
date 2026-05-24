@@ -52,9 +52,10 @@ fun TeamMemberCard(
     onViewDetailsClick: () -> Unit = {},
     onRemoveClick: () -> Unit = {}
 ) {
-    // Swipe left to remove from team.
+    // Arrastar para o lado para remover
     var offsetX by remember(pokemon.id) { mutableFloatStateOf(0f) }
     val removeThresholdPx = with(LocalDensity.current) { 120.dp.toPx() }
+    // O progresso do swipe é usado para ajustar a opacidade do fundo vermelho e do ícone de exclusão.
     val swipeProgress = (abs(offsetX) / removeThresholdPx).coerceIn(0f, 1f)
     ElevatedCard(
         shape = RoundedCornerShape(24.dp),
@@ -74,10 +75,9 @@ fun TeamMemberCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .pointerInput(pokemon.id) {
+                    // Detecta gestos de arrastar horizontalmente para remover Pokémon
                     detectHorizontalDragGestures(
-                        onHorizontalDrag = { _, dragAmount ->
-                            offsetX += dragAmount
-                        },
+                        onHorizontalDrag = { _, dragAmount -> offsetX += dragAmount },
                         onDragEnd = {
                             if (abs(offsetX) > removeThresholdPx) {
                                 onRemoveClick()
@@ -89,16 +89,13 @@ fun TeamMemberCard(
                     )
                 }
         ) {
-            // Delete hint shown during swipe.
+            // Mostra o ícone de exclusão à medida que o usuário arrasta para a esquerda
             if (swipeProgress > 0f) {
                 Icon(
-                    imageVector = Icons.Filled.Delete,
+                    imageVector        = Icons.Filled.Delete,
                     contentDescription = "Delete",
-                    tint = ThemeColors.white.copy(alpha = swipeProgress),
-                    modifier = Modifier
-                        .align(Alignment.CenterEnd)
-                        .padding(end = 22.dp)
-                        .size(30.dp)
+                    tint               = ThemeColors.white.copy(alpha = swipeProgress),
+                    modifier           = Modifier.align(Alignment.CenterEnd).padding(end = 22.dp).size(30.dp)
                 )
             }
             Box(
@@ -108,10 +105,8 @@ fun TeamMemberCard(
             ) {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
+                        modifier              = Modifier.fillMaxWidth().padding(16.dp),
+                        verticalAlignment     = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Box(
@@ -130,50 +125,48 @@ fun TeamMemberCard(
                             contentAlignment = Alignment.Center
                         ) {
                             AsyncImage(
-                                model = pokemon.imageUrl,
+                                model              = pokemon.imageUrl,
                                 contentDescription = pokemon.name,
-                                modifier = Modifier.size(80.dp)
+                                modifier           = Modifier.size(80.dp)
                             )
                             Text(
-                                text = pokemon.id.formatPokemonNumber(),
-                                color = ThemeColors.deepGreen,
-                                style = Typography.statValue(),
-                                fontSize = 10.sp,
+                                text       = pokemon.id.formatPokemonNumber(),
+                                color      = ThemeColors.deepGreen,
+                                style      = Typography.statValue(),
+                                fontSize   = 10.sp,
                                 fontWeight = FontWeight.Bold,
-                                modifier = Modifier
-                                    .align(Alignment.TopCenter)
-                                    .padding(top = 6.dp)
+                                modifier   = Modifier.align(Alignment.TopCenter).padding(top = 6.dp)
                             )
                         }
                         Column(
-                            modifier = Modifier.weight(1f),
+                            modifier            = Modifier.weight(1f),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
                             Text(
-                                text = pokemon.name.capitalizePokemonName(),
-                                color = ThemeColors.deepGreen,
-                                style = MaterialTheme.typography.titleLarge,
+                                text       = pokemon.name.capitalizePokemonName(),
+                                color      = ThemeColors.deepGreen,
+                                style      = MaterialTheme.typography.titleLarge,
                                 fontWeight = FontWeight.ExtraBold,
-                                maxLines = 1,
-                                overflow = TextOverflow.Ellipsis
+                                maxLines   = 1,
+                                overflow   = TextOverflow.Ellipsis
                             )
                             Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                                 pokemon.types.take(2).forEach { type ->
                                     val typeColor = getTypeColor(type)
                                     Surface(
-                                        shape = RoundedCornerShape(6.dp),
-                                        color = typeColor,
+                                        shape  = RoundedCornerShape(6.dp),
+                                        color  = typeColor,
                                         border = androidx.compose.foundation.BorderStroke(
                                             1.dp,
                                             ThemeColors.white.copy(alpha = 0.80f)
                                         )
                                     ) {
                                         Text(
-                                            text = type.capitalizePokemonName(),
-                                            color = ThemeColors.white,
-                                            style = MaterialTheme.typography.labelSmall,
-                                            modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
-                                            fontSize = 10.sp,
+                                            text       = type.capitalizePokemonName(),
+                                            color      = ThemeColors.white,
+                                            style      = MaterialTheme.typography.labelSmall,
+                                            modifier   = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                            fontSize   = 10.sp,
                                             fontWeight = FontWeight.Bold
                                         )
                                     }
@@ -182,26 +175,26 @@ fun TeamMemberCard(
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                                 listOf("hp", "attack", "defense", "speed").forEach { statName ->
                                     MiniStat(
-                                        label = getStatAbbreviation(statName),
-                                        value = pokemon.stats.find { it.name.lowercase() == statName }?.value ?: 0,
-                                        valueColor = getStatColor(statName),
-                                        bgColor = ThemeColors.deepGreen.copy(alpha = 0.15f),
+                                        label       = getStatAbbreviation(statName),
+                                        value       = pokemon.stats.find { it.name.lowercase() == statName }?.value ?: 0,
+                                        valueColor  = getStatColor(statName),
+                                        bgColor     = ThemeColors.deepGreen.copy(alpha = 0.15f),
                                         borderColor = getStatColor(statName).copy(alpha = 0.2f)
                                     )
                                 }
                             }
 
                             Text(
-                                text = pokemon.description,
-                                color = ThemeColors.deepGreen.copy(alpha = 0.7f),
-                                style = Typography.descriptionText,
+                                text     = pokemon.description,
+                                color    = ThemeColors.deepGreen.copy(alpha = 0.7f),
+                                style    = Typography.descriptionText,
                                 fontSize = 11.sp,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
                             )
                         }
                     }
-                    // Primary action for opening details.
+                    // Botão "View Details"
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -212,11 +205,11 @@ fun TeamMemberCard(
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "VIEW DETAILS",
-                            color = ThemeColors.white,
-                            style = Typography.statValue(),
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 12.sp,
+                            text          = "VIEW DETAILS",
+                            color         = ThemeColors.white,
+                            style         = Typography.statValue(),
+                            fontWeight    = FontWeight.Bold,
+                            fontSize      = 12.sp,
                             letterSpacing = 1.sp
                         )
                     }
@@ -242,27 +235,27 @@ fun getStatAbbreviation(statName: String): String {
 @Composable
 fun MiniStat(label: String, value: Int, valueColor: Color, bgColor: Color, borderColor: Color) {
     ElevatedCard(
-        shape = RoundedCornerShape(8.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = bgColor),
+        shape     = RoundedCornerShape(8.dp),
+        colors    = CardDefaults.elevatedCardColors(containerColor = bgColor),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp),
-        modifier = Modifier.border(1.dp, borderColor, RoundedCornerShape(8.dp))
+        modifier  = Modifier.border(1.dp, borderColor, RoundedCornerShape(8.dp))
     ) {
         Column(
-            modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 2.dp),
+            modifier            = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = value.toString(),
-                color = valueColor,
-                style = Typography.statValue(),
-                fontSize = 13.sp,
+                text       = value.toString(),
+                color      = valueColor,
+                style      = Typography.statValue(),
+                fontSize   = 13.sp,
                 fontWeight = FontWeight.ExtraBold
             )
             Text(
-                text = label,
-                color = ThemeColors.mediumGreen,
-                style = MaterialTheme.typography.labelSmall,
-                fontSize = 9.sp,
+                text       = label,
+                color      = ThemeColors.mediumGreen,
+                style      = MaterialTheme.typography.labelSmall,
+                fontSize   = 9.sp,
                 fontWeight = FontWeight.Bold
             )
         }

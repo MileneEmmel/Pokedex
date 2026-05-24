@@ -52,26 +52,26 @@ internal fun TeamBuilderIosContent(
 
         val style = TeamBuilderStyle(
             backgroundBrush = background,
-            panelColor = ThemeColors.white.copy(alpha = 0.90f),
-            panelBorder = ThemeColors.iosPanelBorder,
-            titleColor = ThemeColors.iosTitle,
-            subtitleColor = ThemeColors.iosSubtitle,
-            chipBackground = ThemeColors.iosMintSurface,
-            chipTextColor = ThemeColors.deepGreen,
-            badgeColor = ThemeColors.iosMintSurface,
-            accentColor = ThemeColors.iosAccent,
-            headerTitle = "My Team",
-            headerSubtitle = "A clean roster ready for the next battle.",
-            emptyTitle = "No Pokémon yet",
-            emptySubtitle = "Your roster will appear here after you add a Pokémon from the Pokédex."
+            panelColor      = ThemeColors.white.copy(alpha = 0.90f),
+            panelBorder     = ThemeColors.iosPanelBorder,
+            titleColor      = ThemeColors.iosTitle,
+            subtitleColor   = ThemeColors.iosSubtitle,
+            chipBackground  = ThemeColors.iosMintSurface,
+            chipTextColor   = ThemeColors.deepGreen,
+            badgeColor      = ThemeColors.iosMintSurface,
+            accentColor     = ThemeColors.iosAccent,
+            headerTitle     = "My Team",
+            headerSubtitle  = "A clean roster ready for the next battle.",
+            emptyTitle      = "No Pokémon yet",
+            emptySubtitle   = "Your roster will appear here after you add a Pokémon from the Pokédex."
         )
 
         TeamBuilderContent(
-            team = team,
-            style = style,
-            onExploreClick = onExploreClick,
+            team               = team,
+            style              = style,
+            onExploreClick     = onExploreClick,
             onViewDetailsClick = onViewDetailsClick,
-            onRemovePokemon = onRemovePokemon
+            onRemovePokemon    = onRemovePokemon
         )
     }
 }

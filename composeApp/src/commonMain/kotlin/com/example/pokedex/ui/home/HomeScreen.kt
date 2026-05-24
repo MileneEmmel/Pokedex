@@ -32,9 +32,9 @@ fun HomeScreen(
     onSeePokedexClick: () -> Unit,
     onSeeTeamClick: () -> Unit = {}
 ) {
-    // HOME STATS (Agora usa valores estáticos para evitar sobrecarga de banco de dados na tela Home)
+    // Home stats -> Valores estáticos para evitar chamadas desnecessárias à API na tela inicial
     val pokemonCountStr = "1000+" // Quantidade base na PokeAPI
-    val typesCountStr = "18"      // Quantidade de tipos em Pokémon
+    val typesCountStr   = "18"    // Quantidade de tipos em Pokémon
 
     // BACKGROUND
     val screenGradient = Brush.linearGradient(
@@ -45,10 +45,10 @@ fun HomeScreen(
     )
 
     ElevatedCard(
-        modifier = Modifier.fillMaxSize(),
-        shape = RoundedCornerShape(0.dp),
+        modifier  = Modifier.fillMaxSize(),
+        shape     = RoundedCornerShape(0.dp),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = Color.Transparent)
+        colors    = CardDefaults.elevatedCardColors(containerColor = Color.Transparent)
     ) {
         Box(
             modifier = Modifier.fillMaxSize().background(screenGradient)
@@ -60,11 +60,10 @@ fun HomeScreen(
                     .padding(horizontal = 16.dp, vertical = 4.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // HEADER
-                // Verifique se HeaderSection precisa de import ou se está no mesmo pacote visual!
+                // Header
                 HeaderSection()
 
-                // QUICK STATS
+                // Stats
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -77,21 +76,21 @@ fun HomeScreen(
                     StatItem(value = "6", label = "Max Team", valueColor = ThemeColors.white)
                 }
 
-                // MAIN ACTIONS
+                // Botões de navegação
                 MenuCard(
-                    title = "Pokédex",
+                    title    = "Pokédex",
                     subtitle = "Explore all available Pokémon",
-                    icon = painterResource(Res.drawable.pokebola),
+                    icon     = painterResource(Res.drawable.pokebola),
                     modifier = Modifier.padding(top = 8.dp),
-                    onClick = onSeePokedexClick
+                    onClick  = onSeePokedexClick
                 )
 
                 MenuCard(
-                    title = "My Team",
+                    title    = "My Team",
                     subtitle = "Manage your battle squad",
-                    icon = painterResource(Res.drawable.my_team),
+                    icon     = painterResource(Res.drawable.my_team),
                     modifier = Modifier.padding(top = 14.dp),
-                    onClick = onSeeTeamClick
+                    onClick  = onSeeTeamClick
                 )
             }
         }

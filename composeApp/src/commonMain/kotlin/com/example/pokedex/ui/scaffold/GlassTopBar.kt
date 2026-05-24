@@ -42,17 +42,17 @@ fun GlassTopBar(
         modifier = modifier
             .fillMaxWidth()
             .shadow(
-                elevation = 20.dp,
+                elevation    = 20.dp,
                 ambientColor = ThemeColors.scaffoldShadowLight.copy(alpha = 0.08f),
-                spotColor = ThemeColors.scaffoldShadowStrong.copy(alpha = 0.2f),
-                clip = false
+                spotColor    = ThemeColors.scaffoldShadowStrong.copy(alpha = 0.2f),
+                clip         = false
             )
             .background(ThemeColors.scaffoldBackground.copy(alpha = 0.95f))
             .drawBehind {
                 drawLine(
-                    color = Color.White.copy(alpha = 0.25f),
-                    start = Offset(0f, size.height),
-                    end = Offset(size.width, size.height),
+                    color       = Color.White.copy(alpha = 0.25f),
+                    start       = Offset(0f, size.height),
+                    end         = Offset(size.width, size.height),
                     strokeWidth = 1.dp.toPx()
                 )
             }
@@ -62,7 +62,7 @@ fun GlassTopBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment     = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             if (showBack) {
@@ -76,10 +76,10 @@ fun GlassTopBar(
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                        imageVector        = Icons.AutoMirrored.Filled.ArrowBack,
                         contentDescription = "Voltar",
-                        tint = ThemeColors.deepGreen,
-                        modifier = Modifier.size(24.dp)
+                        tint               = ThemeColors.deepGreen,
+                        modifier           = Modifier.size(24.dp)
                     )
                 }
             } else {
@@ -87,16 +87,16 @@ fun GlassTopBar(
             }
 
             Text(
-                text = title,
+                text  = title,
                 color = ThemeColors.deepGreen,
                 style = TextStyle(
                     fontFamily = AppFonts.pixel(),
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+                    fontSize   = 20.sp
                 ),
-                maxLines = 1,
+                maxLines  = 1,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.weight(1f)
+                modifier  = Modifier.weight(1f)
             )
 
             Spacer(modifier = Modifier.size(40.dp))

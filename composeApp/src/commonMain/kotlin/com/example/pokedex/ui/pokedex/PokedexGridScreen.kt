@@ -20,29 +20,27 @@ import com.example.pokedex.ui.pokedex.components.PokemonGridItem
 
 @Composable
 fun PokedexGridScreen(
-    viewModel: PokedexViewModel, // <-- Injeção do ViewModel exigido na M2
+    viewModel: PokedexViewModel,
     onPokemonClick: (Int) -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val selectedType by viewModel.selectedType.collectAsState()
+    val totalCacheCount by viewModel.totalCacheCount.collectAsState()
 
-    // Lista de tipos disponíveis (já que a PokeAPI inicial não traz os tipos detalhados)
+    // Lista de tipos disponíveis (PokeAPI não traz os tipos detalhados)
     val availableTypes = listOf("normal", "fire", "water", "grass", "electric", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dark", "dragon", "steel", "fairy")
-
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(
-                Brush.verticalGradient(
-                    listOf(ThemeColors.topBackground, ThemeColors.bottomBackground)
-                )
+                Brush.verticalGradient(listOf(ThemeColors.topBackground, ThemeColors.bottomBackground))
             )
             .padding(horizontal = 16.dp, vertical = 20.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        // Controle Reativo de Estado (Loading, Success, Error)
+        // Controle de estados (Loading, Success, Error)
         when (val state = uiState) {
             is UiState.Loading -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -56,9 +54,9 @@ fun PokedexGridScreen(
             }
             is UiState.Success -> {
                 val filteredList = state.data 
-                val gridState = rememberLazyGridState()
+                val gridState    = rememberLazyGridState()
 
-                // Lógica de Paginação: Carrega mais quando chega perto do fim
+                // Paginação: Carrega mais itens quando chega perto do fim
                 val shouldLoadMore = remember {
                     derivedStateOf {
                         val lastVisibleItem = gridState.layoutInfo.visibleItemsInfo.lastOrNull()
@@ -74,7 +72,7 @@ fun PokedexGridScreen(
                 }
 
                 LazyVerticalGrid(
-                    state = gridState,
+                    state    = gridState,
                     columns  = GridCells.Fixed(2),
                     modifier = Modifier.fillMaxSize(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -83,8 +81,7 @@ fun PokedexGridScreen(
                 ) {
 
                     item(span = { GridItemSpan(maxLineSpan) }) {
-                        // Total count genérico, ou você pode buscar do DAO depois
-                        DatabaseBar(currentCount = filteredList.size, totalCount = 1302)
+                        DatabaseBar(currentCount = filteredList.size, totalCount = totalCacheCount)
                     }
 
                     item(span = { GridItemSpan(maxLineSpan) }) {
@@ -99,11 +96,10 @@ fun PokedexGridScreen(
 
                     items(
                         items = filteredList,
-                        key = { it.id }
+                        key   = { it.id }
                     ) { pokemonCache ->
 
-                        // Carrega os detalhes completos se os tipos estiverem vazios 
-                        // ou se houver apenas um tipo e tivermos um filtro ativo (pode ser um pokemon de 2 tipos)
+                        // Se o Pokémon tiver apenas um tipo ou nenhum tipo, tenta buscar os tipos detalhados
                         LaunchedEffect(pokemonCache.id, selectedType) {
                             val hasOnlyOneType = !pokemonCache.types.contains(",")
                             if (pokemonCache.types.isBlank() || (selectedType != null && hasOnlyOneType)) {
@@ -114,16 +110,16 @@ fun PokedexGridScreen(
                         val mappedTypes = if (pokemonCache.types.isNotBlank()) {
                             pokemonCache.types.split(",")
                         } else {
-                            listOf("...") // Mostra reticências até baixar magicamente
+                            listOf("...") // Mostra reticências até baixar os tipos reais
                         }
 
-                        // Mapeado a Entidade do Banco para a classe Pokemon antiga para não quebrar o layout Visual!
+                        // Mapeia o Pokémon do cache para o modelo de exibição, usando os tipos disponíveis
                         val mappedPokemon = Pokemon(
-                            id = pokemonCache.id,
-                            name = pokemonCache.name,
+                            id       = pokemonCache.id,
+                            name     = pokemonCache.name,
                             imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonCache.id}.png",
-                            types = mappedTypes,
-                            height = 0.0, weight = 0.0, abilities = emptyList(), gender = "", weaknesses = emptyList(), evolutions = emptyList(), stats = emptyList(), description = ""
+                            types    = mappedTypes,
+                            height   = 0.0, weight = 0.0, abilities = emptyList(), gender = "", weaknesses = emptyList(), evolutions = emptyList(), stats = emptyList(), description = ""
                         )
 
                         PokemonGridItem(

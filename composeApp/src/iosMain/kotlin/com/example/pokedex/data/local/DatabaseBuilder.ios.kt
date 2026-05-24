@@ -7,7 +7,7 @@ import platform.Foundation.NSHomeDirectory
 fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
     val dbFilePath = NSHomeDirectory() + "/Documents/pokedex.db"
     return Room.databaseBuilder<AppDatabase>(
-        name = dbFilePath,
+        name    = dbFilePath,
         factory = { AppDatabase::class.instantiateImpl() } // Exigência gerada automaticamente pelo Room KMP
     )
 }

@@ -10,7 +10,7 @@ import kotlinx.serialization.json.Json
 class KtorPokeApi(private val client: HttpClient = HttpClient {
     install(ContentNegotiation) {
         json(Json {
-            ignoreUnknownKeys = true // Ignora campos da API que não mapeamos
+            ignoreUnknownKeys = true // Ignora campos da API não mapeados
             prettyPrint = true
         })
     }
@@ -18,7 +18,7 @@ class KtorPokeApi(private val client: HttpClient = HttpClient {
     private val baseUrl = "https://pokeapi.co/api/v2"
 
     // Busca a listagem inicial para o cache offline-first
-    suspend fun getBasePokemonList(limit: Int = 1000): PokemonListResponse {
+    suspend fun getBasePokemonList(limit: Int = 1025): PokemonListResponse {
         return client.get("$baseUrl/pokemon") {
             url {
                 parameters.append("limit", limit.toString())

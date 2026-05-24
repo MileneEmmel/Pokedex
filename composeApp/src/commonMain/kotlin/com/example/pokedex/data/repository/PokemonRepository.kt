@@ -11,7 +11,7 @@ import kotlinx.coroutines.coroutineScope
 
 import com.example.pokedex.data.EvolutionMember
 
-// Classe auxiliar para devolver tudo organizadinho para a UI
+// Classe para encapsular os dados da tela de detalhes
 data class PokemonFullDetails(
     val dto: PokemonDetailDto,
     val description: String,
@@ -20,6 +20,7 @@ data class PokemonFullDetails(
     val weaknesses: List<String>
 )
 
+// Gerencia a sincronização entre a API e o cache local -> Fornece os dados para as telas
 class PokemonRepository(
     private val api: KtorPokeApi,
     private val dao: PokemonDao
@@ -27,12 +28,12 @@ class PokemonRepository(
     suspend fun syncPokemonsIfEmpty() {
         val count = dao.getCacheCount()
         if (count == 0) {
-            val response = api.getBasePokemonList(limit = 1000)
+            val response = api.getBasePokemonList(limit = 1025)
             val entities = response.results.mapIndexed { index, result ->
                 PokemonCacheEntity(
-                    id = index + 1,
-                    name = result.name,
-                    url = result.url,
+                    id    = index + 1,
+                    name  = result.name,
+                    url   = result.url,
                     types = ""
                 )
             }
@@ -40,16 +41,15 @@ class PokemonRepository(
         }
     }
 
-    suspend fun getPagedPokemons(searchQuery: String, type: String?, limit: Int, offset: Int): List<PokemonCacheEntity> {
-        return dao.getPagedPokemons(searchQuery, type, limit, offset)
-    }
-
+    // // Busca os Pokémons paginados do cache local, aplicando filtros de nome e tipo
     fun getPagedPokemonsFlow(searchQuery: String, type: String?, limit: Int, offset: Int) = 
         dao.getPagedPokemonsFlow(searchQuery, type, limit, offset)
 
+    fun getCacheCountFlow() = dao.getCacheCountFlow()
+
     suspend fun syncTypeFilter(typeName: String) {
         try {
-            val typeDetails = api.getTypeDetails(typeName)
+            val typeDetails  = api.getTypeDetails(typeName)
             val pokemonNames = typeDetails.pokemon.map { it.pokemon.name }
             if (pokemonNames.isNotEmpty()) {
                 dao.updateTypesForNames(pokemonNames, typeName)
@@ -62,19 +62,19 @@ class PokemonRepository(
     suspend fun fetchAndSavePokemonTypes(id: Int) {
         try {
             val details = api.getPokemonDetails(id.toString())
-            val types = details.types.joinToString(",") { it.type.name }
+            val types   = details.types.joinToString(",") { it.type.name }
             if (types.isNotBlank()) {
                 dao.updatePokemonTypes(details.id, types)
             }
         } catch (e: Exception) {}
     }
 
-    // Passo 3: A Mágica acontece aqui
+    // Busca os detalhes completos do Pokémon
     suspend fun getPokemonDetails(id: Int): PokemonFullDetails = coroutineScope {
-        val detailDeferred = async { api.getPokemonDetails(id.toString()) }
+        val detailDeferred  = async { api.getPokemonDetails(id.toString()) }
         val speciesDeferred = async { api.getPokemonSpecies(id.toString()) }
 
-        val detailDto = detailDeferred.await()
+        val detailDto  = detailDeferred.await()
         val speciesDto = speciesDeferred.await()
 
         // Atualiza tipos no cache local
@@ -93,20 +93,20 @@ class PokemonRepository(
             ?.replace("\u000c", " ") 
             ?: "Descrição não disponível."
 
-        // Calcula o Gênero de forma robusta
-        val genderRate = speciesDto.gender_rate
+        // Calcula o Gênero
+        val genderRate   = speciesDto.gender_rate
         val genderString = if (genderRate == -1) {
             "Genderless"
         } else {
             val femalePercentage = (genderRate / 8.0) * 100
-            val malePercentage = 100.0 - femalePercentage
+            val malePercentage   = 100.0 - femalePercentage
             "$malePercentage% M, $femalePercentage% F"
         }
 
         // Extrai as Evoluções recursivamente com IDs e Imagens
         val evolutionsList = extractEvolutions(evolutionDto.chain)
 
-        // Busca fraquezas (mantendo a lógica que já tínhamos para não perder funcionalidade)
+        // Busca fraquezas
         val weaknesses = mutableSetOf<String>()
         try {
             detailDto.types.forEach { typeSlot ->
@@ -118,11 +118,11 @@ class PokemonRepository(
         } catch (e: Exception) {}
 
         return@coroutineScope PokemonFullDetails(
-            dto = detailDto,
+            dto         = detailDto,
             description = description,
-            gender = genderString,
-            evolutions = evolutionsList.distinct(),
-            weaknesses = weaknesses.toList()
+            gender      = genderString,
+            evolutions  = evolutionsList.distinct(),
+            weaknesses  = weaknesses.toList()
         )
     }
 
@@ -134,8 +134,8 @@ class PokemonRepository(
         
         members.add(
             EvolutionMember(
-                id = id,
-                name = chain.species.name,
+                id       = id,
+                name     = chain.species.name,
                 imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$id.png"
             )
         )
@@ -165,7 +165,5 @@ class PokemonRepository(
     }
 
     suspend fun removeFavorite(id: Int) = dao.deleteFavorite(id)
-    suspend fun isFavorite(id: Int) = dao.isFavorite(id)
-    suspend fun getMyTeam() = dao.getAllFavorites()
     fun getMyTeamFlow() = dao.getAllFavoritesFlow()
 }

@@ -17,14 +17,14 @@ import com.example.pokedex.ui.team.styles.TeamBuilderStyle
 
 @Composable
 fun TeamBuilderContent(
-    team: List<Pokemon>,
-    style: TeamBuilderStyle,
-    onExploreClick: () -> Unit = {},
+    team              : List<Pokemon>,
+    style             : TeamBuilderStyle,
+    onExploreClick    : () -> Unit = {},
     onViewDetailsClick: (Int) -> Unit = {},
-    onRemovePokemon: (Int) -> Unit = {},
-    modifier: Modifier = Modifier
+    onRemovePokemon   : (Int) -> Unit = {},
+    modifier          : Modifier = Modifier
 ) {
-    val avgHp = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "hp" }?.value }.averageInt()
+    val avgHp  = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "hp" }?.value }.averageInt()
     val avgAtk = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "attack" }?.value }.averageInt()
     val avgDef = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "defense" }?.value }.averageInt()
     val avgSpd = team.mapNotNull { p -> p.stats.firstOrNull { it.name == "speed" }?.value }.averageInt()
@@ -34,18 +34,17 @@ fun TeamBuilderContent(
             .fillMaxSize()
             .background(style.backgroundBrush)
             .padding(horizontal = 16.dp, vertical = 20.dp),
-        // Keeps list items visible below top and bottom scaffold bars.
-        contentPadding = PaddingValues(top = 90.dp, bottom = 100.dp),
+        contentPadding      = PaddingValues(top = 90.dp, bottom = 100.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         // TEAM SUMMARY
         item {
             TeamStatusCard(
                 teamSize = team.size,
-                avgHp = avgHp,
-                avgAtk = avgAtk,
-                avgDef = avgDef,
-                avgSpd = avgSpd
+                avgHp    = avgHp,
+                avgAtk   = avgAtk,
+                avgDef   = avgDef,
+                avgSpd   = avgSpd
             )
         }
 
@@ -53,13 +52,13 @@ fun TeamBuilderContent(
             // EMPTY STATE
             item {
                 TeamEmptyCard(
-                    title = style.emptyTitle,
-                    subtitle = style.emptySubtitle,
-                    panelColor = style.panelColor,
-                    panelBorder = style.panelBorder,
-                    titleColor = style.titleColor,
-                    subtitleColor = style.subtitleColor,
-                    accentColor = style.accentColor,
+                    title          = style.emptyTitle,
+                    subtitle       = style.emptySubtitle,
+                    panelColor     = style.panelColor,
+                    panelBorder    = style.panelBorder,
+                    titleColor     = style.titleColor,
+                    subtitleColor  = style.subtitleColor,
+                    accentColor    = style.accentColor,
                     onExploreClick = onExploreClick
                 )
             }
@@ -67,9 +66,9 @@ fun TeamBuilderContent(
             // TEAM LIST
             items(team, key = { it.id }) { pokemon ->
                 TeamMemberCard(
-                    pokemon = pokemon,
+                    pokemon            = pokemon,
                     onViewDetailsClick = { onViewDetailsClick(pokemon.id) },
-                    onRemoveClick = { onRemovePokemon(pokemon.id) }
+                    onRemoveClick      = { onRemovePokemon(pokemon.id) }
                 )
             }
 

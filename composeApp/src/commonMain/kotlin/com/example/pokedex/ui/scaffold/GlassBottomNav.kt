@@ -31,7 +31,7 @@ fun GlassBottomNav(
 ) {
     val shape = RoundedCornerShape(
         topStart = 24.dp,
-        topEnd = 24.dp
+        topEnd   = 24.dp
     )
 
     val sharedGradient = Brush.linearGradient(
@@ -42,22 +42,22 @@ fun GlassBottomNav(
     )
 
     Surface(
-        color = ThemeColors.scaffoldBackground.copy(alpha = 0.95f),
-        shape = shape,
+        color    = ThemeColors.scaffoldBackground.copy(alpha = 0.95f),
+        shape    = shape,
         modifier = modifier
             .fillMaxWidth()
             .shadow(
-                elevation = 24.dp,
-                shape = shape,
-                spotColor = ThemeColors.scaffoldShadowStrong.copy(alpha = 0.25f),
+                elevation    = 24.dp,
+                shape        = shape,
+                spotColor    = ThemeColors.scaffoldShadowStrong.copy(alpha = 0.25f),
                 ambientColor = ThemeColors.scaffoldShadowLight.copy(alpha = 0.12f)
             )
             .drawBehind {
                 val strokeWidth = 1.dp.toPx()
                 drawLine(
-                    color = Color.White.copy(alpha = 0.4f),
-                    start = Offset(0f, 0f),
-                    end = Offset(size.width, 0f),
+                    color       = Color.White.copy(alpha = 0.4f),
+                    start       = Offset(0f, 0f),
+                    end         = Offset(size.width, 0f),
                     strokeWidth = strokeWidth * 2
                 )
             }
@@ -70,21 +70,21 @@ fun GlassBottomNav(
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             GlassBottomNavItem(
-                label = "POKEDEX",
-                icon = painterResource(Res.drawable.open_book),
-                selected = isPokedexSelected,
+                label         = "POKEDEX",
+                icon          = painterResource(Res.drawable.open_book),
+                selected      = isPokedexSelected,
                 selectedBrush = sharedGradient,
-                onClick = onPokedexClick,
-                modifier = Modifier.weight(1f)
+                onClick       = onPokedexClick,
+                modifier      = Modifier.weight(1f)
             )
 
             GlassBottomNavItem(
-                label = "MY TEAM",
-                icon = painterResource(Res.drawable.shield),
-                selected = isTeamSelected,
+                label         = "MY TEAM",
+                icon          = painterResource(Res.drawable.shield),
+                selected      = isTeamSelected,
                 selectedBrush = sharedGradient,
-                onClick = onTeamClick,
-                modifier = Modifier.weight(1f)
+                onClick       = onTeamClick,
+                modifier      = Modifier.weight(1f)
             )
         }
     }

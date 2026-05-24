@@ -22,13 +22,13 @@ fun HeaderSection(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier            = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Image(
-            painter = painterResource(Res.drawable.pokedex),
+            painter            = painterResource(Res.drawable.pokedex),
             contentDescription = "Pokedex",
-            modifier = Modifier
+            modifier           = Modifier
                 .offset(y = (-50).dp)
                 .padding(top = 100.dp)
                 .size(300.dp)
@@ -36,12 +36,11 @@ fun HeaderSection(
 
 
         Text(
-            text = "Capture, Discover, Build Your Dream Team!",
-            color = Color.White.copy(alpha = 0.92f),
-            style = MaterialTheme.typography.titleMedium,
+            text      = "Capture, Discover, Build Your Dream Team!",
+            color     = Color.White.copy(alpha = 0.92f),
+            style     = MaterialTheme.typography.titleMedium,
             textAlign = TextAlign.Center,
-            modifier = Modifier
-                .offset(y = (-90).dp)
+            modifier  = Modifier.offset(y = (-90).dp)
         )
     }
 }

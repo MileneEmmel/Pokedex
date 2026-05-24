@@ -5,8 +5,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 
-// Precisamos criar um "Construtor" expect (KMP) porque o Android e o iOS
-// guardam os arquivos SQLite em pastas de sistema completamente diferentes.
+// expect Construtor pois o Android e o iOS guardam os arquivos SQLite em pastas de sistema diferentes
 @Suppress("NO_ACTUAL_FOR_EXPECT")
 expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase>
 

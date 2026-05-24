@@ -22,7 +22,7 @@ class PokemonDetailViewModel(
         viewModelScope.launch {
             _detailState.value = UiState.Loading
             try {
-                // Agora o repository devolve o PokemonFullDetails organizadinho
+                // Dados da tela de detalhes são buscados diretamente da API
                 val result = repository.getPokemonDetails(id)
                 _detailState.value = UiState.Success(result)
             } catch (e: Exception) {
@@ -31,7 +31,7 @@ class PokemonDetailViewModel(
         }
     }
 
-    // Salva o Pokémon nos favoritos com a nova Regra de Negócio (Localização)
+    // Salva o Pokémon no time (favoritos)
     fun saveToTeam(
         id: Int,
         name: String,

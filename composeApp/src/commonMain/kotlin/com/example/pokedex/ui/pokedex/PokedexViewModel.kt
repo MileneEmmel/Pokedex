@@ -7,6 +7,7 @@ import com.example.pokedex.data.repository.PokemonRepository
 import com.example.pokedex.ui.UiState
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlin.compareTo
 
 class PokedexViewModel(
     private val repository: PokemonRepository
@@ -20,7 +21,11 @@ class PokedexViewModel(
 
     private val _currentLimit = MutableStateFlow(20) // Começa com 20
 
-    // Estado reativo da UI combinando filtros, paginação e banco de dados
+    // Pega o total de Pokémons no cache
+    val totalCacheCount: StateFlow<Int> = repository.getCacheCountFlow()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), 0)
+
+    // Combina os filtros e o limite para obter a lista de Pokémons paginada
     @OptIn(kotlinx.coroutines.ExperimentalCoroutinesApi::class)
     val uiState: StateFlow<UiState<List<PokemonCacheEntity>>> = combine(
         _searchQuery,
@@ -31,11 +36,11 @@ class PokedexViewModel(
             repository.getPagedPokemonsFlow(query, type, limit, 0)
         }
         .map { pokemons ->
-            // Se a lista está vazia mas NÃO estamos filtrando, aí sim é Loading inicial
+            // Se a lista está vazia e não há filtro selecionado, estado Loading
             if (pokemons.isEmpty() && _searchQuery.value.isEmpty() && _selectedType.value == null) {
                 UiState.Loading
             } else {
-                // Se a lista está vazia mas tem filtro, é Sucesso (lista vazia), a UI trata como "Não encontrado"
+                // Se a lista está vazia mas tem filtro, estado Success -> Lista vazia, UI trata como "Não encontrado"
                 UiState.Success(pokemons)
             }
         }
@@ -49,7 +54,7 @@ class PokedexViewModel(
             try {
                 repository.syncPokemonsIfEmpty()
             } catch (e: Exception) {
-                // Se falhar por falta de internet no primeiro acesso, logamos aqui
+                // Falha por falta de internet no primeiro acesso
                 println("Erro na sincronização: ${e.message}")
             }
         }
@@ -57,7 +62,10 @@ class PokedexViewModel(
 
     // Função para a UI chamar quando o scroll chegar ao fim
     fun loadMore() {
-        _currentLimit.value += 20
+        val maxLimit = 1025
+        if (_currentLimit.value < maxLimit) {
+            _currentLimit.value = minOf(_currentLimit.value + 20, maxLimit)
+        }
     }
 
     fun updateSearchQuery(query: String) {
@@ -66,11 +74,11 @@ class PokedexViewModel(
     }
 
     fun updateSelectedType(type: String?) {
-        val normalizedType = if (type == "All" || type.isNullOrBlank()) null else type.lowercase()
+        val normalizedType  = if (type == "All" || type.isNullOrBlank()) null else type.lowercase()
         _selectedType.value = normalizedType
         _currentLimit.value = 20 // Reseta o limite ao filtrar
         
-        // Se um tipo foi selecionado, sincronizamos os Pokémons desse tipo para garantir que apareçam no filtro
+        // Se um tipo foi selecionado, sincronizam os Pokémons desse tipo com a API
         if (normalizedType != null) {
             viewModelScope.launch {
                 try {

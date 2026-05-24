@@ -50,20 +50,20 @@ fun TeamEmptyCard(
     modifier: Modifier = Modifier
 ) {
     ElevatedCard(
-        shape = RoundedCornerShape(28.dp),
-        colors = CardDefaults.elevatedCardColors(containerColor = panelColor),
+        shape     = RoundedCornerShape(28.dp),
+        colors    = CardDefaults.elevatedCardColors(containerColor = panelColor),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 0.dp),
-        modifier = modifier
+        modifier  = modifier
             .fillMaxWidth()
             .border(1.dp, panelBorder, RoundedCornerShape(28.dp))
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth().padding(24.dp),
+            modifier            = Modifier.fillMaxWidth().padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
 
-            // Empty-team illustration.
+            // Imagem de time vazio
             Box(
                 modifier = Modifier
                     .size(100.dp)
@@ -73,24 +73,24 @@ fun TeamEmptyCard(
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(Res.drawable.ic_pokedex_empty),
+                    painter            = painterResource(Res.drawable.ic_pokedex_empty),
                     contentDescription = "Empty Team Slot",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier.size(80.dp)
+                    contentScale       = ContentScale.Fit,
+                    modifier           = Modifier.size(80.dp)
                 )
             }
 
             Text(
-                text = title,
-                color = titleColor,
-                style = MaterialTheme.typography.titleLarge,
+                text       = title,
+                color      = titleColor,
+                style      = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
+                textAlign  = TextAlign.Center
             )
             Text(
-                text = subtitle,
-                color = subtitleColor,
-                style = MaterialTheme.typography.bodyMedium,
+                text      = subtitle,
+                color     = subtitleColor,
+                style     = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center
             )
 
@@ -98,7 +98,7 @@ fun TeamEmptyCard(
 
             val buttonShape = RoundedCornerShape(24.dp)
 
-            // Explore action.
+            // Botão "Explore Pokedex"
             Box(
                 modifier = Modifier
                     .clip(buttonShape)
@@ -110,14 +110,14 @@ fun TeamEmptyCard(
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        painter = painterResource(Res.drawable.search),
+                        painter            = painterResource(Res.drawable.search),
                         contentDescription = "Search",
-                        tint = titleColor,
-                        modifier = Modifier.size(19.dp)
+                        tint               = titleColor,
+                        modifier           = Modifier.size(19.dp)
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "EXPLORE POKEDEX",
+                        text  = "EXPLORE POKEDEX",
                         color = titleColor,
                         style = TextStyle(
                             fontFamily = AppFonts.pixel(),

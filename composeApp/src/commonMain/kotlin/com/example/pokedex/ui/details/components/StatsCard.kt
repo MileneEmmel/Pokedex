@@ -75,7 +75,6 @@ fun StatRow(statName: String, statValue: Int) {
         it.replaceFirstChar { char -> char.uppercase() }
     }
 
-    // Como abandonamos o mock, o limite absoluto (max stat base de um Pokemon) é 255.
     val maxStatValue = 255f
 
     var animationPlayed by remember { mutableStateOf(false) }

@@ -60,7 +60,7 @@ fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
                 )
             }
 
-            // Exibe a lista de evoluções vinda da API
+            // Lista de evoluções
             if (pokemon.evolutions.isNotEmpty()) {
                 pokemon.evolutions.forEachIndexed { index, member ->
                     EvolutionNameItem(
@@ -77,63 +77,10 @@ fun EvolutionChainCard(pokemon: Pokemon, modifier: Modifier = Modifier) {
             } else {
                 // Fallback caso não haja evoluções
                 EvolutionNameItem(
-                    member = EvolutionMember(pokemon.id, pokemon.name, pokemon.imageUrl),
+                    member     = EvolutionMember(pokemon.id, pokemon.name, pokemon.imageUrl),
                     isSelected = true
                 )
             }
-        }
-    }
-}
-
-@Composable
-fun EvolutionItem(evo: Pokemon, isSelected: Boolean, modifier: Modifier = Modifier) {
-    val shape = RoundedCornerShape(20.dp)
-
-    // Borda de destaque no Pokémon selecionado
-    val borderModifier = if (isSelected) {
-        Modifier.border(width = 1.dp, color = ThemeColors.deepGreen, shape = shape)
-    } else {
-        Modifier
-    }
-
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .then(borderModifier)
-            .background(Color.White, shape)
-            .padding(10.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-
-        // Imagem do Pokemon
-        Box(
-            modifier = Modifier
-                .size(64.dp)
-                .background(ThemeColors.iceGreen, RoundedCornerShape(16.dp))
-                .padding(8.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            AsyncImage(
-                model              = evo.imageUrl,
-                contentDescription = evo.name,
-                modifier           = Modifier.fillMaxSize()
-            )
-        }
-
-        // Nome e número do Pokemon
-        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(
-                text  = evo.name.capitalizePokemonName(),
-                color = ThemeColors.deepGreen,
-                style = Typography.gridItemName
-            )
-
-            Text(
-                text  = evo.id.formatPokemonNumber(),
-                color = ThemeColors.deepGreen,
-                style = Typography.pixelId()
-            )
         }
     }
 }
@@ -159,7 +106,7 @@ fun EvolutionNameItem(member: com.example.pokedex.data.EvolutionMember, isSelect
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
 
-        // Imagem do Pokemon vinda da API
+        // Imagem
         Box(
             modifier = Modifier
                 .size(48.dp)
@@ -168,13 +115,13 @@ fun EvolutionNameItem(member: com.example.pokedex.data.EvolutionMember, isSelect
             contentAlignment = Alignment.Center
         ) {
             AsyncImage(
-                model = member.imageUrl,
+                model              = member.imageUrl,
                 contentDescription = member.name,
-                modifier = Modifier.fillMaxSize()
+                modifier           = Modifier.fillMaxSize()
             )
         }
 
-        // Nome do Pokemon
+        // Nome
         Text(
             text  = member.name.capitalizePokemonName(),
             color = ThemeColors.deepGreen,

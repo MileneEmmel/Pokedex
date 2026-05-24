@@ -6,9 +6,9 @@ import com.example.pokedex.data.Pokemon
 
 @Composable
 expect fun TeamBuilderScreen(
-    team: List<Pokemon>,
-    onExploreClick: () -> Unit,
+    team              : List<Pokemon>,
+    onExploreClick    : () -> Unit,
     onViewDetailsClick: (Int) -> Unit,
-    onRemovePokemon: (Int) -> Unit,
-    modifier: Modifier
+    onRemovePokemon   : (Int) -> Unit,
+    modifier          : Modifier
 )
