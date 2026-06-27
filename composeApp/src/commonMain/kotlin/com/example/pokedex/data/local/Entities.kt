@@ -23,5 +23,8 @@ data class FavoritePokemonEntity(
     val hp: Int,
     val attack: Int,
     val defense: Int,
-    val speed: Int
+    val speed: Int,
+    val latitude: Double? = null,
+    val longitude: Double? = null,
+    val photoPath: String? = null
 )

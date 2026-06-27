@@ -28,7 +28,8 @@ fun TeamActionButtons(
     onAddToTeamClick: () -> Unit,
     onViewTeamClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isInTeam: Boolean = false
+    isInTeam: Boolean = false,
+    isTeamFull: Boolean = false
 ) {
     Column(
         modifier            = modifier.fillMaxWidth(),
@@ -43,7 +44,7 @@ fun TeamActionButtons(
                 .shadow(4.dp, RoundedCornerShape(16.dp)),
             shape    = RoundedCornerShape(16.dp),
             colors   = ButtonDefaults.buttonColors(
-                containerColor         = if (isInTeam) ThemeColors.greenPrimary else ThemeColors.lightIceGreen,
+                containerColor         = if (isInTeam) ThemeColors.greenPrimary else if (isTeamFull) ThemeColors.greenPrimary else ThemeColors.lightIceGreen,
                 disabledContainerColor = ThemeColors.greenPrimary,
                 disabledContentColor   = Color.White
             ),
@@ -61,7 +62,7 @@ fun TeamActionButtons(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text  = if (isInTeam) "ADDED TO TEAM" else "ADD TO TEAM",
+                    text  = if (isInTeam) "ADDED TO TEAM" else if (isTeamFull) "TEAM FULL" else "ADD TO TEAM",
                     color = ThemeColors.deepGreen,
                     style = Typography.gridItemName
                 )

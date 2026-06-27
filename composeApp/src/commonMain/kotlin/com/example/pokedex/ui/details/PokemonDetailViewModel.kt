@@ -41,10 +41,16 @@ class PokemonDetailViewModel(
         hp: Int,
         attack: Int,
         defense: Int,
-        speed: Int
+        speed: Int,
+        latitude: Double? = null,
+        longitude: Double? = null,
+        photoPath: String? = null
     ) {
         viewModelScope.launch {
-            repository.saveFavorite(id, name, imageUrl, captureLocation, types, hp, attack, defense, speed)
+            repository.saveFavorite(
+                id, name, imageUrl, captureLocation, types, hp, attack, defense, speed,
+                latitude, longitude, photoPath
+            )
         }
     }
 }

@@ -10,4 +10,5 @@ fun getDatabaseBuilder(): RoomDatabase.Builder<AppDatabase> {
         name    = dbFilePath,
         factory = { AppDatabase::class.instantiateImpl() } // Exigência gerada automaticamente pelo Room KMP
     )
+        .addMigrations(AppDatabase.MIGRATION_1_2)
 }

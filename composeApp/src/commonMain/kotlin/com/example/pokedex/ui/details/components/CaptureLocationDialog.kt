@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.pokedex.permission.PermissionStatus
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.Typography
 import org.jetbrains.compose.resources.painterResource
@@ -20,13 +21,18 @@ import pokedex.composeapp.generated.resources.pokebola
 
 @Composable
 fun CaptureLocationDialog(
-    location: String,
-    onLocationChange: (String) -> Unit,
+    latitude: Double? = null,
+    longitude: Double? = null,
+    permissionStatus: PermissionStatus = PermissionStatus.NOT_DETERMINED,
+    isLoadingLocation: Boolean = false,
+    onRequestLocationPermission: () -> Unit = {},
+    onOpenSettings: () -> Unit = {},
     onConfirm: () -> Unit,
     onDismiss: () -> Unit,
+    photoPath: String? = null,
+    onTakePhoto: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    // Diálogo para inserir a localização onde o Pokémon foi encontrado
     AlertDialog(
         onDismissRequest = onDismiss,
         title = {
@@ -50,29 +56,86 @@ fun CaptureLocationDialog(
                     contentDescription = "Capture",
                     modifier           = Modifier.size(200.dp)
                 )
-                
+
                 Text(
-                    text      = "Where did you find this Pokémon?",
+                    text      = "Where did you find this Pokemon?",
                     color     = ThemeColors.deepGreen,
                     textAlign = TextAlign.Center,
                     style     = Typography.descriptionText
                 )
-                
-                OutlinedTextField(
-                    value         = location,
-                    onValueChange = onLocationChange,
-                    placeholder   = { Text("Ex: Route 1, Viridian Forest...", color = Color.Gray.copy(alpha = 0.6f)) },
-                    modifier      = Modifier.fillMaxWidth(),
-                    shape         = RoundedCornerShape(16.dp),
-                    colors        = OutlinedTextFieldDefaults.colors(
-                        focusedBorderColor   = ThemeColors.deepGreen,
-                        unfocusedBorderColor = ThemeColors.deepGreen.copy(alpha = 0.5f),
-                        cursorColor          = ThemeColors.deepGreen,
-                        focusedTextColor     = ThemeColors.deepGreen,
-                        unfocusedTextColor   = ThemeColors.deepGreen
-                    ),
-                    singleLine = true
-                )
+
+                // GPS: loading, coordinates, permission request, or settings fallback
+                if (isLoadingLocation) {
+                    Row(
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        CircularProgressIndicator(
+                            modifier = Modifier.size(20.dp),
+                            color = ThemeColors.greenPrimary,
+                            strokeWidth = 2.dp
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Getting location...",
+                            color = ThemeColors.deepGreen.copy(alpha = 0.7f),
+                            fontSize = 12.sp,
+                            style = Typography.descriptionText
+                        )
+                    }
+                } else if (permissionStatus == PermissionStatus.GRANTED && latitude != null && longitude != null) {
+                    Text(
+                        text = "GPS: $latitude, $longitude",
+                        color = ThemeColors.deepGreen.copy(alpha = 0.7f),
+                        fontSize = 12.sp,
+                        style = Typography.descriptionText
+                    )
+                } else if (permissionStatus == PermissionStatus.DENIED_ALWAYS) {
+                    TextButton(onClick = onOpenSettings) {
+                        Text("Enable Location in Settings", color = Color.Red, fontSize = 12.sp)
+                    }
+                } else {
+                    Button(
+                        onClick = onRequestLocationPermission,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = ThemeColors.greenPrimary,
+                            contentColor = ThemeColors.white
+                        ),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Use My Location (GPS)")
+                    }
+                }
+
+                // Camera: unified button (requests permission if needed, then captures)
+                if (photoPath != null) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = "Photo captured!",
+                            color = ThemeColors.deepGreen,
+                            style = Typography.descriptionText
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        TextButton(onClick = onTakePhoto) {
+                            Text("Retake", color = ThemeColors.deepGreen.copy(alpha = 0.7f), fontSize = 12.sp)
+                        }
+                    }
+                } else {
+                    Button(
+                        onClick = onTakePhoto,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = ThemeColors.greenPrimary,
+                            contentColor = ThemeColors.white
+                        ),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Text("Take a Photo")
+                    }
+                }
             }
         },
         confirmButton = {
@@ -81,17 +144,14 @@ fun CaptureLocationDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                // Botão de confirmar para salvar a localização
                 Button(
-                    // Chama a função de confirmação ao clicar
                     onClick  = onConfirm,
-                    // Habilita o botão apenas se a localização não estiver vazia
-                    enabled  = location.isNotBlank(),
+                    enabled  = latitude != null && longitude != null && photoPath != null,
                     shape    = RoundedCornerShape(999.dp),
                     modifier = Modifier.widthIn(min = 150.dp),
                     colors   = ButtonDefaults.buttonColors(
-                        containerColor         = ThemeColors.greenPrimary.copy(alpha = 0.7f),
-                        contentColor           = ThemeColors.white,
+                        containerColor = ThemeColors.greenPrimary.copy(alpha = 0.7f),
+                        contentColor   = ThemeColors.white,
                         disabledContainerColor = Color.Gray.copy(alpha = 0.3f)
                     )
                 ) {

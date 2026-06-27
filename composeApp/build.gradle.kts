@@ -31,6 +31,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.koin.android)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -57,6 +58,18 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
+
+            // Koin
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+
+            // Moko Permissions & Geo
+            implementation(libs.moko.permissions.core)
+            api(libs.moko.permissions.compose)
+            api(libs.moko.permissions.location)
+            api(libs.moko.geo)
+            api(libs.moko.geo.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

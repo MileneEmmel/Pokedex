@@ -1,4 +1,4 @@
-﻿package com.example.pokedex.ui.team
+package com.example.pokedex.ui.team
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable

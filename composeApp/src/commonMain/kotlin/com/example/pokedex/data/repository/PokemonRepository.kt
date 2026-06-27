@@ -155,11 +155,15 @@ class PokemonRepository(
         hp: Int,
         attack: Int,
         defense: Int,
-        speed: Int
+        speed: Int,
+        latitude: Double? = null,
+        longitude: Double? = null,
+        photoPath: String? = null
     ) {
         dao.insertFavorite(
             FavoritePokemonEntity(
-                id, name, imageUrl, captureLocation, types, hp, attack, defense, speed
+                id, name, imageUrl, captureLocation, types, hp, attack, defense, speed,
+                latitude, longitude, photoPath
             )
         )
     }

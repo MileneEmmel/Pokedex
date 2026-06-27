@@ -147,7 +147,11 @@ fun App(
                                 com.example.pokedex.data.Stat("defense", favorite.defense),
                                 com.example.pokedex.data.Stat("speed", favorite.speed)
                             ),
-                            description = "Caught at: ${favorite.captureLocation}"
+                            description = if (favorite.latitude != null && favorite.longitude != null) {
+                                "${favorite.captureLocation} (${favorite.latitude.toString().take(7)}, ${favorite.longitude.toString().take(7)})"
+                            } else {
+                                favorite.captureLocation
+                            }
                         )
                     }
 
@@ -171,7 +175,8 @@ fun App(
                     val route = backStackEntry.toRoute<PokemonDetailRoute>()
 
                     // Verifica se já está no time consultando no BD
-                    val isInTeam = teamEntities.any { it.id == route.pokemonId }
+                    val teamMember = teamEntities.find { it.id == route.pokemonId }
+                    val isInTeam = teamMember != null
 
                     PokemonDetailScreen(
                         pokemonId              = route.pokemonId,
@@ -180,7 +185,11 @@ fun App(
                         onViewTeamClick        = { navController.navigate(MyTeamRoute) },
                         isInTeam               = isInTeam,
                         showTeamFullAlert      = showTeamFullAlert,
-                        onDismissTeamFullAlert = { showTeamFullAlert = false }
+                        onDismissTeamFullAlert = { showTeamFullAlert = false },
+                        teamSize               = teamEntities.size,
+                        teamPhotoPath          = teamMember?.photoPath,
+                        teamLatitude           = teamMember?.latitude,
+                        teamLongitude          = teamMember?.longitude
                     )
                 }
             }

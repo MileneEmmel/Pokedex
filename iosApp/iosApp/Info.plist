@@ -4,5 +4,11 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>O Pokédex precisa da sua localização para registrar onde o Pokémon foi capturado.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>O Pokédex precisa da sua localização para registrar onde o Pokémon foi capturado.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>O Pokédex precisa acessar a câmera para fotografar o Pokémon capturado.</string>
 </dict>
 </plist>
