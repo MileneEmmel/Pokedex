@@ -2,23 +2,24 @@
 
 Autores: Milene Emmel Rovedder e Daniel Henrique Da Silva
 
-Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS, agora utilizando uma arquitetura **Offline-First** com **PokeAPI** e **Room Database**.
+Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS, utilizando uma arquitetura **Offline-First** com **PokeAPI**, **Room Database** e **Integração Nativa de Hardware (Câmera e GPS)**.
 
-O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes, adição ao time e uma tela de **Team Builder** com implementação diferente para cada sistema operacional.
+O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes e uma tela de **Team Builder** com implementação visual diferente para cada sistema operacional, oferecendo agora suporte a captura geolocalizada e registros fotográficos.
 
 ## Visão geral
 
 - **Home**: dashboard inicial com atalhos para Pokédex e Meu Time.
 - **Pokédex**: listagem real via **PokeAPI** com paginação dinâmica, busca por nome/ID e filtros por tipo.
-- **Detalhes do Pokémon**: exibe descrição, tipos, atributos reais (stats), cadeia de evolução recursiva e localização de captura.
-- **Meu Time / Team Builder**: gerencia até 6 Pokémon com persistência local total via Room.
+- **Detalhes do Pokémon**: exibe descrição, tipos, atributos reais (stats), cadeia de evolução recursiva e integra os recursos de hardware para captura.
+- **Meu Time / Team Builder**: gerencia até 6 Pokémon com persistência local total via Room, armazenando os metadados exatos do momento e local da captura.
 
 ## Stack
 
 - Kotlin Multiplatform
 - Compose Multiplatform
 - **Ktor**: Consumo da PokeAPI
-- **Room Database**: Cache local e persistência do time (Offline-First)
+- **Room Database**: Cache local, persistência do time e Migrações estruturais
+- **Moko Permissions / Moko Geo**: Gerenciamento de permissões nativas e rastreamento de GPS
 - Material 3
 - Navegação tipada com `@Serializable`
 - `expect/actual` para diferenciar a tela de Team Builder por plataforma
@@ -27,9 +28,10 @@ O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas e
 
 O código compartilhado fica em `composeApp/src/commonMain` e está organizado em:
 
-- **data**: modelos, repositórios e acesso a dados (API / Banco de Dados)
+- **data**: modelos, repositórios, configuração do banco de dados e objetos de Migration
 - **navigation**: rotas tipadas e grafo de navegação
-- **ui**: telas reativas, ViewModels e componentes de interface
+- **ui**: telas reativas, ViewModels, diálogos de captura e componentes de interface
+- **hardware**: gerenciamento de estados de permissão (câmera/localização) compartilhados
 
 As implementações específicas ficam em:
 
@@ -66,11 +68,11 @@ O `Scaffold` centraliza a estrutura visual com:
 
 ## Funcionalidades principais
 
-- Navegação tipada entre telas
-- **Integração com PokeAPI**: Dados reais e em tempo real
-- **Arquitetura Offline-First**: Sincronização e cache de dados no Room para funcionamento sem internet
-- **Paginação Real**: Carregamento sob demanda (Lazy Loading) na listagem principal
-- **Busca e Filtros Reativos**: Atualização instantânea da UI ao pesquisar ou filtrar tipos
-- **Persistência de Atributos**: Stats completos e local de captura salvos permanentemente no time
-- **Evolução Completa**: Mapeamento de toda a cadeia evolutiva via API
-- Visual diferenciado para Android e iOS na tela de Team Builder
+- **Captura com Câmera**: Uso de hardware nativo para tirar fotos do treinador ou do ambiente no momento de adicionar o Pokémon ao time.
+- **Geolocalização Automatizada**: Obtenção de coordenadas geográficas exatas (Latitude e Longitude) via GPS integrado.
+- **Gerenciamento de Permissões em Tempo Real**: Tratamento seguro e UI responsiva para solicitar acesso à câmera e à localização em ambas as plataformas.
+- **Banco de Dados Evolutivo**: Migrações (Migrations) seguras do Room Database para persistir novos campos (foto e coordenadas) sem causar perda dos times já montados.
+- **Navegação Tipada**: Transições fluídas e seguras entre telas.
+- **Arquitetura Offline-First**: Sincronização e cache para funcionamento ininterrupto sem conexão com a internet.
+- **Integração com PokeAPI**: Dados dinâmicos com paginação (Lazy Loading), busca e filtros em tempo real.
+- **Evolução Completa**: Mapeamento e exibição de toda a cadeia evolutiva diretamente da API.
