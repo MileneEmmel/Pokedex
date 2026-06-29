@@ -5,13 +5,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,7 +25,6 @@ import com.example.pokedex.ui.Typography
 import org.jetbrains.compose.resources.painterResource
 import pokedex.composeapp.generated.resources.Res
 import pokedex.composeapp.generated.resources.local
-import pokedex.composeapp.generated.resources.pokebola
 
 @Composable
 fun CaptureLocationDialog(
@@ -32,7 +34,7 @@ fun CaptureLocationDialog(
     isLoadingLocation: Boolean = false,
     onRequestLocationPermission: () -> Unit = {},
     onOpenSettings: () -> Unit = {},
-    onConfirm: () -> Unit,
+    onConfirm: (Double?, Double?) -> Unit,
     onDismiss: () -> Unit,
     photoPath: String? = null,
     onTakePhoto: () -> Unit = {},
@@ -106,12 +108,21 @@ fun CaptureLocationDialog(
                         )
                     }
                 } else if (permissionStatus == PermissionStatus.GRANTED && latitude != null && longitude != null) {
-                    Text(
-                        text = "GPS: $latitude, $longitude",
-                        color = ThemeColors.deepGreen.copy(alpha = 0.7f),
-                        fontSize = 12.sp,
-                        style = Typography.descriptionText
-                    )
+                    Surface(
+                        color = ThemeColors.iceGreen.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(12.dp),
+                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp)
+                    ) {
+                        Text(
+                            text = "Lat: $latitude\nLng: $longitude",
+                            color = ThemeColors.deepGreen,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            style = Typography.descriptionText,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(12.dp)
+                        )
+                    }
                 } else if (permissionStatus == PermissionStatus.DENIED_ALWAYS) {
                     TextButton(onClick = onOpenSettings) {
                         Text("Enable Location in Settings", color = Color.Red, fontSize = 12.sp)
@@ -129,7 +140,6 @@ fun CaptureLocationDialog(
                     }
                 }
 
-                // Camera: unified button (requests permission if needed, then captures)
                 if (photoPath != null) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -167,7 +177,7 @@ fun CaptureLocationDialog(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Button(
-                    onClick  = onConfirm,
+                    onClick  = { onConfirm(latitude, longitude) },
                     enabled  = latitude != null && longitude != null && photoPath != null,
                     shape    = RoundedCornerShape(999.dp),
                     modifier = Modifier.widthIn(min = 150.dp),
@@ -183,7 +193,6 @@ fun CaptureLocationDialog(
                         style = Typography.pixelCardTitle()
                     )
                 }
-                // Botão de cancelar para fechar o diálogo sem salvar
                 TextButton(onClick = onDismiss) {
                     Text(
                         text     = "CANCEL",

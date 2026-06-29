@@ -148,7 +148,7 @@ fun App(
                                 com.example.pokedex.data.Stat("speed", favorite.speed)
                             ),
                             description = if (favorite.latitude != null && favorite.longitude != null) {
-                                "${favorite.captureLocation} (${favorite.latitude.toString().take(7)}, ${favorite.longitude.toString().take(7)})"
+                                "Lat: ${favorite.latitude.toString().take(11)}, Lng: ${favorite.longitude.toString().take(11)}"
                             } else {
                                 favorite.captureLocation
                             }

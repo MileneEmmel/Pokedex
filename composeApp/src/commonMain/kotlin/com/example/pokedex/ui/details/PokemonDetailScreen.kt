@@ -7,11 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,10 +18,13 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import coil3.compose.rememberAsyncImagePainter
+import coil3.compose.AsyncImagePainter
 import com.example.pokedex.data.Pokemon
 import com.example.pokedex.location.LocationViewModel
 import com.example.pokedex.ui.ThemeColors
@@ -98,7 +99,7 @@ fun PokemonDetailScreen(
             onOpenSettings = { locationViewModel.openSettings() },
             photoPath   = capturePhotoPath,
             onTakePhoto = { cameraLauncher() },
-            onConfirm   = {
+            onConfirm   = { lat, lng ->
                 if (uiState is UiState.Success) {
                     val details = (uiState as UiState.Success).data.dto
 
@@ -108,8 +109,8 @@ fun PokemonDetailScreen(
                     val speed = details.stats.find { it.stat.name == "speed" }?.base_stat ?: 0
                     val typesString = details.types.joinToString(",") { it.type.name }
 
-                    val gpsLocation = if (locationState != null) {
-                        "Lat: ${locationState!!.latitude}, Lng: ${locationState!!.longitude}"
+                    val gpsLocation = if (lat != null && lng != null) {
+                        "Lat: $lat, Lng: $lng"
                     } else "GPS Location"
 
                     viewModel.saveToTeam(
@@ -122,8 +123,8 @@ fun PokemonDetailScreen(
                         attack          = attack,
                         defense         = defense,
                         speed           = speed,
-                        latitude        = locationState?.latitude,
-                        longitude       = locationState?.longitude,
+                        latitude        = lat,
+                        longitude       = lng,
                         photoPath       = capturePhotoPath
                     )
                 }
@@ -227,7 +228,7 @@ fun PokemonDetailScreen(
     }
 }
 
-// Exibe foto e coordenadas do Pokémon já capturado no time
+// Exibe foto (mantida igual ao original) e o mapa ao lado, no lugar das coordenadas
 @Composable
 private fun CapturedInfoCard(
     photoPath: String?,
@@ -243,14 +244,14 @@ private fun CapturedInfoCard(
         Row(
             modifier = Modifier.padding(12.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Foto do Pokémon capturado
+            // Foto do Pokémon capturado (inalterada)
             Box(
                 modifier = Modifier
-                    .size(120.dp)
+                    .size(100.dp)
                     .clip(RoundedCornerShape(16.dp))
-                    .border(4.dp, ThemeColors.deepGreen, RoundedCornerShape(16.dp))
+                    .border(2.dp, ThemeColors.deepGreen.copy(alpha = 0.3f), RoundedCornerShape(16.dp))
                     .background(ThemeColors.iceGreen),
                 contentAlignment = Alignment.Center
             ) {
@@ -262,63 +263,85 @@ private fun CapturedInfoCard(
                         contentScale = ContentScale.Crop
                     )
                 } else {
-                    Image(
-                        painter = painterResource(Res.drawable.local),
+                    Icon(
+                        imageVector = Icons.Default.LocationOn,
                         contentDescription = "Location placeholder",
-                        modifier = Modifier.size(55.dp).padding(4.dp),
-                        alpha = 0.4f
+                        modifier = Modifier.size(50.dp),
+                        tint = ThemeColors.deepGreen.copy(alpha = 0.4f)
                     )
                 }
             }
 
-            // Coordenadas da captura
-            Column(
-                modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
-            ) {
-                Text(
-                    text = "CAPTURE LOCATION",
-                    color = ThemeColors.deepGreen.copy(alpha = 0.6f),
-                    style = Typography.pixelCardTitle(),
-                    fontSize = 10.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 1.sp
-                )
-                
-                if (latitude != null && longitude != null) {
-                    Column {
+            // Mapa no lugar onde antes ficavam as coordenadas
+            if (latitude != null && longitude != null) {
+                val uriHandler = androidx.compose.ui.platform.LocalUriHandler.current
+                // Yandex Maps (longitude, latitude) - Gratuito e mais estável para previews
+                val mapUrl = "https://static-maps.yandex.ru/1.x/?ll=$longitude,$latitude&z=14&l=map&size=450,250"
+
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "CAPTURE LOCATION",
+                        color = ThemeColors.deepGreen,
+                        style = Typography.pixelCardTitle(),
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.ExtraBold,
+                        letterSpacing = 0.5.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    // Usando rememberAsyncImagePainter para controlar a visibilidade baseada no sucesso
+                    val mapPainter = rememberAsyncImagePainter(model = mapUrl)
+                    val mapState by mapPainter.state.collectAsState()
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(80.dp)
+                            .clip(RoundedCornerShape(12.dp))
+                            .border(2.dp, ThemeColors.deepGreen.copy(alpha = 0.3f), RoundedCornerShape(12.dp)),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        if (mapState is AsyncImagePainter.State.Success) {
+                            Image(
+                                painter = mapPainter,
+                                contentDescription = "Map",
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop
+                            )
+                            Icon(
+                                imageVector = Icons.Default.LocationOn,
+                                contentDescription = "Pin",
+                                modifier = Modifier.size(18.dp),
+                                tint = ThemeColors.deepGreen
+                            )
+                        } else {
+                            CircularProgressIndicator(
+                                color = ThemeColors.greenPrimary,
+                                modifier = Modifier.size(20.dp)
+                            )
+                        }
+                    }
+
+                    TextButton(
+                        onClick = { uriHandler.openUri("geo:$latitude,$longitude?q=$latitude,$longitude") },
+                        modifier = Modifier.fillMaxWidth().height(32.dp),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
                         Text(
-                            text = "Lat: ${latitude.formatCoordinate()}",
-                            color = ThemeColors.deepGreen,
-                            style = Typography.descriptionText,
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.ExtraBold
-                        )
-                        Text(
-                            text = "Lng: ${longitude.formatCoordinate()}",
-                            color = ThemeColors.deepGreen,
-                            style = Typography.descriptionText,
-                            fontSize = 14.sp,
+                            text = "VIEW ON MAP",
+                            color = ThemeColors.greenPrimary,
+                            style = Typography.pixelCardTitle(),
+                            fontSize = 11.sp,
                             fontWeight = FontWeight.ExtraBold
                         )
                     }
-                } else {
-                    Text(
-                        text = "Coordinates not available",
-                        color = ThemeColors.deepGreen.copy(alpha = 0.5f),
-                        fontSize = 12.sp,
-                        style = Typography.descriptionText
-                    )
                 }
             }
         }
     }
-}
-
-// Formata coordenada com 6 casas decimais
-private fun Double.formatCoordinate(): String {
-    val str = toString()
-    val dotIndex = str.indexOf('.')
-    return if (dotIndex == -1) "$str.000000"
-    else (str + "000000").substring(0, dotIndex + 7)
 }
