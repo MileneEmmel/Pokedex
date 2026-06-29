@@ -1,16 +1,21 @@
 package com.example.pokedex.ui.details.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.example.pokedex.permission.PermissionStatus
 import com.example.pokedex.ui.ThemeColors
 import com.example.pokedex.ui.Typography
@@ -51,11 +56,28 @@ fun CaptureLocationDialog(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                Image(
-                    painter            = painterResource(Res.drawable.local),
-                    contentDescription = "Capture",
-                    modifier           = Modifier.size(200.dp)
-                )
+                Box(
+                    modifier = Modifier
+                        .size(200.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .border(4.dp, ThemeColors.deepGreen, RoundedCornerShape(16.dp))
+                        .background(ThemeColors.iceGreen)
+                ) {
+                    if (photoPath != null) {
+                        AsyncImage(
+                            model = photoPath,
+                            contentDescription = "Captured photo",
+                            modifier = Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop
+                        )
+                    } else {
+                        Image(
+                            painter            = painterResource(Res.drawable.local),
+                            contentDescription = "Capture placeholder",
+                            modifier           = Modifier.fillMaxSize().padding(32.dp)
+                        )
+                    }
+                }
 
                 Text(
                     text      = "Where did you find this Pokemon?",

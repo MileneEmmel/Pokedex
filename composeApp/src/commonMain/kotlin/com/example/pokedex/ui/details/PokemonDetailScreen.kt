@@ -1,6 +1,8 @@
 package com.example.pokedex.ui.details
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -32,6 +34,9 @@ import dev.icerock.moko.geo.compose.BindLocationTrackerEffect
 import dev.icerock.moko.permissions.compose.BindEffect
 import org.koin.compose.viewmodel.koinViewModel
 import com.example.pokedex.camera.rememberCameraLauncher
+import org.jetbrains.compose.resources.painterResource
+import pokedex.composeapp.generated.resources.Res
+import pokedex.composeapp.generated.resources.local
 
 @Composable
 fun PokemonDetailScreen(
@@ -231,48 +236,78 @@ private fun CapturedInfoCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = ThemeColors.lightIceGreen.copy(alpha = 0.3f))
+        shape = RoundedCornerShape(24.dp),
+        colors = CardDefaults.cardColors(containerColor = ThemeColors.lightIceGreen.copy(alpha = 0.6f)),
+        border = androidx.compose.foundation.BorderStroke(2.dp, ThemeColors.deepGreen.copy(alpha = 0.2f))
     ) {
-        Column(modifier = Modifier.padding(12.dp)) {
+        Row(
+            modifier = Modifier.padding(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             // Foto do Pokémon capturado
-            if (photoPath != null) {
-                AsyncImage(
-                    model = photoPath,
-                    contentDescription = "Captured photo",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(160.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                )
-                Spacer(modifier = Modifier.height(8.dp))
+            Box(
+                modifier = Modifier
+                    .size(120.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .border(4.dp, ThemeColors.deepGreen, RoundedCornerShape(16.dp))
+                    .background(ThemeColors.iceGreen),
+                contentAlignment = Alignment.Center
+            ) {
+                if (photoPath != null) {
+                    AsyncImage(
+                        model = photoPath,
+                        contentDescription = "Captured photo",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(Res.drawable.local),
+                        contentDescription = "Location placeholder",
+                        modifier = Modifier.size(55.dp).padding(4.dp),
+                        alpha = 0.4f
+                    )
+                }
             }
+
             // Coordenadas da captura
-            if (latitude != null && longitude != null) {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
-                ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                Text(
+                    text = "CAPTURE LOCATION",
+                    color = ThemeColors.deepGreen.copy(alpha = 0.6f),
+                    style = Typography.pixelCardTitle(),
+                    fontSize = 10.sp,
+                    fontWeight = FontWeight.Bold,
+                    letterSpacing = 1.sp
+                )
+                
+                if (latitude != null && longitude != null) {
+                    Column {
+                        Text(
+                            text = "Lat: ${latitude.formatCoordinate()}",
+                            color = ThemeColors.deepGreen,
+                            style = Typography.descriptionText,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                        Text(
+                            text = "Lng: ${longitude.formatCoordinate()}",
+                            color = ThemeColors.deepGreen,
+                            style = Typography.descriptionText,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraBold
+                        )
+                    }
+                } else {
                     Text(
-                        text = "Capture Location",
-                        color = ThemeColors.deepGreen.copy(alpha = 0.6f),
-                        fontSize = 11.sp,
+                        text = "Coordinates not available",
+                        color = ThemeColors.deepGreen.copy(alpha = 0.5f),
+                        fontSize = 12.sp,
                         style = Typography.descriptionText
-                    )
-                    Text(
-                        text = "Lat: ${latitude.formatCoordinate()}",
-                        color = ThemeColors.deepGreen,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
-                    )
-                    Text(
-                        text = "Lng: ${longitude.formatCoordinate()}",
-                        color = ThemeColors.deepGreen,
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
                     )
                 }
             }

@@ -4,7 +4,7 @@ Autores: Milene Emmel Rovedder e Daniel Henrique Da Silva
 
 Projeto acadêmico em **Kotlin Multiplatform** e **Compose Multiplatform** para Android e iOS, utilizando uma arquitetura **Offline-First** com **PokeAPI**, **Room Database** e **Integração Nativa de Hardware (Câmera e GPS)**.
 
-O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes e uma tela de **Team Builder** com implementação visual diferente para cada sistema operacional, oferecendo agora suporte a captura geolocalizada e registros fotográficos.
+O app simula uma Pokédex moderna com navegação tipada, telas compartilhadas entre plataformas, lista de Pokémon em grade, tela de detalhes e uma tela de **Team Builder** com implementação visual diferente para cada sistema operacional, com suporte a captura geolocalizada e registros fotográficos ao capturar um pokemon.
 
 ## Visão geral
 
@@ -68,11 +68,15 @@ O `Scaffold` centraliza a estrutura visual com:
 
 ## Funcionalidades principais
 
+- Navegação tipada entre telas
+- **Integração com PokeAPI**: Dados reais e em tempo real
+- **Arquitetura Offline-First**: Sincronização e cache de dados no Room para funcionamento sem internet
+- **Paginação Real**: Carregamento sob demanda (Lazy Loading) na listagem principal
+- **Busca e Filtros Reativos**: Atualização instantânea da UI ao pesquisar ou filtrar tipos
+- **Persistência de Atributos**: Stats completos e local de captura salvos permanentemente no time
+- **Evolução Completa**: Mapeamento de toda a cadeia evolutiva via API
+- Visual diferenciado para Android e iOS na tela de Team Builder
 - **Captura com Câmera**: Uso de hardware nativo para tirar fotos do treinador ou do ambiente no momento de adicionar o Pokémon ao time.
 - **Geolocalização Automatizada**: Obtenção de coordenadas geográficas exatas (Latitude e Longitude) via GPS integrado.
 - **Gerenciamento de Permissões em Tempo Real**: Tratamento seguro e UI responsiva para solicitar acesso à câmera e à localização em ambas as plataformas.
 - **Banco de Dados Evolutivo**: Migrações (Migrations) seguras do Room Database para persistir novos campos (foto e coordenadas) sem causar perda dos times já montados.
-- **Navegação Tipada**: Transições fluídas e seguras entre telas.
-- **Arquitetura Offline-First**: Sincronização e cache para funcionamento ininterrupto sem conexão com a internet.
-- **Integração com PokeAPI**: Dados dinâmicos com paginação (Lazy Loading), busca e filtros em tempo real.
-- **Evolução Completa**: Mapeamento e exibição de toda a cadeia evolutiva diretamente da API.
